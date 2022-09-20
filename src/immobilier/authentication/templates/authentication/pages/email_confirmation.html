@@ -1,0 +1,12 @@
+{% autoescape off %}
+
+Bienvenu Django Login
+
+Bonjour {{ name }}!
+
+Confirmez s'il vous plait votre eamil en cliquant sur le lien.
+
+Lien de Confirmation:  http://{{ domain }}{% {% url 'active' uid64=uid token=token %}%}
+
+
+{% endautoescape %}
