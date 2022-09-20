@@ -85,8 +85,15 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse yamm" id="navigation">
                     <div class="button navbar-right">
-                        <button class="navbar-btn nav-button wow bounceInRight login" onclick=" window.open('register.html')" data-wow-delay="0.45s">Login</button>
-                        <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.open('submit-property.html')" data-wow-delay="0.48s">Submit</button>
+                        {% if user.is_authenticated %}
+                        {% if  messages %}messages{% endif%}
+                            <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.open('submit-property.html')" data-wow-delay="0.48s">Submit</button>
+                            <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.open('{% url 'user-logout' %}')" data-wow-delay="0.48s">
+                                <a href="{% url 'user-logout' %}">Logout</a>
+                            </button>
+                        {% else %}
+                            <button class="navbar-btn nav-button wow bounceInRight login" onclick=" window.open('register.html')" data-wow-delay="0.45s">Login</button>
+                        {% endif %}
                     </div>
                     <ul class="main-nav nav navbar-nav navbar-right">
                         <li class="dropdown ymm-sw " data-wow-delay="0.1s">

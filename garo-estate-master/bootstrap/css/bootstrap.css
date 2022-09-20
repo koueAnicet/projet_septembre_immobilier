@@ -5,7 +5,7 @@
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
-  font-family: sans-serif;
+  font-family: "Black",sans-serif;
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
@@ -52,7 +52,7 @@ a:hover {
 abbr[title] {
   border-bottom: 1px dotted;
 }
-b,
+b,h3,h2,p
 strong {
   font-weight: bold;
 }
@@ -1086,7 +1086,7 @@ body {
   font-size: 14px;
   line-height: 1.42857143;
   color: #333;
-  background-color: #fff;
+  background-color: rgb(255, 255, 255);
 }
 input,
 button,

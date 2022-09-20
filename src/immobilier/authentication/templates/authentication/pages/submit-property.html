@@ -215,7 +215,8 @@
                     <div class="wizard-container"> 
 
                         <div class="wizard-card ct-wizard-orange" id="wizardProperty">
-                            <form action="" method="">                        
+                            <form action="" method="post" enctype="multipart/form-data">  
+                                {% csrf_token %}                      
                                 <div class="wizard-header">
                                     <h3>
                                         <b>Submit</b> YOUR PROPERTY <br>

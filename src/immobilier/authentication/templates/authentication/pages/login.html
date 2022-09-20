@@ -1,4 +1,5 @@
 {% load static %}
+{% load widget_tweaks %}
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -19,21 +20,21 @@
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
         <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-        <link rel="stylesheet" href="{% static 'authentication/pages/assets/css/normalize.css' %}">
-        <link rel="stylesheet" href="{% static 'authentication/pages/assets/css/font-awesome.min.css' %}">
-        <link rel="stylesheet" href="{% static 'authentication/pages/assets/css/fontello.css' %}">
-        <link href="{% static 'authentication/pages/assets/fonts/icon-7-stroke/css/pe-icon-7-stroke.css' %}" rel="stylesheet">
-        <link href="{% static 'authentication/pages/assets/fonts/icon-7-stroke/css/helper.css' %}" rel="stylesheet">
-        <link href="{% static 'authentication/pages/assets/css/animate.css' %}" rel="stylesheet" media="screen">
-        <link rel="stylesheet" href="{% static 'authentication/pages/assets/css/bootstrap-select.min.css' %}"> 
-        <link rel="stylesheet" href="{% static 'authentication/pages/bootstrap/css/bootstrap.min.css' %}">
-        <link rel="stylesheet" href="{% static 'authentication/pages/assets/css/icheck.min_all.css' %}">
-        <link rel="stylesheet" href="{% static 'authentication/pages/assets/css/price-range.css' %}">
-        <link rel="stylesheet" href="{% static 'authentication/pages/assets/css/owl.carousel.css' %}">  
-        <link rel="stylesheet" href="{% static 'authentication/pages/assets/css/owl.theme.css' %}">
-        <link rel="stylesheet" href="{% static 'authentication/pages/assets/css/owl.transitions.css' %}">
-        <link rel="stylesheet" href="{% static 'authentication/pages/assets/css/style.css' %}">
-        <link rel="stylesheet" href="{% static 'authentication/pages/assets/css/responsive.css' %}">
+        <link rel="stylesheet" href="{% static 'authentication/assets/css/normalize.css' %}">
+        <link rel="stylesheet" href="{% static 'authentication/assets/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'authentication/assets/css/fontello.css' %}">
+        <link href="{% static 'authentication/assets/fonts/icon-7-stroke/css/pe-icon-7-stroke.css' %}" rel="stylesheet">
+        <link href="{% static 'authentication/assets/fonts/icon-7-stroke/css/helper.css' %}" rel="stylesheet">
+        <link href="{% static 'authentication/assets/css/animate.css' %}" rel="stylesheet" media="screen">
+        <link rel="stylesheet" href="{% static 'authentication/assets/css/bootstrap-select.min.css' %}"> 
+        <link rel="stylesheet" href="{% static 'authentication/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'authentication/assets/css/icheck.min_all.css' %}">
+        <link rel="stylesheet" href="{% static 'authentication/assets/css/price-range.css' %}">
+        <link rel="stylesheet" href="{% static 'authentication/assets/css/owl.carousel.css' %}">  
+        <link rel="stylesheet" href="{% static 'authentication/assets/css/owl.theme.css' %}">
+        <link rel="stylesheet" href="{% static 'authentication/assets/css/owl.transitions.css' %}">
+        <link rel="stylesheet" href="{% static 'authentication/assets/css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'authentication/assets/css/responsive.css' %}">
     </head>
     <body>
 
@@ -81,7 +82,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html"><img src="{% static 'authentication/pages/assets/img/logo.png' %}" alt=""></a>
+                    <a class="navbar-brand" href="index.html"><img src="{% static 'authentication/assets/img/logo.png' %}" alt=""></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -211,32 +212,36 @@
 
         <!-- login-area -->
         <div class="register-area" style="background-color: rgb(249, 249, 249);">
-            <div class="container">
+            <div class=" text-center container">
 
 
                 <div class="col-md-6">
                     <div class="box-for overflow">                         
                         <div class="col-md-12 col-xs-12 login-blocks">
                             <h2>Login : </h2> 
+                            <br/>
+                            <br/>
+                            <br/>
                             <form action="" method="post">
                                 {% csrf_token %}
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="text" class="form-control" id="email">
-                                </div>
+                                
                                 <div class="form-group">
                                     <label for="name">Username</label>
-                                    <input type="text" class="form-control" id="name">
+                                    {% render_field form.username class="form-control"  data-error="Username." %}
+                                    {% comment %} <input type="text" class="form-control" id="name"> {% endcomment %}
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
-                                    <input type="password" class="form-control" id="password">
+                                    {% render_field form.password type="password" class="form-control "  data-error="Password." %}
+                                    {% comment %} <input type="password" class="form-control" id="password"> {% endcomment %}
                                 </div>
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-default"> Log in</button>
                                 </div>
                             </form>
                             <br>
+                            <br/>
+                            
                             
                             <h2>Social login :  </h2> 
                             
@@ -265,7 +270,7 @@
                                 <h4>About us </h4>
                                 <div class="footer-title-line"></div>
 
-                                <img src="{% static 'authentication/pages/assets/img/footer-logo.png' %}" alt="" class="wow pulse" data-wow-delay="1s">
+                                <img src="{% static 'authentication/assets/img/footer-logo.png' %}" alt="" class="wow pulse" data-wow-delay="1s">
                                 <p>Lorem ipsum dolor cum necessitatibus su quisquam molestias. Vel unde, blanditiis.</p>
                                 <ul class="footer-adress">
                                     <li><i class="pe-7s-map-marker strong"> </i> 9089 your adress her</li>
@@ -296,7 +301,7 @@
                                     <li>
                                         <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
                                             <a href="single.html">
-                                                <img src="{% static 'authentication/pages/assets/img/demo/small-proerty-2.jpg' %}">
+                                                <img src="{% static 'authentication/assets/img/demo/small-proerty-2.jpg' %}">
                                             </a>
                                             <span class="blg-date">12-12-2016</span>
 
@@ -310,7 +315,7 @@
                                     <li>
                                         <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
                                             <a href="single.html">
-                                                <img src="{% static 'authentication/pages/assets/img/demo/small-proerty-2.jpg' %}">
+                                                <img src="{% static 'authentication/assets/img/demo/small-proerty-2.jpg' %}">
                                             </a>
                                             <span class="blg-date">12-12-2016</span>
 
@@ -324,7 +329,7 @@
                                     <li>
                                         <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
                                             <a href="single.html">
-                                                <img src="{% static 'authentication/pages/assets/img/demo/small-proerty-2.jpg' %}">
+                                                <img src="{% static 'authentication/assets/img/demo/small-proerty-2.jpg' %}">
                                             </a>
                                             <span class="blg-date">12-12-2016</span>
 
@@ -391,23 +396,23 @@
 
         </div>
 
-         <script src="{% static 'authentication/pages/assets/js/modernizr-2.6.2.min.js' %}"></script>
+         <script src="{% static 'authentication/assets/js/modernizr-2.6.2.min.js' %}"></script>
 
-        <script src="{% static 'authentication/pages/assets/js/jquery-1.10.2.min.js' %}"></script> 
-        <script src="{% static 'authentication/pages/bootstrap/js/bootstrap.min.js' %}"></script>
-        <script src="{% static 'authentication/pages/assets/js/bootstrap-select.min.js' %}"></script>
-        <script src="{% static 'authentication/pages/assets/js/bootstrap-hover-dropdown.js' %}"></script>
+        <script src="{% static 'authentication/assets/js/jquery-1.10.2.min.js' %}"></script> 
+        <script src="{% static 'authentication/bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'authentication/assets/js/bootstrap-select.min.js' %}"></script>
+        <script src="{% static 'authentication/assets/js/bootstrap-hover-dropdown.js' %}"></script>
 
-        <script src="{% static 'authentication/pages/assets/js/easypiechart.min.js' %}"></script>
-        <script src="{% static 'authentication/pages/assets/js/jquery.easypiechart.min.js' %}"></script>
+        <script src="{% static 'authentication/assets/js/easypiechart.min.js' %}"></script>
+        <script src="{% static 'authentication/assets/js/jquery.easypiechart.min.js' %}"></script>
 
-        <script src="{% static 'authentication/pages/assets/js/owl.carousel.min.js' %}"></script>
-        <script src="{% static 'authentication/pages/assets/js/wow.js' %}"></script>
+        <script src="{% static 'authentication/assets/js/owl.carousel.min.js' %}"></script>
+        <script src="{% static 'authentication/assets/js/wow.js' %}"></script>
 
-        <script src="{% static 'authentication/pages/assets/js/icheck.min.js' %}"></script>
-        <script src="{% static 'authentication/pages/assets/js/price-range.js' %}"></script>
+        <script src="{% static 'authentication/assets/js/icheck.min.js' %}"></script>
+        <script src="{% static 'authentication/assets/js/price-range.js' %}"></script>
 
-        <script src="{% static 'authentication/pages/assets/js/main.js' %}"></script>
+        <script src="{% static 'authentication/assets/js/main.js' %}"></script>
 
     </body>
 </html>

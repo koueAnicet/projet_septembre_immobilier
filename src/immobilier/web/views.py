@@ -3,11 +3,9 @@ from django.views.generic import View
 
 # Create your views here.
 class HomeView(View):
-    templates_name="immoblier/pages/"
-    form = ''
-    
+    templates_name="web/pages/index.html"
     def get(self, request):
-        pass
+        return render(request, self.templates_name, locals())
     
     def post(self, request):
         pass
