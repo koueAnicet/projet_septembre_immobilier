@@ -1,3 +1,6 @@
+{% load static %}
+
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -14,25 +17,25 @@
 
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800' rel='stylesheet' type='text/css'>
 
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <!-- Place favicon.ico and apple-touch-icon.png' %} in the root directory -->
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
         <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-        <link rel="stylesheet" href="assets/css/normalize.css">
-        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-        <link rel="stylesheet" href="assets/css/fontello.css">
-        <link href="assets/fonts/icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet">
-        <link href="assets/fonts/icon-7-stroke/css/helper.css" rel="stylesheet">
-        <link href="assets/css/animate.css" rel="stylesheet" media="screen">
-        <link rel="stylesheet" href="assets/css/bootstrap-select.min.css"> 
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/css/icheck.min_all.css">
-        <link rel="stylesheet" href="assets/css/price-range.css">
-        <link rel="stylesheet" href="assets/css/owl.carousel.css">  
-        <link rel="stylesheet" href="assets/css/owl.theme.css">
-        <link rel="stylesheet" href="assets/css/owl.transitions.css">
-        <link rel="stylesheet" href="assets/css/style.css">
-        <link rel="stylesheet" href="assets/css/responsive.css">
+        <link rel="stylesheet" href="{% static 'web/assets/css/normalize.css' %}">
+        <link rel="stylesheet" href="{% static 'web/assets/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'web/assets/css/fontello.css' %}">
+        <link href="{% static 'web/assets/fonts/icon-7-stroke/css/pe-icon-7-stroke.css' %}" rel="stylesheet">
+        <link href="{% static 'web/assets/fonts/icon-7-stroke/css/helper.css' %}" rel="stylesheet">
+        <link href="{% static 'web/assets/css/animate.css' %}" rel="stylesheet" media="screen">
+        <link rel="stylesheet" href="{% static 'web/assets/css/bootstrap-select.min.css' %}"> 
+        <link rel="stylesheet" href="{% static 'web/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'web/assets/css/icheck.min_all.css' %}">
+        <link rel="stylesheet" href="{% static 'web/assets/css/price-range.css' %}">
+        <link rel="stylesheet" href="{% static 'web/assets/css/owl.carousel.css' %}">  
+        <link rel="stylesheet" href="{% static 'web/assets/css/owl.theme.css' %}">
+        <link rel="stylesheet" href="{% static 'web/assets/css/owl.transitions.css' %}">
+        <link rel="stylesheet" href="{% static 'web/assets/css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'web/assets/css/responsive.css' %}">
     </head>
     <body>
 
@@ -79,7 +82,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html"><img src="assets/img/logo.png" alt=""></a>
+                    <a class="navbar-brand" href="index.html"><img src="{% static 'web/assets/img/logo.png' %}" alt=""></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -206,9 +209,9 @@
             <div class="slider">
                 <div id="bg-slider" class="owl-carousel owl-theme">
 
-                    <div class="item"><img src="assets/img/slide1/slider-image-1.jpg" alt="GTA V"></div>
-                    <div class="item"><img src="assets/img/slide1/slider-image-2.jpg" alt="The Last of us"></div>
-                    <div class="item"><img src="assets/img/slide1/slider-image-1.jpg" alt="GTA V"></div>
+                    <div class="item"><img src="{% static 'web/assets/img/slide1/slider-image-1.jpg' %}" alt="GTA V"></div>
+                    <div class="item"><img src="{% static 'web/assets/img/slide1/slider-image-2.jpg' %}" alt="The Last of us"></div>
+                    <div class="item"><img src="{% static 'web/assets/img/slide1/slider-image-1.jpg' %}" alt="GTA V"></div>
 
                 </div>
             </div>
@@ -413,7 +416,7 @@
                         <div class="col-sm-6 col-md-3 p0">
                             <div class="box-two proerty-item">
                                 <div class="item-thumb">
-                                    <a href="property-1.html" ><img src="assets/img/demo/property-1.jpg"></a>
+                                    <a href="property-1.html" ><img src="{% static 'web/assets/img/demo/property-1.jpg' %}"></a>
                                 </div>
                                 <div class="item-entry overflow">
                                     <h5><a href="property-1.html" >Super nice villa </a></h5>
@@ -427,7 +430,7 @@
                         <div class="col-sm-6 col-md-3 p0">
                             <div class="box-two proerty-item">
                                 <div class="item-thumb">
-                                    <a href="property-2.html" ><img src="assets/img/demo/property-2.jpg"></a>
+                                    <a href="property-2.html" ><img src="{% static 'web/assets/img/demo/property-2.jpg' %}"></a>
                                 </div>
                                 <div class="item-entry overflow">
                                     <h5><a href="property-2.html" >Super nice villa </a></h5>
@@ -441,7 +444,7 @@
                         <div class="col-sm-6 col-md-3 p0">
                             <div class="box-two proerty-item">
                                 <div class="item-thumb">
-                                    <a href="property-3.html" ><img src="assets/img/demo/property-3.jpg"></a>
+                                    <a href="property-3.html" ><img src="{% static 'web/assets/img/demo/property-3.jpg' %}"></a>
 
                                 </div>
                                 <div class="item-entry overflow">
@@ -456,7 +459,7 @@
                         <div class="col-sm-6 col-md-3 p0">
                             <div class="box-two proerty-item">
                                 <div class="item-thumb">
-                                    <a href="property-1.html" ><img src="assets/img/demo/property-4.jpg"></a>
+                                    <a href="property-1.html" ><img src="{% static 'web/assets/img/demo/property-4.jpg' %}"></a>
 
                                 </div>
                                 <div class="item-entry overflow">
@@ -472,7 +475,7 @@
                         <div class="col-sm-6 col-md-3 p0">
                             <div class="box-two proerty-item">
                                 <div class="item-thumb">
-                                    <a href="property-3.html" ><img src="assets/img/demo/property-2.jpg"></a>
+                                    <a href="property-3.html" ><img src="{% static 'web/assets/img/demo/property-2.jpg' %}"></a>
                                 </div>
                                 <div class="item-entry overflow">
                                     <h5><a href="property-3.html" >Super nice villa </a></h5>
@@ -486,7 +489,7 @@
                         <div class="col-sm-6 col-md-3 p0">
                             <div class="box-two proerty-item">
                                 <div class="item-thumb">
-                                    <a href="property-2.html" ><img src="assets/img/demo/property-4.jpg"></a>
+                                    <a href="property-2.html" ><img src="{% static 'web/assets/img/demo/property-4.jpg' %}"></a>
                                 </div>
                                 <div class="item-entry overflow">
                                     <h5><a href="property-2.html" >Super nice villa </a></h5>
@@ -500,7 +503,7 @@
                         <div class="col-sm-6 col-md-3 p0">
                             <div class="box-two proerty-item">
                                 <div class="item-thumb">
-                                    <a href="property-1.html" ><img src="assets/img/demo/property-3.jpg"></a>
+                                    <a href="property-1.html" ><img src="{% static 'web/assets/img/demo/property-3.jpg' %}"></a>
                                 </div>
                                 <div class="item-entry overflow">
                                     <h5><a href="property-1.html" >Super nice villa </a></h5>
@@ -614,7 +617,7 @@
                                         <h4><strong>Ohidul Islam, </strong><i>Web Designer</i></h4>
                                     </div>
                                     <div class="client-face wow fadeInRight" data-wow-delay=".9s"> 
-                                        <img src="assets/img/client-face1.png" alt="">
+                                        <img src="{% static 'web/assets/img/client-face1.png' %}" alt="">
                                     </div>
                                 </div>
                                 <div class="item">
@@ -623,7 +626,7 @@
                                         <h4><strong>Ohidul Islam, </strong><i>Web Designer</i></h4>
                                     </div>
                                     <div class="client-face">
-                                        <img src="assets/img/client-face2.png" alt="">
+                                        <img src="{% static 'web/assets/img/client-face2.png' %}" alt="">
                                     </div>
                                 </div>
                                 <div class="item">
@@ -632,7 +635,7 @@
                                         <h4><strong>Ohidul Islam, </strong><i>Web Designer</i></h4>
                                     </div>
                                     <div class="client-face">
-                                        <img src="assets/img/client-face1.png" alt="">
+                                        <img src="{% static 'web/assets/img/client-face1.png' %}" alt="">
                                     </div>
                                 </div>
                                 <div class="item">
@@ -641,7 +644,7 @@
                                         <h4><strong>Ohidul Islam, </strong><i>Web Designer</i></h4>
                                     </div>
                                     <div class="client-face">
-                                        <img src="assets/img/client-face2.png" alt="">
+                                        <img src="{% static 'web/assets/img/client-face2.png' %}" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -767,7 +770,7 @@
                                 <h4>About us </h4>
                                 <div class="footer-title-line"></div>
 
-                                <img src="assets/img/footer-logo.png" alt="" class="wow pulse" data-wow-delay="1s">
+                                <img src="{% static 'web/assets/img/footer-logo.png' %}" alt="" class="wow pulse" data-wow-delay="1s">
                                 <p>Lorem ipsum dolor cum necessitatibus su quisquam molestias. Vel unde, blanditiis.</p>
                                 <ul class="footer-adress">
                                     <li><i class="pe-7s-map-marker strong"> </i> 9089 your adress her</li>
@@ -798,7 +801,7 @@
                                     <li>
                                         <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
                                             <a href="single.html">
-                                                <img src="assets/img/demo/small-proerty-2.jpg">
+                                                <img src="{% static 'web/assets/img/demo/small-proerty-2.jpg' %}">
                                             </a>
                                             <span class="blg-date">12-12-2016</span>
 
@@ -812,7 +815,7 @@
                                     <li>
                                         <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
                                             <a href="single.html">
-                                                <img src="assets/img/demo/small-proerty-2.jpg">
+                                                <img src="{% static 'web/assets/img/demo/small-proerty-2.jpg' %}">
                                             </a>
                                             <span class="blg-date">12-12-2016</span>
 
@@ -826,7 +829,7 @@
                                     <li>
                                         <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
                                             <a href="single.html">
-                                                <img src="assets/img/demo/small-proerty-2.jpg">
+                                                <img src="{% static 'web/assets/img/demo/small-proerty-2.jpg' %}">
                                             </a>
                                             <span class="blg-date">12-12-2016</span>
 
@@ -893,23 +896,23 @@
 
         </div>
 
-        <script src="assets/js/modernizr-2.6.2.min.js"></script>
+        <script src="{% static 'web/assets/js/modernizr-2.6.2.min.js' %}"></script>
 
-        <script src="assets/js/jquery-1.10.2.min.js"></script> 
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/js/bootstrap-select.min.js"></script>
-        <script src="assets/js/bootstrap-hover-dropdown.js"></script>
+        <script src="{% static 'web/assets/js/jquery-1.10.2.min.js' %}"></script> 
+        <script src="{% static 'web/bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'web/assets/js/bootstrap-select.min.js' %}"></script>
+        <script src="{% static 'web/assets/js/bootstrap-hover-dropdown.js' %}"></script>
 
-        <script src="assets/js/easypiechart.min.js"></script>
-        <script src="assets/js/jquery.easypiechart.min.js"></script>
+        <script src="{% static 'web/assets/js/easypiechart.min.js' %}"></script>
+        <script src="{% static 'web/assets/js/jquery.easypiechart.min.js' %}"></script>
 
-        <script src="assets/js/owl.carousel.min.js"></script>
-        <script src="assets/js/wow.js"></script>
+        <script src="{% static 'web/assets/js/owl.carousel.min.js' %}"></script>
+        <script src="{% static 'web/assets/js/wow.js' %}"></script>
 
-        <script src="assets/js/icheck.min.js"></script>
-        <script src="assets/js/price-range.js"></script>
+        <script src="{% static 'web/assets/js/icheck.min.js' %}"></script>
+        <script src="{% static 'web/assets/js/price-range.js' %}"></script>
 
-        <script src="assets/js/main.js"></script>
+        <script src="{% static 'web/assets/js/main.js' %}"></script>
 
     </body>
 </html>

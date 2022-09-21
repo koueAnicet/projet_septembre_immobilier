@@ -9,12 +9,12 @@ from django.core.mail import send_mail
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes, force_text
+from django.utils.encoding import force_bytes, force_str
 from django.core.mail import EmailMessage
 
 from immobilier import settings
-from authentication.tokens import generate_tokens
-from immobilier.authentication.forms import User
+from authentication.tokens import generate_token
+from authentication.forms import User
 
 
 def logout_user_auth(request):
@@ -60,7 +60,7 @@ class  RegisterView(View):
                 'name' : user.first_name,
                 'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': generate_tokens.make_token(user)
+                'token': generate_token.make_token(user)
             })
             email =EmailMessage(
                 email_subjuct,
@@ -127,7 +127,7 @@ def user_property(request):
 
 def active(request, uidb64, token):
     try:
-        uid = force_text(urlsafe_base64_decode(uidb64))
+        uid = force_str(urlsafe_base64_decode(uidb64))
         user= User.objects.get(pk=uid)
     except (TypeError,ValueError, OverflowError, User.DoesNotExist):
         user= None
@@ -138,4 +138,4 @@ def active(request, uidb64, token):
         login(request, user)
         return redirect('home')
     else:
-        return render(request, 'authentication/pages.activation_echoue.html', locals())
+        return render(request, 'authentication/pages/activation_echoue.html', locals())

@@ -16,7 +16,7 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from authentication import views
+
 from web import views as web_views
 
 

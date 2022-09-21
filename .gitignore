@@ -4,3 +4,4 @@ __pycache__/
 ../.DS_Store
 .DS_Store
 garo-estate-master/login.html
+src/immobilier/db.sqlite3
