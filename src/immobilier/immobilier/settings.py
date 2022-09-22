@@ -143,4 +143,6 @@ AUTH_USER_MODEL = 'authentication.User'
 
 LOGIN_REDIRECT_URL = 'login'
 
+#LOGIN_URL = "authentication/pages/login.html"
+
 STATIC_ROOT = os.path.join(BASE_DIR, "static_files")

@@ -1,5 +1,5 @@
-from tkinter import E
-from django.forms import EmailField
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from django.contrib import messages
@@ -38,8 +38,9 @@ class  RegisterView(View):
     def post(self, request):
         form = self.class_form(request.POST)
         
-        if form.is_valid:
-            user.is_active = False
+        if form.is_valid():
+            
+            form.is_active = False
             user = form.save()
             
             login(request, user)
@@ -70,6 +71,8 @@ class  RegisterView(View):
             )
             email.fail_silently = True
             email.send()
+            print('##########@')
+            print(email)
             
             return redirect(settings.LOGIN_REDIRECT_URL)
         return render(request, self.template_name, locals())
@@ -84,10 +87,11 @@ class  LoginView(View):
         form = self.class_form()
         return render(request, self.template_name, locals())
     
+    #@method_decorator(login_required)
     def post(self, request):
         form = self.class_form(request.POST)
         
-        if form.is_valid:
+        if form.is_valid():
             #recuperation des infos
             user= authenticate(request,
                 username=form.cleaned_data["username"],
@@ -103,27 +107,40 @@ class  LoginView(View):
                     return redirect('home',locals())
                 elif user and user.is_superuser:
                     login(request, user)
-                    fname = user.username
+                    fname = user.get_full_name
                   
                     messages.success(request, "f Bonjour {fname}! Merci d'avoir d'être connecté.")
                     return redirect('home')
                 else:
                     
-                    messages.error(request, "Mauvais identifiant")
+                    messages.error(request, "Utilisateur introuvable.")
                     return render(request, self.template_name, locals())
         
-        return render(request, self.template_name, locals())
+        return render(request, self.template_name, context={'form': form})
 
 
+class ContactView(View):
+    template_name ="web/pages/contat.html"
+    class_form = 'Contact'
+    
+    def get(self, request):
+        
+        return render(request, self.template_name , locals())
+
+
+def user_profiles(request):
+    return render(request, "authentication/pages/user-profile.html", locals())
+
+@login_required
 def submit_property(request):
-    template_name = "autthentication/pages/submit-property.html"
-    #if request.method == 'POST':
-    return render(request, template_name, locals())
+   
+    return render(request, "authentication/pages/submit-property.html", locals())
 
 
 def user_property(request):
-    template_name = "autthentication/pages/user-properties.html"
-    return render(request, template_name, locals())
+    template_name = "authentication/pages/user-properties.html"
+    return render(request, 'authentication/pages/user-properties.html', locals())
+
 
 def active(request, uidb64, token):
     try:
