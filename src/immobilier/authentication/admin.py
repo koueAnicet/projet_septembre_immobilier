@@ -8,7 +8,6 @@ from django.utils.safestring import mark_safe
 @admin.register(User)
 class AdminUser(admin.ModelAdmin):
     list_display=(
-        'photo',
         'username',
         'first_name',
         'last_name',
@@ -18,6 +17,7 @@ class AdminUser(admin.ModelAdmin):
         'nationality',
         'is_estate_agent',
         'social_link',
+        'photo',
         
         
     )

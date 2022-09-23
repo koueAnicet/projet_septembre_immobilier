@@ -1,3 +1,5 @@
+from distutils.log import error
+import errno
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, redirect
@@ -5,15 +7,17 @@ from django.views.generic import View
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from authentication import forms
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
+from django.contrib.auth import get_user_model
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes, force_str
-from django.core.mail import EmailMessage
+from django.utils.encoding import force_bytes,force_text
+
+
 
 from immobilier import settings
-from authentication.tokens import generate_token
+from .tokens import generate_token
 from authentication.forms import User
 
 
@@ -41,37 +45,40 @@ class  RegisterView(View):
         if form.is_valid():
             
             form.is_active = False
+            print('##########')
+            print(form.is_active)
             user = form.save()
             
             login(request, user)
-            messages.success(request, "Votre compte a été créé avec success! Nous vous avons envoyez un email de confirmation, s'il vous plait veuillez le confirmé")
+            messages.success(request, "Votre compte a été créé avec success! Nous vous avons envoyez un email de confirmation,veuillez le confirmé")
             
             #Email de bienvenu
-            subject = "Bienvenue à GARO ESTATE!!"
-            message = "Hello "+ user.first_name + "!!\n" + "Bienvenue à GARO ESTATE!!\n Merci pour la visite sur notre site web\n Nous t'avons envoyé un email de confirmation, s'il vous plait confirmez votre adresse email afin d'activer votre compte.\n\n Nous vous remercions\n Membre d'admin\n"
+            
+            subject = "Bienvenue sur GARO ESTATE!!"
+            message = "Hello "+ user.first_name + "!!\n" + "Bienvenue à GARO ESTATE!!\n Merci pour la visite sur notre site web\n Nous t'avons envoyé un email de confirmation, s'il vous plait confirmez votre adresse email afin d'activer votre compte.\n\n Nous vous remercions\n GARO ESTATE TEAM\n"
             from_email = settings.EMAIL_HOST_USER
-            to_list =[user.email]
-            send_mail(subject, message, from_email, to_list, fail_silently=True)
+            to_list =[user.email]#on peu envoyer a plusier personne
+            send_mail(subject, message, from_email, to_list, fail_silently=False)
             
             #confirmation d'email
             
             current_site = get_current_site(request)
-            email_subjuct = "Confirmez votre email @ GARO ESTATE - Django Login!!"
+            email_subject = "Confirmation de l'email " + user.email + "GARO ESTATE - Django Login!!"
             message2 = render_to_string('authentication/pages/email_confirmation.html',{
                 'name' : user.first_name,
                 'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': generate_token.make_token(user)
             })
-            email =EmailMessage(
-                email_subjuct,
+            email = EmailMessage(
+                email_subject,
                 message2,
-                settings.EMAIM_HOST_USER,
+                settings.EMAIL_HOST_USER,
                 [user.email],
             )
-            email.fail_silently = True
+            email.fail_silently = False
             email.send()
-            print('##########@')
+            print('##########@') 
             print(email)
             
             return redirect(settings.LOGIN_REDIRECT_URL)
@@ -97,25 +104,26 @@ class  LoginView(View):
                 username=form.cleaned_data["username"],
                 password=form.cleaned_data["password"],
             )
-            
-            if user:
-                if user.is_estate_agent:
+            if user is not None:
+                if user.is_estate_agent and user.is_active != False:
+                    
                     login(request, user)
                     fname = user.username
-                    messages.success(request, "Merci d'avoir d'être connecté.")
+                    messages.success(request, "Bienvenue  d'être connecté.")
                     
-                    return redirect('home',locals())
+                    return redirect('user-property')
                 elif user and user.is_superuser:
                     login(request, user)
                     fname = user.get_full_name
                   
-                    messages.success(request, "f Bonjour {fname}! Merci d'avoir d'être connecté.")
-                    return redirect('home')
+                    #messages.success(request, "f Bonjour {fname}! Merci d'avoir d'être connecté.")
+                    return redirect('user-property')
+                
                 else:
+                    messages.error(request, "Votre adresse email doit être confirmer avant de vous connecter, merci!")
                     
-                    messages.error(request, "Utilisateur introuvable.")
                     return render(request, self.template_name, locals())
-        
+        messages.error(request, "Utilisateur introuvable.")
         return render(request, self.template_name, context={'form': form})
 
 
@@ -142,17 +150,20 @@ def user_property(request):
     return render(request, 'authentication/pages/user-properties.html', locals())
 
 
-def active(request, uidb64, token):
+def activate(request, uidb64, token):
+    User = get_user_model()
     try:
-        uid = force_str(urlsafe_base64_decode(uidb64))
+        uid = force_text(urlsafe_base64_decode(uidb64))
         user= User.objects.get(pk=uid)
     except (TypeError,ValueError, OverflowError, User.DoesNotExist):
         user= None
         
-    if user is not None and generate_token.check_token(user,token):
+    if user is not None and generate_token.check_token(user, token):
         user.is_active =True
         user.save()
-        login(request, user)
-        return redirect('home')
+        messages.success(request, "Votre a été activé , félicitaion!! connectez maintenant.")
+        #login(request, user)
+        return redirect('login')
     else:
+        #messages.error(request, " Ooop, activation a échoué !!!!")
         return render(request, 'authentication/pages/activation_echoue.html', locals())

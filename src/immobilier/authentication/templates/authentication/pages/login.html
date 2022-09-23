@@ -28,6 +28,11 @@
                         <div class="col-md-12 col-xs-12 login-blocks">
                             <h2>Login : </h2> 
                             <br/>
+                            <h4>
+                                {% for message in messages %}
+                                    <strong class="alert alert-danger">{% if message %} {{message}} {% endif %}</strong>
+                                {% endfor %}
+                            </h4>
                             <br/>
                             <br/>
                             <form action="" method="post">
@@ -50,11 +55,12 @@
                                     {% render_field form.password type="password" class="form-control " id="motdepasse"  data-error="Password." %}
                                     {% comment %} <input type="password" class="form-control" id="password"> {% endcomment %}
                                     {% if form.password.errors %}
-                                    <ol>
+                                    <ol class="">
                                         {% for error in form.password.errors %}
-                                            <li>{{ error|escape }}</li>
+                                            <li><strong class="alert alert-dander">{{ error|escape }}</strong></li>
                                         {% endfor %}
                                     </ol>
+                                    
                                     {% endif %}
                                 </div>
                                 <div class="text-center">

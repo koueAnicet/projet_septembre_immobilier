@@ -1,12 +1,11 @@
 {% autoescape off %}
 
-Bienvenu Django Login
+    Bienvenu sur GARO ESTATE systeme Login!
 
-Bonjour {{ name }}!
+    Bonjour {{ name }}!
 
-Confirmez s'il vous plait votre eamil en cliquant sur le lien.
+    Confirmez votre adresse email en cliquant sur le lien en dessous.
 
-Lien de Confirmation:  http://{{ domain }}{% url 'active' uid64=uid token=token %}
-
+    Lien de Confirmation:  http//{{ domain }}{% url 'activate' uidb64=uid token=token %}
 
 {% endautoescape %}
