@@ -13,7 +13,7 @@ class AdminUser(admin.ModelAdmin):
         'last_name',
         'number_phone',
         'number_phone_two',
-        'address',
+        'email',
         'nationality',
         'is_estate_agent',
         'social_link',
