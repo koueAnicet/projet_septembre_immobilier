@@ -1,5 +1,5 @@
 ENV/
-__pycache__/
+**/__pycache__/
 ../../garo-estate-master/login.html
 ../.DS_Store
 .DS_Store

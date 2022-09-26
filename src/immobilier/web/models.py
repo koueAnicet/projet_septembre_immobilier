@@ -1,5 +1,4 @@
-from distutils.command.upload import upload
-import email
+from tinymce.models import HTMLField
 from django.db import models
 
 
@@ -17,7 +16,9 @@ class Banner(models.Model):
 
 class NewsLetter(models.Model):
     email = models.EmailField( max_length=150)
-
+    def __str__(self):
+        return self.email
+    
 class SocialLinks(models.Model):
     name= models.CharField(max_length=150)
     icon =  models.CharField(max_length=150)
@@ -31,7 +32,7 @@ class SiteInfos(models.Model):
     contact = models.CharField(max_length=150)
     address = models.CharField(max_length=150)
     emails = models.EmailField(max_length=255)
-    def __str__(self) -> str:
+    def __str__(self):
         return self.name
     
 
@@ -39,5 +40,13 @@ class Testimonial(models.Model):
     name = models.CharField(max_length=150)
     emails = models.EmailField(max_length=255)
     comments = HTMLField()
-    def __str__(self) -> str:
+    def __str__(self):
         return self.name
+    
+    
+class Contact(models.Model):
+    first_name=models.CharField(max_length=150,)
+    last_name=models.CharField(max_length=150, )
+    email=models.EmailField(max_length=150, )
+    subject=models.CharField(max_length=150)
+    message= HTMLField()

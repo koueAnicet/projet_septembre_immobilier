@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load widget_tweaks %}
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -304,11 +304,13 @@
                                 <div class="footer-title-line"></div>
                                 <p>Lorem ipsum dolor sit amet, nulla  suscipit similique quisquam molestias. Vel unde, blanditiis.</p>
 
-                                <form>
+                                <form method="post" >
+                                    {% csrf_token %}
                                     <div class="input-group">
-                                        <input class="form-control" type="email" placeholder="E-mail ... ">
+                                        {% comment %} <input class="form-control" type="email" placeholder="E-mail ... "> {% endcomment %}
+                                        {% render_field form.email type="email" class="form-control " placeholder="E-mail ... " id="email"  data-error="Email." %}
                                         <span class="input-group-btn">
-                                            <button class="btn btn-primary subscribe" type="button"><i class="pe-7s-paper-plane pe-2x"></i></button>
+                                            <button class="btn btn-primary subscribe" type="submit"><i class="pe-7s-paper-plane pe-2x"></i></button>
                                         </span>
                                     </div>
                                     <!-- /input-group -->
@@ -341,7 +343,7 @@
                                 <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">Home</a></li>
                                 <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s">Property</a></li>
                                 <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.4s">Faq</a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s">Contact</a></li>
+                                <li><a class="wow fadeInUp animated" href="{% url 'contact' %}" data-wow-delay="0.6s">Contact</a></li>
                             </ul> 
                         </div>
                     </div>
