@@ -1,5 +1,4 @@
-from distutils.log import error
-import errno
+
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, redirect
