@@ -337,7 +337,8 @@
 
                         <section id="comment-form" class="add-comments">
                             <h4 class="text-uppercase wow fadeInLeft animated">Leave comment</h4>
-                            <form>
+                            <form method="post">
+                                {% csrf_token %}
                                 <div class="row wow fadeInLeft animated">
                                     <div class="col-sm-6">
                                         <div class="form-group">
@@ -353,7 +354,7 @@
                                         <div class="form-group">
                                             <label for="email">Email <span class="required">*</span>
                                             </label>
-                                            <input class="form-control" id="email" type="text">
+                                            <input type="email" class="form-control" id="email" type="text">
                                         </div>
                                     </div>
                                 </div>
@@ -370,7 +371,7 @@
 
                                 <div class="row wow fadeInLeft animated">
                                     <div class="col-sm-12 text-right">
-                                        <button class="btn btn-primary"><i class="fa fa-comment-o"></i> Post comment</button>
+                                        <button type="submit" class="btn btn-primary"><i class="fa fa-comment-o"></i> Post comment</button>
                                     </div>
                                 </div>
                             </form>

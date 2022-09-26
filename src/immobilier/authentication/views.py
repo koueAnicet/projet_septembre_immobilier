@@ -17,6 +17,7 @@ from django.utils.encoding import force_bytes,force_text
 
 
 from immobilier import settings
+from immobilier.service.models import SubmitProperty
 from .tokens import generate_token
 from authentication.forms import User
 
@@ -144,12 +145,57 @@ def submit_property(request):
    
     return render(request, "authentication/pages/submit-property.html", locals())
 
+class UserProperty(View):
+    template_name='authentication/pages/user-properties.html'
+    class_form = forms.SubmitProperForm
+
+
+    def get(self, request):
+        count_bed = SubmitProperty.objects.filter(active=True).count()
+        property = SubmitProperty.objects.filter(active=True)
+        count_shaweds = SubmitProperty.objects.filter(active=True).count()
+        return render(request, self.template_name, locals())
+
+    def post(self, request):
+        form = self.class_form(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('submit-property')
+
+    def delete(self, request ):
+        delete_property = SubmitProperty.objects.get(pk=id).delete()
+
+    def update(self, request ):
+        pass
+    def puth(self, request ):
+        pass
+
+class Contact(View):
+    template_name=''
+    class_form = forms.ContactForm
+    def get(self, request):
+        form = self.class_form()
+        return render(request, self.template_name, locals())
+
+    def post(self, request):
+        form = self.class_form(request.POST)
+        if form.is_valid():
+            form.save()
+
+        return render(request, self.template_name, locals())
+
 
 def user_property(request):
     template_name = "authentication/pages/user-properties.html"
+    properties = SubmitProperty.objects.filter(active=True)
     return render(request, 'authentication/pages/user-properties.html', locals())
 
+def all_properties(request):
+    template_name=''
+    all_properties_db = SubmitProperty.objects.filter(active=True)
+    return render(request, template_name, locals())
 
+#vue de confirmation email avec token
 def activate(request, uidb64, token):
     User = get_user_model()
     try:

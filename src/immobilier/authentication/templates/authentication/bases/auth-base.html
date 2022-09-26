@@ -90,17 +90,17 @@
                     <div class="button navbar-right">
                         {% if user.is_authenticated %}
                         {% comment %} {% if  messages %}{{messages|escape }}{% endif%} {% endcomment %}
-                            <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.open('{% url 'submit-property' %}')" data-wow-delay="0.48s">Submit</button>
-                            <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.open('{% url 'user-profiles' %}')" data-wow-delay="0.48s">
+                            <button class="navbar-btn nav-button wow fadeInRight" onclick="window.open('{% url 'submit-property' %}')" data-wow-delay="0.48s">Submit</button>
+                            <button class="navbar-btn nav-button wow fadeInRight" onclick="window.open('{% url 'user-profiles' %}')" data-wow-delay="0.48s">
                                 {% if user.is_authenticated and user.get_full_name %}
                                 {{ user.get_full_name }}
                                 {% else %}
                                 {{ user.username }}
                                 {% endif  %}
                             </button>
-                            <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.open('{% url 'user-logout' %}')" data-wow-delay="0.48s">Logout</button>
+                            <button class="navbar-btn nav-button wow fadeInRight" onclick="window.open('{% url 'user-logout' %}')" data-wow-delay="0.48s">Logout</button>
                         {% else %}
-                            <button class="navbar-btn nav-button wow bounceInRight login" onclick=" window.open('{% url 'login' %}')" data-wow-delay="0.45s">Login</button>
+                            <button class="navbar-btn nav-button wow bounceInRight login" onclick="window.open('{% url 'login' %}')" data-wow-delay="0.45s">Login</button>
                         {% endif %}
                     </div>
                     <ul class="main-nav nav navbar-nav navbar-right">
@@ -306,7 +306,7 @@
 
                                 <form>
                                     <div class="input-group">
-                                        <input class="form-control" type="text" placeholder="E-mail ... ">
+                                        <input class="form-control" type="email" placeholder="E-mail ... ">
                                         <span class="input-group-btn">
                                             <button class="btn btn-primary subscribe" type="button"><i class="pe-7s-paper-plane pe-2x"></i></button>
                                         </span>
