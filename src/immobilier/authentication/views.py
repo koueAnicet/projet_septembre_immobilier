@@ -147,13 +147,16 @@ class Contact(View):
 def user_profiles(request):
     return render(request, "authentication/pages/user-profile.html", locals())
 
-@login_required
+#@login_required
+
 def submit_property(request):
-   
+    if request.method == 'POST':
+        pass
     return render(request, "authentication/pages/submit-property.html", locals())
 
 class UserProperty(View):
-    template_name='authentication/pages/user-properties.html'
+    template_name1='authentication/pages/submit-property.html'
+    template_name2='authentication/pages/user-properties.html'
     class_form = forms.SubmitProperForm
 
 
@@ -161,12 +164,38 @@ class UserProperty(View):
         # count_bed = SubmitProperty.objects.filter(active=True).count()
         # property = SubmitProperty.objects.filter(active=True)
         # count_shaweds = SubmitProperty.objects.filter(active=True).count()
-        return render(request, self.template_name, locals())
+        return render(request, self.template_name1, locals())
 
     def post(self, request):
-        form = self.class_form(request.POST)
-        if form.is_valid():
-            form.save()
+        #form = self.class_form(request.POST)
+        user = request.user
+        image_first = request.method.POST.get('image_prins')
+        name = request.method.POST.get('propertyname')
+        price = request.method.POST.get('propertyprice')
+        phone = request.method.POST.get('phone')
+        description = request.method.POST.get('discrition')
+        image1 = request.method.POST.get('image1')#.FILES
+        image2 = request.method.POST.get('image2')
+        image3 = request.method.POST.get('image3')
+        videos = request.method.POST.get('property_video1')
+        videos2 = request.method.POST.get('property_video2')
+        accept_condition = request.method.POST.get('accept_condition')
+        
+        property = SubmitProperty(
+            user_property_submit = user,
+            image_first = image_first,
+            name = name,
+            price = price,
+            phone = phone,
+            description = description,
+            image1 = image1,
+            image2 = image2,
+            image3 = image3,
+            videos = videos,
+            videos2 = videos2,
+            accept_condition = accept_condition,
+        )
+        property.save()
         return redirect('submit-property')
 
     def delete(self, request ):

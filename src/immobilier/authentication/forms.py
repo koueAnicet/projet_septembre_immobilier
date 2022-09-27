@@ -1,12 +1,17 @@
 from email import message
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
+from django.core.exceptions import ValidationError
+from phonenumber_field.modelfields import PhoneNumberField
+from tinymce.models import HTMLField
 
 from django.contrib.auth import get_user_model
 from authentication.models import User
 
 from web import models
 from service import models as service_models
+
+
 class FormRegister(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
@@ -61,29 +66,64 @@ class ContactForm(forms.ModelForm):
             'subject',
             'message',
         ]
+    def clean_first_name(self):
+        first_name = self.cleaned_data['first_name']
+        if not first_name.isalpha() or not first_name.isalnum():
+           raise ValidationError('Cet champ doit être alphabetique ou alphanumerique.')  
+        return first_name
+    
+    def clean_last_name(self):
+        last_name = self.cleaned_data['last_name']
+        if not last_name.isalpha() or not last_name.isalnum():
+            raise ValidationError('Cet champ doit être alphabetique ou alphanumerique.')  
+        return last_name
+    
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if not email or not email:
+            raise ValidationError('Enytrez un email valide.')  
+        return email
+    
+    def clean_subject(self):
+        subject = self.cleaned_data['subject']
+        if not subject.isalpha() or not subject.isalnum():
+            raise ValidationError('Cet champ doit être alphabetique ou alphanumerique.')  
+        return subject
+
+    def clean_message(self):
+        message = self.cleaned_data['message']
+        if not message:
+            raise ValidationError('Cet champ doit pas être vide.')  
+        return message
+
+        
         
 class NewsLetterForm(forms.ModelForm):
+    
     class Meta:
         model = models.NewsLetter
         fields=[
             'email',
         ]
-class SubmitProperForm(forms.ModelForm):
-    class Meta:
-        model = service_models.SubmitProperty
-        fields= [
-            'image_first',
-            'name',
-            'price',
-            'description',
-            'state',
-            'city',
-            'status',
-            'image1',
-            'image2',
-            'image3',
-            'image4',
-            'videos',
-            'videos2',
-            'accept_condition',
-        ]
+        
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if not email or not email:
+            raise ValidationError('Enytrez un email valide.')  
+        return email
+    
+    
+class SubmitProperForm(forms.Form):
+    image_first = forms.FileField()
+    name=forms.CharField(max_length=150)
+    price = forms.IntegerField(widget=forms.NumberInput())
+    phone = PhoneNumberField(region="CI")
+    description =HTMLField()
+    image1 = forms.ImageField()
+    image2 = forms.ImageField()
+    image3 = forms.ImageField()
+    image4 = forms.ImageField()
+    videos = forms.URLField()
+    videos2 = forms.ImageField()
+    accept_condition = forms.BooleanField()
+    

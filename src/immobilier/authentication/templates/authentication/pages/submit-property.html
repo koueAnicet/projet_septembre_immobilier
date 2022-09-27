@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load widget_tweaks %}
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -83,7 +83,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html"><img src="{% static 'authentication/assets/img/logo.png' %}" alt=""></a>
+                    <a class="navbar-brand" href="{% url 'home' %}"><span class="text-primary">One</span>-Health</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -204,7 +204,7 @@
                             </ul>
                         </li>
 
-                        <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="contact.html">Contact</a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="{% url 'contact' %}">Contact</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
@@ -253,23 +253,27 @@
                                             <div class="col-sm-4 col-sm-offset-1">
                                                 <div class="picture-container">
                                                     <div class="picture">
+                                                        {% comment %} {% render_field form.image_first class="form-control " id="wizard-picture"  data-error="Imagefirst." %} {% endcomment %}
                                                         <img src="{% static 'authentication/assets/img/default-property.jpg' %}" class="picture-src" id="wizardPicturePreview" title=""/>
-                                                        <input type="file" id="wizard-picture">
+                                                        <input type="file" name ="image_prins" id="wizard-picture">
                                                     </div> 
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label>Property name <small>(required)</small></label>
+                                                    {% comment %} {% render_field form.name class="form-control " name="propertyname" placeholder="Super villa ..." data-error="Name." %} {% endcomment %}
                                                     <input name="propertyname" type="text" class="form-control" placeholder="Super villa ...">
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label>Property price <small>(required)</small></label>
+                                                    {% comment %} {% render_field form.price class="form-control " placeholder="3330000" name="propertyprice"  data-error="Name." %} {% endcomment %}
                                                     <input name="propertyprice" type="text" class="form-control" placeholder="3330000">
                                                 </div> 
                                                 <div class="form-group">
                                                     <label>Telephone <small>(empty if you wanna use default phone number)</small></label>
+                                                    {% comment %} {% render_field form.phone class="form-control " name="phone" placeholder="+1 473 843 7436" data-error="Name." %} {% endcomment %}
                                                     <input name="phone" type="text" class="form-control" placeholder="+1 473 843 7436">
                                                 </div>
                                             </div>
@@ -284,7 +288,8 @@
                                                 <div class="col-sm-12"> 
                                                     <div class="form-group">
                                                         <label>Property Description :</label>
-                                                        <textarea name="discrition" class="form-control" ></textarea>
+                                                    {% comment %} {% render_field form.description class="form-control " name="discrition" data-error="Name." %} {% endcomment %}
+                                                    <textarea name="discrition" class="form-control" ></textarea>
                                                     </div> 
                                                 </div> 
                                             </div>
@@ -462,24 +467,29 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label for="property-images">Chose Images :</label>
-                                                    <input class="form-control" type="file" id="property-images">
+                                                    {% comment %} {% render_field form.image1 class="form-control " id="property-images" data-error="Name." %} {% endcomment %}
+                                                    <input class="form-control" type="file" name="image1" id="property-images">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input class="form-control" type="file" id="property-images">
+                                                    {% comment %} {% render_field form.image2 class="form-control " id="property-images" data-error="Name." %} {% endcomment %}
+                                                    <input class="form-control" type="file" name="image2" id="property-images">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input class="form-control" type="file" id="property-images">
+                                                    {% comment %} {% render_field form.image3 class="form-control " id="property-images" data-error="Name." %} {% endcomment %}
+                                                    <input class="form-control" type="file" name="image3" id="property-images">
                                                     <p class="help-block">Select multipel images for your property .</p>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6"> 
                                                 <div class="form-group">
                                                     <label for="property-video">Property video :</label>
-                                                    <input class="form-control" value="" placeholder="http://www.youtube.com, http://vimeo.com" name="property_video" type="text">
+                                                    {% comment %} {% render_field form.videos class="form-control " value="" placeholder="http://www.youtube.com, http://vimeo.com" name="property_video" data-error="Name."%} {% endcomment %}
+                                                    <input class="form-control" value="" placeholder="http://www.youtube.com, http://vimeo.com" name="property_video1" type="file">
                                                 </div> 
 
                                                 <div class="form-group">
-                                                    <input class="form-control" value="" placeholder="http://www.youtube.com, http://vimeo.com" name="property_video" type="text">
+                                                    {% comment %} {% render_field form.videos2 class="form-control " value="" placeholder="http://www.youtube.com, http://vimeo.com" name="property_video" data-error="Name." %} {% endcomment %}
+                                                    <input class="form-control" value="" placeholder="http://www.youtube.com, http://vimeo.com" name="property_video2" type="file">
                                                 </div>
 
                                                 <div class="form-group">
@@ -507,7 +517,9 @@
 
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" /> <strong>Accept termes and conditions.</strong>
+                                                            {% comment %} {% render_field form.videos2 class="form-control " %}<strong>Accept termes and conditions.</strong> {% endcomment %}
+                                                            <input type="checkbox" name ="accept_condition"/> 
+
                                                         </label>
                                                     </div> 
 
@@ -630,9 +642,11 @@
                                 <div class="footer-title-line"></div>
                                 <p>Lorem ipsum dolor sit amet, nulla  suscipit similique quisquam molestias. Vel unde, blanditiis.</p>
 
-                                <form>
+                                <form action="{% url 'news-letter' %}" method="post">
+                                    {% csrf_token %}
                                     <div class="input-group">
                                         <input class="form-control" type="text" placeholder="E-mail ... ">
+                                        {% render_field form.email  class="form-" placeholder="E-mail ... " id="email"  data-error="Email." %}
                                         <span class="input-group-btn">
                                             <button class="btn btn-primary subscribe" type="button"><i class="pe-7s-paper-plane pe-2x"></i></button>
                                         </span>

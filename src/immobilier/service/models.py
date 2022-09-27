@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 from tinymce.models import HTMLField
-
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 class StatusProperty(models.Model):
@@ -37,6 +37,7 @@ class SubmitProperty(models.Model):
     image_first = models.FileField(upload_to='image_first')
     name=models.CharField(max_length=150)
     price = models.PositiveIntegerField()
+    phone = PhoneNumberField(region="CI")
     description =HTMLField()
     state = models.ForeignKey(
         State,
@@ -63,12 +64,12 @@ class SubmitProperty(models.Model):
     bed_numbers=models.PositiveBigIntegerField(blank=True, null=True)
     bath_numbers=models.PositiveBigIntegerField(blank=True, null=True)
     area_numbers=models.PositiveBigIntegerField(blank=True, null=True)
-    image1 = models.FileField(upload_to='img1',blank=True, null=True)
-    image2 = models.FileField(upload_to='img2',blank=True, null=True)
-    image3 = models.FileField(upload_to='img3',blank=True, null=True)
-    image4 = models.FileField(upload_to='img4',blank=True, null=True)
+    image1 = models.ImageField(upload_to='img1',blank=True, null=True)
+    image2 = models.ImageField(upload_to='img2',blank=True, null=True)
+    image3 = models.ImageField(upload_to='img3',blank=True, null=True)
+    image4 = models.ImageField(upload_to='img4',blank=True, null=True)
     videos = models.URLField(blank=True, null=True)
-    videos2 = models.FileField(upload_to='videos2', blank=True, null=True)
+    videos2 = models.ImageField(upload_to='videos2', blank=True, null=True)
     accept_condition = models.BooleanField(default=False)
     def __str__(self):
         return self.name

@@ -65,19 +65,40 @@
                                         <label for="firstname">Firstname</label>
                                         {% render_field form.first_name type="text" class="form-control " id="firstname"  data-error="Firstname." %}
                                         {% comment %} <input type="text" class="form-control" id="firstname"> {% endcomment %}
+                                        {% if form.first_name.errors %}
+                                            <ul>
+                                                {% for error in form.first_name.errors %}
+                                                    <li class="alert alert-danger"><strong>{{ error|escape }}</strong></li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="lastname">Lastname</label>
-                                        {% comment %} {% render_field form.last_name type="text" class="form-control " id="lastname" data-error="Lastname." %} {% endcomment %}
-                                        <input type="text" class="form-control" id="lastname">
+                                        {% render_field form.last_name type="text" class="form-control " id="lastname" data-error="Lastname." %} 
+                                        {% comment %} <input type="text" class="form-control" id="lastname"> {% endcomment %}
+                                        {% if form.last_name.errors %}
+                                            <ul>
+                                                {% for error in form.last_name.errors %}
+                                                    <li class="alert alert-danger"><strong>{{ error|escape }}</strong></li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="email">Email</label>
                                         {% render_field form.email type="email" class="form-control " id="email"  data-error="Email." %}
+                                        {% if form.email.errors %}
+                                            <ul>
+                                                {% for error in form.email.errors %}
+                                                    <li class="alert alert-danger"><strong>{{ error|escape }}</strong></li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
                                         {% comment %} <input type="text" class="form-control" id="email"> {% endcomment %}
                                     </div>
                                 </div>
@@ -85,6 +106,13 @@
                                     <div class="form-group">
                                         <label for="subject">Subject</label>
                                         {% render_field form.subject type="text" class="form-control "  id="subject"  data-error="Subject." %}
+                                        {% if form.subject.errors %}
+                                            <ul>
+                                                {% for error in form.subject.errors %}
+                                                    <li class="alert alert-danger"><strong>{{ error|escape }}</strong></li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
                                         {% comment %} <input type="text" class="form-control" id="subject"> {% endcomment %}
                                     </div>
                                 </div>
@@ -92,6 +120,13 @@
                                     <div class="form-group">
                                         <label for="message">Message</label>
                                         {% render_field form.message type="textarea" class="form-control " id="message"  data-error="Message." %}
+                                        {% if form.message.errors %}
+                                            <ul>
+                                                {% for error in form.message.errors %}
+                                                    <li class="alert alert-danger"><strong>{{ error|escape }}</strong></li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
                                         {% comment %} <textarea id="message" class="form-control"></textarea> {% endcomment %}
                                     </div>
                                 </div>
