@@ -6,19 +6,13 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 class StatusProperty(models.Model):
     name = models.CharField(max_length=150)
-    def __str__(self) -> str:
+    def __str__(self):
         return self.name
-
-class City(models.Model):
-    name = models.CharField(max_length=150)
-    
     class Meta:
-        db_table = 'City'
+        db_table = 'StatusProperty'
         managed = True
-        verbose_name = 'City'
-        verbose_name_plural = 'Cities'
-    def __str__(self) -> str:
-        return self.name
+        verbose_name = 'StatusProperty'
+        verbose_name_plural = 'StatusProperties'
 
 class State(models.Model):
     name = models.CharField(max_length=150)
@@ -28,17 +22,11 @@ class State(models.Model):
         managed = True
         verbose_name = 'State'
         verbose_name_plural = 'States'
-    def __str__(self) -> str:
+    def __str__(self):
         return self.name
 
 
-class SubmitProperty(models.Model):
-    user_property_submit = get_user_model()
-    image_first = models.FileField(upload_to='image_first')
-    name=models.CharField(max_length=150)
-    price = models.PositiveIntegerField()
-    phone = PhoneNumberField(region="CI")
-    description =HTMLField()
+class City(models.Model):
     state = models.ForeignKey(
         State,
         on_delete=models.SET_NULL,
@@ -47,6 +35,25 @@ class SubmitProperty(models.Model):
         related_name='properti_state',
         
     )
+    name = models.CharField(max_length=150)
+    
+    class Meta:
+        db_table = 'City'
+        managed = True
+        verbose_name = 'City'
+        verbose_name_plural = 'Cities'
+    def __str__(self):
+        return self.name
+
+
+
+class SubmitProperty(models.Model):
+    user_property_submit = get_user_model()
+    image_first = models.FileField(upload_to='image_first')
+    name=models.CharField(max_length=150)
+    price = models.PositiveIntegerField()
+    phone = PhoneNumberField(region="CI", blank=True, null=True)
+    description =HTMLField(blank=True, null=True)
     city = models.ForeignKey(
         City,
         on_delete=models.SET_NULL,

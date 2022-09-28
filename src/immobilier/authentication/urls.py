@@ -7,8 +7,10 @@ urlpatterns = [
     
     path('login/', views.LoginView.as_view(), name="login"),
     path('register/', views.RegisterView.as_view(), name="register"),
-    path('submit-property/', views.submit_property, name='submit-property'),
-    path('user-properties/', views.UserProperty.as_view(), name='user-property'),
+    #path('submit-property/', views.submit_property, name='submit-property'),
+    path('submit-property/', views.SubmitProperty.as_view(), name='submit-property'),
+    path('user-properties/', views.UserProperty.as_view(), name='user-properties'),
+    path('properties/', views.AllPropertiesView.as_view(), name='properties'),
     path('user-logout/', views.logout_user_auth, name='user-logout'),
     path('user-profiles/', views.user_profiles, name='user-profiles'),
     

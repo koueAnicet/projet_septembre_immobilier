@@ -82,4 +82,3 @@ class NewsLetterView(View):
             messages.success(request, 'Email envoyé avec succes.')
         return render(request, self.templates_name, locals())
     
-    

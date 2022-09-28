@@ -32,7 +32,7 @@ class SiteInfos(FieldsDate):
     contact = models.CharField(max_length=150)
     address = models.CharField(max_length=150)
     emails = models.EmailField(max_length=255)
-    
+    year = models.PositiveIntegerField()
     def __str__(self):
         return self.name
     

@@ -10,14 +10,16 @@ class StatusPropertyAdmin(admin.ModelAdmin):
         'name',
         )
     
-@admin.register(City)
-class CityAdmin(admin.ModelAdmin): 
-    list_display=(
-        'name',
-        )
 @admin.register(State)
 class StateAdmin(admin.ModelAdmin): 
     list_display=(
+        'name',
+        
+        )
+@admin.register(City)
+class CityAdmin(admin.ModelAdmin): 
+    list_display=(
+        'state',
         'name',
         )
 @admin.register(SubmitProperty)
@@ -29,7 +31,7 @@ class SubmitPropertyAdmin(admin.ModelAdmin):
         'price',
         'phone',
         'description',
-        'state',
+        'status',
         'city',
         'status',
         'bed_numbers',

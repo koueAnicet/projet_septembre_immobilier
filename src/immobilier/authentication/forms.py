@@ -7,6 +7,7 @@ from tinymce.models import HTMLField
 
 from django.contrib.auth import get_user_model
 from authentication.models import User
+from service.models import SubmitProperty
 
 from web import models
 from service import models as service_models
@@ -113,17 +114,41 @@ class NewsLetterForm(forms.ModelForm):
         return email
     
     
-class SubmitProperForm(forms.Form):
-    image_first = forms.FileField()
-    name=forms.CharField(max_length=150)
-    price = forms.IntegerField(widget=forms.NumberInput())
-    phone = PhoneNumberField(region="CI")
-    description =HTMLField()
-    image1 = forms.ImageField()
-    image2 = forms.ImageField()
-    image3 = forms.ImageField()
-    image4 = forms.ImageField()
-    videos = forms.URLField()
-    videos2 = forms.ImageField()
-    accept_condition = forms.BooleanField()
+# class SubmitProperForm(forms.Form):
+#     image_first = forms.FileField()
+#     name=forms.CharField(max_length=150)
+#     price = forms.IntegerField()
+#     phone = forms.IntegerField(widget=forms.NumberInput())
+#     description =HTMLField()
+#     image1 = forms.ImageField()
+#     image2 = forms.ImageField()
+#     image3 = forms.ImageField()
+#     image4 = forms.ImageField()
+#     videos = forms.URLField()
+#     videos2 = forms.ImageField()
+#     accept_condition = forms.BooleanField()
     
+class SubmitProperForm(forms.Form):   
+    class Meta:
+        model = SubmitProperty
+        fields = [
+            '',
+            'image_first',
+            'name',
+            'price',
+            'phone',
+            'description',
+            'city',
+            'status',
+            'bed_numbers',
+            'bath_numbers',
+            'area_numbers',
+            'image1',
+            'image2',
+            'image3',
+            'image4',
+            'videos',
+            'videos2',
+            'accept_condition',
+            
+        ]

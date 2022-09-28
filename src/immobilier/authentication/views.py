@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, redirect
 from django.views.generic import View
+from django.views.generic.edit import CreateView,DeleteView,UpdateView
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from authentication import forms
@@ -151,23 +152,120 @@ def user_profiles(request):
 
 def submit_property(request):
     if request.method == 'POST':
-        pass
+        #properties = SubmitProperty.objects.filter(active=True)
+    
+        #form =class_form(request.POST)
+        user = request.user
+        #image_first = request.method.POST.get('image_prins')
+        name = request.method.POST.get('propertyname')
+        price = request.method.POST.get('propertyprice')
+        phone = request.method.POST.get('phone')
+        description = request.method.POST.get('discrition')
+        image1 = request.method.POST.get('image1')#.FILES
+        image2 = request.method.POST.get('image2')
+        image3 = request.method.POST.get('image3')
+        videos = request.method.POST.get('property_video1')
+        videos2 = request.method.POST.get('property_video2')
+        accept_condition = request.method.POST.get('accept_condition')
+        print("@@@@@@@@@@@@@@@")
+        print(f"{user}\n \n{name}\n {price}\n {phone}\n {description}\n{image1}\n {image2}\n {image3}\n{videos}\n {videos2}\n{accept_condition}\n")
+        property = SubmitProperty(
+            user_property_submit = user,
+            image_first = 'image_first',
+            name = name,
+            price = price,
+            phone = phone,
+            description = description,
+            image1 = image1,
+            image2 = image2,
+            image3 = image3,
+            videos = videos,
+            videos2 = videos2,
+            accept_condition = accept_condition,
+        )
+        property.save()
+        return redirect('user-profiles')
     return render(request, "authentication/pages/submit-property.html", locals())
 
 class UserProperty(View):
-    template_name1='authentication/pages/submit-property.html'
-    template_name2='authentication/pages/user-properties.html'
-    class_form = forms.SubmitProperForm
+    template_name='authentication/pages/user-properties.html'
+    
 
 
     def get(self, request):
         # count_bed = SubmitProperty.objects.filter(active=True).count()
         # property = SubmitProperty.objects.filter(active=True)
         # count_shaweds = SubmitProperty.objects.filter(active=True).count()
-        return render(request, self.template_name1, locals())
+        return render(request, self.template_name, locals())
 
     def post(self, request):
-        #form = self.class_form(request.POST)
+        
+        return redirect('user-profiles')
+
+    def delete(self, request ):
+        #delete_property = SubmitProperty.objects.get(pk=id).delete()
+        pass
+    def update(self, request ):
+        pass
+    def puth(self, request ):
+        pass
+
+class SubmitProperty(View):
+    template_name='authentication/pages/submit-property.html'
+    form_class= forms.SubmitProperForm
+    
+    def get(self,request):
+        
+        self.form_class()
+        return render(request, self.template_name, locals())
+    
+    def post(self,request):
+        if request.method=='POST':
+                #form =class_form(request.POST)
+            user = request.user
+            image_first = request.method.POST.get('image_prins')
+            name = request.method.POST.get('propertyname')
+            price = request.method.POST.get('propertyprice')
+            phone = request.method.POST.get('phone')
+            description = request.method.POST.get('discrition')
+            image1 = request.method.POST.get('image1')#.FILES
+            image2 = request.method.POST.get('image2')
+            image3 = request.method.POST.get('image3')
+            videos = request.method.POST.get('property_video1')
+            videos2 = request.method.POST.get('property_video2')
+            accept_condition = request.method.POST.get('accept_condition')
+            print("@@@@@@@@@@@@@@@")
+            print(f"{user}\n {image_first}\n{name}\n {price}\n {phone}\n {description}\n{image1}\n {image2}\n {image3}\n{videos}\n {videos2}\n{accept_condition}\n")
+            property = SubmitProperty(
+                user_property_submit = user,
+                image_first = image_first,
+                name = name,
+                price = price,
+                phone = phone,
+                description = description,
+                image1 = image1,
+                image2 = image2,
+                image3 = image3,
+                videos = videos,
+                videos2 = videos2,
+                accept_condition = accept_condition,
+            )
+            property.save()
+        user =get_user_model().objects.get(username=request.user)
+        form = self.form_class(request.POST, request.FILES, )
+        
+        if form.is_valid():
+            form.save()
+            return redirect('user-properties')
+        
+        return render(request, self.template_name, locals())
+        
+        
+def user_property(request):
+    #template_name = "authentication/pages/user-properties.html"
+    #properties = SubmitProperty.objects.filter(active=True)
+    if request.method=='POST':
+        #form =class_form(request.POST)
         user = request.user
         image_first = request.method.POST.get('image_prins')
         name = request.method.POST.get('propertyname')
@@ -180,7 +278,8 @@ class UserProperty(View):
         videos = request.method.POST.get('property_video1')
         videos2 = request.method.POST.get('property_video2')
         accept_condition = request.method.POST.get('accept_condition')
-        
+        print("@@@@@@@@@@@@@@@")
+        print(f"{user}\n {image_first}\n{name}\n {price}\n {phone}\n {description}\n{image1}\n {image2}\n {image3}\n{videos}\n {videos2}\n{accept_condition}\n")
         property = SubmitProperty(
             user_property_submit = user,
             image_first = image_first,
@@ -196,26 +295,19 @@ class UserProperty(View):
             accept_condition = accept_condition,
         )
         property.save()
-        return redirect('submit-property')
-
-    def delete(self, request ):
-        #delete_property = SubmitProperty.objects.get(pk=id).delete()
-        pass
-    def update(self, request ):
-        pass
-    def puth(self, request ):
-        pass
-
-
-def user_property(request):
-    #template_name = "authentication/pages/user-properties.html"
-    #properties = SubmitProperty.objects.filter(active=True)
+        return redirect('user-profiles')
     return render(request, 'authentication/pages/user-properties.html', locals())
 
-def all_properties(request):
-    template_name=''
-    #all_properties_db = SubmitProperty.objects.filter(active=True)
-    return render(request, template_name, locals())
+class  AllPropertiesView(View):
+    template_name='authentication/pages/properties.html'
+    
+    def get(self, request):
+        all_properties= SubmitProperty.objects.all()
+        return render(request, self.template_name, locals())
+    def post(self, request):
+        
+        #all_properties_db = SubmitProperty.objects.filter(active=True)
+        return render(request, self.template_name, locals())
 
 #vue de confirmation email avec token
 def activate(request, uidb64, token):
