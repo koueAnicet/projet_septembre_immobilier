@@ -217,7 +217,7 @@ def activate(request, uidb64, token):
     if user is not None and generate_token.check_token(user, token):
         user.is_active =True
         user.save()
-        messages.success(request, "Votre a été activé , félicitaion!! connectez maintenant.")
+        messages.success(request, "Votre compte est activé ,connectez vous maintenant!! ")
         #login(request, user)
         return redirect('login')
     else:
