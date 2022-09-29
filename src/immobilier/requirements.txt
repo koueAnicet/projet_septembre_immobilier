@@ -1,9 +1,10 @@
 asgiref==3.5.2
 Django==4.1.1
-django-phonenumber-field==6.3.0
+django-phonenumber-field==7.0.0
 django-tinymce==3.5.0
 django-widget-tweaks==1.4.12
+phonenumbers==8.12.53
 Pillow==9.2.0
 python-environ==0.4.54
+six==1.16.0
 sqlparse==0.4.2
-tzdata==2022.4

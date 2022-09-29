@@ -128,11 +128,11 @@ class NewsLetterForm(forms.ModelForm):
 #     videos2 = forms.ImageField()
 #     accept_condition = forms.BooleanField()
     
-class SubmitProperForm(forms.Form):   
+class SubmitProperForm(forms.ModelForm):   
     class Meta:
         model = SubmitProperty
         fields = [
-            '',
+            
             'image_first',
             'name',
             'price',

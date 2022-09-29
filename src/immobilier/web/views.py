@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views.generic import View
 
-from authentication.forms import ContactForm, NewsLetterForm
+from authentication.forms import ContactForm, NewsLetterForm,SubmitProperForm
 
 from web.models import OtherBanner,Banner, SiteInfos,NewsLetter
 from authentication.forms import TestimonialForm
