@@ -9,3 +9,5 @@ src/immobilier/immobilier/__pycache__/settings.cpython-310.pycsrc/immobilier/db.
 src/immobilier/immobilier/.env
 src/immobilier/immobilier/__pycache__/settings.cpython-310.pyc
 .vscode/
+../../db.sqlite3
+garo-estate-master/

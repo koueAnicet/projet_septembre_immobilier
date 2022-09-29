@@ -111,7 +111,7 @@ class  LoginView(View):
                     
                     login(request, user)
                     fname = user.username
-                    messages.success(request, "Bienvenue  d'être connecté.")
+                    messages.success(request, "Bienvenue , vous êtes connecté.")
                     
                     return redirect('user-property')
                 elif user and user.is_superuser:
@@ -119,7 +119,7 @@ class  LoginView(View):
                     fname = user.get_full_name
                   
                     #messages.success(request, "f Bonjour {fname}! Merci d'avoir d'être connecté.")
-                    return redirect('user-property')
+                    return redirect('submit-property')
                 
                 else:
                     messages.error(request, "Votre adresse email doit être confirmer avant de vous connecter, merci!")
@@ -150,43 +150,6 @@ def user_profiles(request):
 
 #@login_required
 
-def submit_property(request):
-    if request.method == 'POST':
-        #properties = SubmitProperty.objects.filter(active=True)
-    
-        #form =class_form(request.POST)
-        user = request.user
-        #image_first = request.method.POST.get('image_prins')
-        name = request.method.POST.get('propertyname')
-        price = request.method.POST.get('propertyprice')
-        phone = request.method.POST.get('phone')
-        description = request.method.POST.get('discrition')
-        image1 = request.method.POST.get('image1')#.FILES
-        image2 = request.method.POST.get('image2')
-        image3 = request.method.POST.get('image3')
-        videos = request.method.POST.get('property_video1')
-        videos2 = request.method.POST.get('property_video2')
-        accept_condition = request.method.POST.get('accept_condition')
-        print("@@@@@@@@@@@@@@@")
-        print(f"{user}\n \n{name}\n {price}\n {phone}\n {description}\n{image1}\n {image2}\n {image3}\n{videos}\n {videos2}\n{accept_condition}\n")
-        property = SubmitProperty(
-            user_property_submit = user,
-            image_first = 'image_first',
-            name = name,
-            price = price,
-            phone = phone,
-            description = description,
-            image1 = image1,
-            image2 = image2,
-            image3 = image3,
-            videos = videos,
-            videos2 = videos2,
-            accept_condition = accept_condition,
-        )
-        property.save()
-        return redirect('user-profiles')
-    return render(request, "authentication/pages/submit-property.html", locals())
-
 class UserProperty(View):
     template_name='authentication/pages/user-properties.html'
     
@@ -216,44 +179,13 @@ class SubmitProperty(View):
     
     def get(self,request):
         
-        self.form_class()
+        form = self.form_class()
         return render(request, self.template_name, locals())
     
     def post(self,request):
-        if request.method=='POST':
-                #form =class_form(request.POST)
-            user = request.user
-            image_first = request.method.POST.get('image_prins')
-            name = request.method.POST.get('propertyname')
-            price = request.method.POST.get('propertyprice')
-            phone = request.method.POST.get('phone')
-            description = request.method.POST.get('discrition')
-            image1 = request.method.POST.get('image1')#.FILES
-            image2 = request.method.POST.get('image2')
-            image3 = request.method.POST.get('image3')
-            videos = request.method.POST.get('property_video1')
-            videos2 = request.method.POST.get('property_video2')
-            accept_condition = request.method.POST.get('accept_condition')
-            print("@@@@@@@@@@@@@@@")
-            print(f"{user}\n {image_first}\n{name}\n {price}\n {phone}\n {description}\n{image1}\n {image2}\n {image3}\n{videos}\n {videos2}\n{accept_condition}\n")
-            property = SubmitProperty(
-                user_property_submit = user,
-                image_first = image_first,
-                name = name,
-                price = price,
-                phone = phone,
-                description = description,
-                image1 = image1,
-                image2 = image2,
-                image3 = image3,
-                videos = videos,
-                videos2 = videos2,
-                accept_condition = accept_condition,
-            )
-            property.save()
+    
         user =get_user_model().objects.get(username=request.user)
-        form = self.form_class(request.POST, request.FILES, )
-        
+        form =self.form_class(request.POST, request.FILES, instance=user)
         if form.is_valid():
             form.save()
             return redirect('user-properties')
@@ -261,42 +193,7 @@ class SubmitProperty(View):
         return render(request, self.template_name, locals())
         
         
-def user_property(request):
-    #template_name = "authentication/pages/user-properties.html"
-    #properties = SubmitProperty.objects.filter(active=True)
-    if request.method=='POST':
-        #form =class_form(request.POST)
-        user = request.user
-        image_first = request.method.POST.get('image_prins')
-        name = request.method.POST.get('propertyname')
-        price = request.method.POST.get('propertyprice')
-        phone = request.method.POST.get('phone')
-        description = request.method.POST.get('discrition')
-        image1 = request.method.POST.get('image1')#.FILES
-        image2 = request.method.POST.get('image2')
-        image3 = request.method.POST.get('image3')
-        videos = request.method.POST.get('property_video1')
-        videos2 = request.method.POST.get('property_video2')
-        accept_condition = request.method.POST.get('accept_condition')
-        print("@@@@@@@@@@@@@@@")
-        print(f"{user}\n {image_first}\n{name}\n {price}\n {phone}\n {description}\n{image1}\n {image2}\n {image3}\n{videos}\n {videos2}\n{accept_condition}\n")
-        property = SubmitProperty(
-            user_property_submit = user,
-            image_first = image_first,
-            name = name,
-            price = price,
-            phone = phone,
-            description = description,
-            image1 = image1,
-            image2 = image2,
-            image3 = image3,
-            videos = videos,
-            videos2 = videos2,
-            accept_condition = accept_condition,
-        )
-        property.save()
-        return redirect('user-profiles')
-    return render(request, 'authentication/pages/user-properties.html', locals())
+
 
 class  AllPropertiesView(View):
     template_name='authentication/pages/properties.html'

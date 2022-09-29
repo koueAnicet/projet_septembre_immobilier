@@ -50,10 +50,17 @@ class City(models.Model):
 class SubmitProperty(models.Model):
     user_property_submit = get_user_model()
     image_first = models.FileField(upload_to='image_first')
-    name=models.CharField(max_length=150)
-    price = models.PositiveIntegerField()
+    name=models.CharField(max_length=150, blank=True, null=True)
+    price = models.PositiveIntegerField(blank=True, null=True)
     phone = PhoneNumberField(region="CI", blank=True, null=True)
     description =HTMLField(blank=True, null=True)
+    state = models.ForeignKey(
+        State,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name='property_state',
+    )
     city = models.ForeignKey(
         City,
         on_delete=models.SET_NULL,

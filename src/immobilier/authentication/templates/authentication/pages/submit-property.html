@@ -253,28 +253,28 @@
                                             <div class="col-sm-4 col-sm-offset-1">
                                                 <div class="picture-container">
                                                     <div class="picture">
-                                                        {% comment %} {% render_field form.image_first class="form-control " id="wizard-picture"  data-error="Imagefirst." %} {% endcomment %}
+                                                        {% render_field form.image_first class="form-control " id="wizard-picture"  data-error="Imagefirst." %}
                                                         <img src="{% static 'authentication/assets/img/default-property.jpg' %}" class="picture-src" id="wizardPicturePreview" title=""/>
-                                                        <input type="file" name ="image_prins" id="wizard-picture">
+                                                        {% comment %} <input type="file" name ="image_prins" id="wizard-picture"> {% endcomment %}
                                                     </div> 
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label style="color:black">Property name <small>(required)</small></label>
-                                                    {% comment %} {% render_field form.name class="form-control " name="propertyname" placeholder="Super villa ..." data-error="Name." %} {% endcomment %}
-                                                    <input name="propertyname" type="text" class="form-control" placeholder="Super villa ...">
+                                                    {% render_field form.name class="form-control " name="propertyname" placeholder="Super villa ..." data-error="Name." %}
+                                                    {% comment %} <input name="propertyname" type="text" class="form-control" placeholder="Super villa ..."> {% endcomment %} 
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label style="color:black">Property price <small>(required)</small></label>
-                                                    {% comment %} {% render_field form.price class="form-control " placeholder="3330000" name="propertyprice"  data-error="Name." %} {% endcomment %}
-                                                    <input name="propertyprice" type="text" class="form-control" placeholder="3330000">
+                                                    {% render_field form.price class="form-control " placeholder="3330000" name="propertyprice"  data-error="Name." %}
+                                                    {% comment %} <input name="propertyprice" type="text" class="form-control" placeholder="3330000"> {% endcomment %}
                                                 </div> 
                                                 <div class="form-group">
                                                     <label style="color:black">Telephone <small>(empty if you wanna use default phone number)</small></label>
-                                                    {% comment %} {% render_field form.phone class="form-control " name="phone" placeholder="+1 473 843 7436" data-error="Name." %} {% endcomment %}
-                                                    <input name="phone" type="telephone" class="form-control" placeholder="+1 473 843 7436">
+                                                    {% render_field form.phone class="form-control " name="phone" placeholder="+1 473 843 7436" data-error="Name." %}
+                                                    {% comment %} <input name="phone" type="telephone" class="form-control" placeholder="+1 473 843 7436"> {% endcomment %}
                                                 </div>
                                             </div>
                                         </div>
@@ -288,8 +288,8 @@
                                                 <div class="col-sm-12"> 
                                                     <div class="form-group">
                                                         <label style="color:black">Property Description :</label>
-                                                    {% comment %} {% render_field form.description class="form-control " name="discrition" data-error="Name." %} {% endcomment %}
-                                                    <textarea name="discrition" class="form-control" ></textarea>
+                                                    {% render_field form.description class="form-control " name="discrition" data-error="Name." %}
+                                                    {% comment %} <textarea name="discrition" class="form-control" ></textarea> {% endcomment %}
                                                     </div> 
                                                 </div> 
                                             </div>
@@ -298,51 +298,59 @@
                                                 <div class="col-sm-3">
                                                     <div class="form-group">
                                                         <label style="color:black">Property State :</label>
-                                                        <select id="lunchBegins" name="" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Select your city">
+                                                        {% comment %} <select id="lunchBegins" name="" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Select your city">
                                                             <option>Seoul</option>
                                                             <option>Paris</option>
                                                             <option>Casablanca</option>
                                                             <option>Tokyo</option>
                                                             <option>Marraekch</option>
                                                             <option>kyoto , shibua</option>
-                                                        </select>
+                                                        </select> {% endcomment %}
+                                                    {% render_field form.state class="form-control " name="discrition" data-error="Name." %}
+
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <div class="form-group">
                                                         <label style="color:black">Property City :</label>
-                                                        <select id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Select your city">
+                                                        {% comment %} <select id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Select your city">
                                                             <option>New york, CA</option>
                                                             <option>Paris</option>
                                                             <option>Casablanca</option>
                                                             <option>Tokyo</option>
                                                             <option>Marraekch</option>
                                                             <option>kyoto , shibua</option>
-                                                        </select>
+                                                        </select> {% endcomment %}
+                                                    {% render_field form.city class="form-control " name="discrition" data-error="Name." %}
+
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <div class="form-group">
                                                         <label style="color:black">Property Statue  :</label>
-                                                        <select id="basic" class="selectpicker show-tick form-control">
+                                                        {% comment %} <select id="basic" class="selectpicker show-tick form-control">
                                                             <option> -Status- </option>
                                                             <option>Rent </option>
                                                             <option>Boy</option>
                                                             <option>used</option>  
 
-                                                        </select>
+                                                        </select> {% endcomment %}
+                                                    {% render_field form.status class="form-control " name="discrition" data-error="Name." %}
+
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <div class="form-group">
                                                         <label style="color:black">Property Statue  :</label>
-                                                        <select id="basic" class="selectpicker show-tick form-control">
+                                                        {% comment %} <select id="basic" class="selectpicker show-tick form-control">
                                                             <option> -Status- </option>
                                                             <option>Rent </option>
                                                             <option>Boy</option>
                                                             <option>used</option>  
 
-                                                        </select>
+                                                        </select> {% endcomment %}
+                                                    {% render_field form.status class="form-control " name="discrition" data-error="Name." %}
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -467,29 +475,29 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label for="property-images" style="color:black">Chose Images :</label>
-                                                    {% comment %} {% render_field form.image1 class="form-control " id="property-images" data-error="Name." %} {% endcomment %}
-                                                    <input class="form-control" type="file" name="image1" id="property-images">
+                                                    {% render_field form.image1 class="form-control " id="property-images" data-error="Name." %}
+                                                    {% comment %} <input class="form-control" type="file" name="image1" id="property-images"> {% endcomment %}
                                                 </div>
                                                 <div class="form-group">
-                                                    {% comment %} {% render_field form.image2 class="form-control " id="property-images" data-error="Name." %} {% endcomment %}
-                                                    <input class="form-control" type="file" name="image2" id="property-images">
+                                                    {% render_field form.image2 class="form-control " id="property-images" data-error="Name." %}
+                                                    {% comment %} <input class="form-control" type="file" name="image2" id="property-images"> {% endcomment %}
                                                 </div>
                                                 <div class="form-group">
-                                                    {% comment %} {% render_field form.image3 class="form-control " id="property-images" data-error="Name." %} {% endcomment %}
-                                                    <input class="form-control" type="file" name="image3" id="property-images">
+                                                    {% render_field form.image3 class="form-control " id="property-images" data-error="Name." %}
+                                                    {% comment %} <input class="form-control" type="file" name="image3" id="property-images"> {% endcomment %}
                                                     <p class="help-block">Select multipel images for your property .</p>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6"> 
                                                 <div class="form-group">
                                                     <label for="property-video">Property video :</label>
-                                                    {% comment %} {% render_field form.videos class="form-control " value="" placeholder="http://www.youtube.com, http://vimeo.com" name="property_video" data-error="Name."%} {% endcomment %}
-                                                    <input class="form-control" value="" placeholder="http://www.youtube.com, http://vimeo.com" name="property_video1" type="url">
+                                                    {% render_field form.videos class="form-control " value="" placeholder="http://www.youtube.com, http://vimeo.com" name="property_video" data-error="Name."%}
+                                                    {% comment %} <input class="form-control" value="" placeholder="http://www.youtube.com, http://vimeo.com" name="property_video1" type="url"> {% endcomment %}
                                                 </div> 
 
                                                 <div class="form-group">
-                                                    {% comment %} {% render_field form.videos2 class="form-control " value="" placeholder="http://www.youtube.com, http://vimeo.com" name="property_video" data-error="Name." %} {% endcomment %}
-                                                    <input class="form-control" value="" placeholder="http://www.youtube.com, http://vimeo.com" name="property_video2" type="file">
+                                                    {% render_field form.videos2 class="form-control " value="" placeholder="http://www.youtube.com, http://vimeo.com" name="property_video" data-error="Name." %}
+                                                    {% comment %} <input class="form-control" value="" placeholder="http://www.youtube.com, http://vimeo.com" name="property_video2" type="file"> {% endcomment %}
                                                 </div>
 
                                                 <div class="form-group">
@@ -517,8 +525,8 @@
 
                                                     <div class="checkbox">
                                                         <label>
-                                                            {% comment %} {% render_field form.videos2 class="form-control " %}<strong>Accept termes and conditions.</strong> {% endcomment %}
-                                                            <input type="checkbox" name ="accept_condition"/> 
+                                                            {% render_field form.accept_condition class="form-control " %}<strong>Accept termes and conditions.</strong>
+                                                            {% comment %} <input type="checkbox" name ="accept_condition"/>  {% endcomment %}
 
                                                         </label>
                                                     </div> 
