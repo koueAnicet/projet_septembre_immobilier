@@ -6,3 +6,6 @@ __pycache__/
 garo-estate-master/login.html
 src/immobilier/db.sqlite3
 src/immobilier/immobilier/__pycache__/settings.cpython-310.pyc
+src/immobilier/immobilier/.env
+.vscode/
+src/immobilier/immobilier/__pycache__/settings.cpython-310.pyc
