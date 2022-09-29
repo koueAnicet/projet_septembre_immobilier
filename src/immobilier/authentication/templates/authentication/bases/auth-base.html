@@ -98,12 +98,7 @@
                                 {{ user.username }}
                                 {% endif  %}
                             </button>
-<<<<<<< HEAD
-                            
-                            <button class="navbar-btn nav-button wow bounceInRight login" onclick=" window.open('{% url 'user-logout' %}')" data-wow-delay="0.45s">Logout</button>
-=======
                             <button class="navbar-btn nav-button wow fadeInRight" onclick="window.open('{% url 'user-logout' %}')" data-wow-delay="0.48s"style="color:red">Logout</button>
->>>>>>> housework
                         {% else %}
                             <button class="navbar-btn nav-button wow bounceInRight login" onclick="window.open('{% url 'login' %}')" data-wow-delay="0.45s" style="color:black">Login</button>
                         {% endif %}
