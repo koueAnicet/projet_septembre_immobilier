@@ -14,13 +14,21 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 from pathlib import Path
 
+import environ
+
 import django
 from .infos import *
 from django.utils.encoding import force_str
 django.utils.encoding.force_text = force_str
 
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+env =environ.Env()
+
+environ.Env.read_env(env_file=str(BASE_DIR /'immobilier'/'.env'))
 
 EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
 
@@ -34,12 +42,12 @@ EMAIL_PORT = EMAIL_PORT
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-tja83s=dc)63#0phrz8=@2*x0q652n#w78(e4o&r(mf(hy(g-f'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
 
 # Application definition
@@ -52,6 +60,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'phonenumber_field',
+    'tinymce',
     'authentication',
     'web',
     'service',

@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load widget_tweaks %}
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -9,7 +9,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>GARO ESTATE | Submit property Page</title>
+        <title>ANICK DELACOSTE ESTATE | Submit property Page</title>
         <meta name="description" content="GARO is a real-estate template">
         <meta name="author" content="Kimarotec">
         <meta name="keyword" content="html5, css, bootstrap, property, real-estate theme , bootstrap template">
@@ -26,7 +26,7 @@
         <link rel="stylesheet" href="{% static 'authentication/assets/css/fontello.css' %}">
         <link href="{% static 'authentication/assets/fonts/icon-7-stroke/css/pe-icon-7-stroke.css' %}" rel="stylesheet">
         <link href="{% static 'authentication/assets/fonts/icon-7-stroke/css/helper.css' %}" rel="stylesheet">
-        <link href="{% static 'authentication/css/animate.css' %}" rel="stylesheet" media="screen">
+        <link href="{% static 'authentication/assets/css/animate.css' %}" rel="stylesheet" media="screen">
         <link rel="stylesheet" href="{% static 'authentication/assets/css/bootstrap-select.min.css' %}"> 
         <link rel="stylesheet" href="{% static 'authentication/bootstrap/css/bootstrap.min.css' %}">
         <link rel="stylesheet" href="{% static 'authentication/assets/css/icheck.min_all.css' %}">
@@ -83,7 +83,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html"><img src="{% static 'authentication/assets/img/logo.png' %}" alt=""></a>
+                    <a class="navbar-brand" href="{% url 'home' %}"><span style="color:black"class="text-primary">Anick</span>-Delacoste</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -91,9 +91,9 @@
                     <div class="button navbar-right">
                         {% if user.is_authenticated %}
                         {% comment %} {% if  messages %}{{messages|escape }}{% endif%} {% endcomment %}
-                            <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.open('{% url 'submit-property' %}')" data-wow-delay="0.48s">Submit</button>
-                            <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.open('{% url 'user-logout' %}')" data-wow-delay="0.48s">Logout</button>
-                            <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.open('{% url 'user-profiles' %}')" data-wow-delay="0.48s">
+                            <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.open('{% url 'submit-property' %}')" data-wow-delay="0.48s" style="color:black">Submit</button>
+                            <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.open('{% url 'user-logout' %}')" data-wow-delay="0.48s" style="color:black">Logout</button>
+                            <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.open('{% url 'user-profiles' %}')" data-wow-delay="0.48s" style="color:black">
                                 {% if user.is_authenticated and user.get_full_name %}
                                     {{ user.get_full_name }}
                                 {% else %}
@@ -101,12 +101,12 @@
                                 {% endif  %}
                             </button>
                         {% else %}
-                            <button class="navbar-btn nav-button wow bounceInRight login" onclick=" window.open('{% url 'login' %}')" data-wow-delay="0.45s">Login</button>
+                            <button class="navbar-btn nav-button wow bounceInRight login" onclick=" window.open('{% url 'login' %}')" data-wow-delay="0.45s" >Login</button>
                         {% endif %}
                     </div>
                     <ul class="main-nav nav navbar-nav navbar-right">
                         <li class="dropdown ymm-sw " data-wow-delay="0.1s">
-                            <a href="{% url 'home' %}" class="dropdown-toggle active" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Home <b class="caret"></b></a>
+                            <a href="{% url 'home' %}" class="dropdown-toggle active" data-toggle="dropdown" data-hover="dropdown" data-delay="200" style="color:black">Home <b class="caret"></b></a>
                             <ul class="dropdown-menu navbar-nav">
                                 <li>
                                     <a href="index-2.html">Home Style 2</a>
@@ -124,10 +124,10 @@
                             </ul>
                         </li>
                         
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="properties.html">Properties</a></li>
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="property.html">Property</a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="{% url 'properties' %}" style="color:black">Properties</a></li>
+                        {% comment %} <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="property.html" style="color:black">Property</a></li> {% endcomment %}
                         <li class="dropdown yamm-fw" data-wow-delay="0.1s">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Template <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200" style="color:black">Template <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
                                     <div class="yamm-content">
@@ -191,9 +191,9 @@
                                                 <h5>User account</h5>
                                                 <ul>
                                                     <li><a href="register.html">Register / login</a>   </li>
-                                                    <li><a href="{% url 'user-property' %}">Your properties</a>  </li>
-                                                    <li><a href="submit-property.html">Submit property</a>  </li>
-                                                    <li><a href="change-password.html">Change password</a> </li>
+                                                    <li><a href="{% url 'user-properties' %}">Your properties</a>  </li>
+                                                    <li><a href="{% url 'submit-property' %}">Submit property</a>  </li>
+                                                    <li><a href="{% url 'reset-password' %}">Change password</a> </li>
                                                     <li><a href="{% url 'user-profiles' %}">Your profile</a>  </li>
                                                 </ul>
                                             </div>
@@ -204,7 +204,7 @@
                             </ul>
                         </li>
 
-                        <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="contact.html">Contact</a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.4s" ><a href="{% url 'contact' %}" style="color:black">Contact</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
@@ -253,24 +253,28 @@
                                             <div class="col-sm-4 col-sm-offset-1">
                                                 <div class="picture-container">
                                                     <div class="picture">
+                                                        {% render_field form.image_first class="form-control " id="wizard-picture"  data-error="Imagefirst." %}
                                                         <img src="{% static 'authentication/assets/img/default-property.jpg' %}" class="picture-src" id="wizardPicturePreview" title=""/>
-                                                        <input type="file" id="wizard-picture">
+                                                        {% comment %} <input type="file" name ="image_prins" id="wizard-picture"> {% endcomment %}
                                                     </div> 
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="form-group">
-                                                    <label>Property name <small>(required)</small></label>
-                                                    <input name="propertyname" type="text" class="form-control" placeholder="Super villa ...">
+                                                    <label style="color:black">Property name <small>(required)</small></label>
+                                                    {% render_field form.name class="form-control " name="propertyname" placeholder="Super villa ..." data-error="Name." %}
+                                                    {% comment %} <input name="propertyname" type="text" class="form-control" placeholder="Super villa ..."> {% endcomment %} 
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label>Property price <small>(required)</small></label>
-                                                    <input name="propertyprice" type="text" class="form-control" placeholder="3330000">
+                                                    <label style="color:black">Property price <small>(required)</small></label>
+                                                    {% render_field form.price class="form-control " placeholder="3330000" name="propertyprice"  data-error="Name." %}
+                                                    {% comment %} <input name="propertyprice" type="text" class="form-control" placeholder="3330000"> {% endcomment %}
                                                 </div> 
                                                 <div class="form-group">
-                                                    <label>Telephone <small>(empty if you wanna use default phone number)</small></label>
-                                                    <input name="phone" type="text" class="form-control" placeholder="+1 473 843 7436">
+                                                    <label style="color:black">Telephone <small>(empty if you wanna use default phone number)</small></label>
+                                                    {% render_field form.phone class="form-control " name="phone" placeholder="+1 473 843 7436" data-error="Name." %}
+                                                    {% comment %} <input name="phone" type="telephone" class="form-control" placeholder="+1 473 843 7436"> {% endcomment %}
                                                 </div>
                                             </div>
                                         </div>
@@ -283,8 +287,9 @@
                                             <div class="col-sm-12"> 
                                                 <div class="col-sm-12"> 
                                                     <div class="form-group">
-                                                        <label>Property Description :</label>
-                                                        <textarea name="discrition" class="form-control" ></textarea>
+                                                        <label style="color:black">Property Description :</label>
+                                                    {% render_field form.description class="form-control " name="discrition" data-error="Name." %}
+                                                    {% comment %} <textarea name="discrition" class="form-control" ></textarea> {% endcomment %}
                                                     </div> 
                                                 </div> 
                                             </div>
@@ -292,59 +297,67 @@
                                             <div class="col-sm-12">
                                                 <div class="col-sm-3">
                                                     <div class="form-group">
-                                                        <label>Property State :</label>
-                                                        <select id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Select your city">
+                                                        <label style="color:black">Property State :</label>
+                                                        {% comment %} <select id="lunchBegins" name="" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Select your city">
                                                             <option>Seoul</option>
                                                             <option>Paris</option>
                                                             <option>Casablanca</option>
                                                             <option>Tokyo</option>
                                                             <option>Marraekch</option>
                                                             <option>kyoto , shibua</option>
-                                                        </select>
+                                                        </select> {% endcomment %}
+                                                    {% render_field form.state class="form-control " name="discrition" data-error="Name." %}
+
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <div class="form-group">
-                                                        <label>Property City :</label>
-                                                        <select id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Select your city">
+                                                        <label style="color:black">Property City :</label>
+                                                        {% comment %} <select id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Select your city">
                                                             <option>New york, CA</option>
                                                             <option>Paris</option>
                                                             <option>Casablanca</option>
                                                             <option>Tokyo</option>
                                                             <option>Marraekch</option>
                                                             <option>kyoto , shibua</option>
-                                                        </select>
+                                                        </select> {% endcomment %}
+                                                    {% render_field form.city class="form-control " name="discrition" data-error="Name." %}
+
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <div class="form-group">
-                                                        <label>Property Statue  :</label>
-                                                        <select id="basic" class="selectpicker show-tick form-control">
+                                                        <label style="color:black">Property Statue  :</label>
+                                                        {% comment %} <select id="basic" class="selectpicker show-tick form-control">
                                                             <option> -Status- </option>
                                                             <option>Rent </option>
                                                             <option>Boy</option>
                                                             <option>used</option>  
 
-                                                        </select>
+                                                        </select> {% endcomment %}
+                                                    {% render_field form.status class="form-control " name="discrition" data-error="Name." %}
+
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <div class="form-group">
-                                                        <label>Property Statue  :</label>
-                                                        <select id="basic" class="selectpicker show-tick form-control">
+                                                        <label style="color:black">Property Statue  :</label>
+                                                        {% comment %} <select id="basic" class="selectpicker show-tick form-control">
                                                             <option> -Status- </option>
                                                             <option>Rent </option>
                                                             <option>Boy</option>
                                                             <option>used</option>  
 
-                                                        </select>
+                                                        </select> {% endcomment %}
+                                                    {% render_field form.status class="form-control " name="discrition" data-error="Name." %}
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 padding-top-15">                                                   
                                                 <div class="col-sm-4">
                                                     <div class="form-group">
-                                                        <label for="property-geo">Min bed :</label>
+                                                        <label for="property-geo" style="color:black">Min bed :</label>
                                                         <input type="text" class="span2" value="" data-slider-min="0" 
                                                                data-slider-max="600" data-slider-step="5" 
                                                                data-slider-value="[250,450]" id="min-bed" ><br />
@@ -355,7 +368,7 @@
                                                 <div class="col-sm-4">
 
                                                     <div class="form-group">
-                                                        <label for="price-range">Min baths :</label>
+                                                        <label for="price-range" style="color:black">Min baths :</label>
                                                         <input type="text" class="span2" value="" data-slider-min="0" 
                                                                data-slider-max="600" data-slider-step="5" 
                                                                data-slider-value="[250,450]" id="min-baths" ><br />
@@ -366,7 +379,7 @@
                                                 <div class="col-sm-4">
 
                                                     <div class="form-group">
-                                                        <label for="property-geo">Property geo (m2) :</label>
+                                                        <label for="property-geo" style="color:black">Property geo (m2) :</label>
                                                         <input type="text" class="span2" value="" data-slider-min="0" 
                                                                data-slider-max="600" data-slider-step="5" 
                                                                data-slider-value="[50,450]" id="property-geo" ><br />
@@ -379,7 +392,7 @@
                                                 <div class="col-sm-3">
                                                     <div class="form-group">
                                                         <div class="checkbox">
-                                                            <label>
+                                                            <label style="color:black">
                                                                 <input type="checkbox"> Swimming Pool
                                                             </label>
                                                         </div>
@@ -388,7 +401,7 @@
                                                 <div class="col-sm-3">
                                                     <div class="form-group">
                                                         <div class="checkbox">
-                                                            <label>
+                                                            <label style="color:black"> 
                                                                 <input type="checkbox"> 2 Stories
                                                             </label>
                                                         </div>
@@ -397,7 +410,7 @@
                                                 <div class="col-sm-3">
                                                     <div class="form-group">
                                                         <div class="checkbox">
-                                                            <label>
+                                                            <label style="color:black">
                                                                 <input type="checkbox"> Emergency Exit
                                                             </label>
                                                         </div>
@@ -406,7 +419,7 @@
                                                 <div class="col-sm-3">
                                                     <div class="form-group">
                                                         <div class="checkbox">
-                                                            <label>
+                                                            <label style="color:black">
                                                                 <input type="checkbox"> Fire Place 
                                                             </label>
                                                         </div>
@@ -417,7 +430,7 @@
                                                 <div class="col-sm-3">
                                                     <div class="form-group">
                                                         <div class="checkbox">
-                                                            <label>
+                                                            <label style="color:black">
                                                                 <input type="checkbox"> Laundry Room
                                                             </label>
                                                         </div>
@@ -426,7 +439,7 @@
                                                 <div class="col-sm-3">
                                                     <div class="form-group">
                                                         <div class="checkbox">
-                                                            <label>
+                                                            <label style="color:black">
                                                                 <input type="checkbox"> Jog Path
                                                             </label>
                                                         </div>
@@ -435,7 +448,7 @@
                                                 <div class="col-sm-3">
                                                     <div class="form-group">
                                                         <div class="checkbox">
-                                                            <label>
+                                                            <label style="color:black">
                                                                 <input type="checkbox"> Ceilings
                                                             </label>
                                                         </div>
@@ -444,7 +457,7 @@
                                                 <div class="col-sm-3">
                                                     <div class="form-group">
                                                         <div class="checkbox">
-                                                            <label>
+                                                            <label style="color:black">
                                                                 <input type="checkbox"> Dual Sinks
                                                             </label>
                                                         </div>
@@ -461,29 +474,34 @@
                                         <div class="row">  
                                             <div class="col-sm-6">
                                                 <div class="form-group">
-                                                    <label for="property-images">Chose Images :</label>
-                                                    <input class="form-control" type="file" id="property-images">
+                                                    <label for="property-images" style="color:black">Chose Images :</label>
+                                                    {% render_field form.image1 class="form-control " id="property-images" data-error="Name." %}
+                                                    {% comment %} <input class="form-control" type="file" name="image1" id="property-images"> {% endcomment %}
                                                 </div>
                                                 <div class="form-group">
-                                                    <input class="form-control" type="file" id="property-images">
+                                                    {% render_field form.image2 class="form-control " id="property-images" data-error="Name." %}
+                                                    {% comment %} <input class="form-control" type="file" name="image2" id="property-images"> {% endcomment %}
                                                 </div>
                                                 <div class="form-group">
-                                                    <input class="form-control" type="file" id="property-images">
+                                                    {% render_field form.image3 class="form-control " id="property-images" data-error="Name." %}
+                                                    {% comment %} <input class="form-control" type="file" name="image3" id="property-images"> {% endcomment %}
                                                     <p class="help-block">Select multipel images for your property .</p>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6"> 
                                                 <div class="form-group">
                                                     <label for="property-video">Property video :</label>
-                                                    <input class="form-control" value="" placeholder="http://www.youtube.com, http://vimeo.com" name="property_video" type="text">
+                                                    {% render_field form.videos class="form-control " value="" placeholder="http://www.youtube.com, http://vimeo.com" name="property_video" data-error="Name."%}
+                                                    {% comment %} <input class="form-control" value="" placeholder="http://www.youtube.com, http://vimeo.com" name="property_video1" type="url"> {% endcomment %}
                                                 </div> 
 
                                                 <div class="form-group">
-                                                    <input class="form-control" value="" placeholder="http://www.youtube.com, http://vimeo.com" name="property_video" type="text">
+                                                    {% render_field form.videos2 class="form-control " value="" placeholder="http://www.youtube.com, http://vimeo.com" name="property_video" data-error="Name." %}
+                                                    {% comment %} <input class="form-control" value="" placeholder="http://www.youtube.com, http://vimeo.com" name="property_video2" type="file"> {% endcomment %}
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <input class="form-control" value="" placeholder="http://www.youtube.com, http://vimeo.com" name="property_video" type="text">
+                                                    <input class="form-control" value="" placeholder="http://www.youtube.com, http://vimeo.com" name="property_video" type="url">
                                                 </div>
                                             </div>
                                         </div>
@@ -507,7 +525,9 @@
 
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" /> <strong>Accept termes and conditions.</strong>
+                                                            {% render_field form.accept_condition class="form-control " %}<strong>Accept termes and conditions.</strong>
+                                                            {% comment %} <input type="checkbox" name ="accept_condition"/>  {% endcomment %}
+
                                                         </label>
                                                     </div> 
 
@@ -627,14 +647,26 @@
                         <div class="col-md-3 col-sm-6 wow fadeInRight animated">
                             <div class="single-footer news-letter">
                                 <h4>Stay in touch</h4>
+                                {% for message in messages %}
+                                    <strong class="alert alert-danger">{% if message %} {{message}} {% endif %}</strong>
+                                {% endfor %}
                                 <div class="footer-title-line"></div>
                                 <p>Lorem ipsum dolor sit amet, nulla  suscipit similique quisquam molestias. Vel unde, blanditiis.</p>
 
-                                <form>
+                                <form action="{% url 'news-letter' %}" method="post">
+                                    {% csrf_token %}
                                     <div class="input-group">
-                                        <input class="form-control" type="text" placeholder="E-mail ... ">
+                                        {% if form.email.errors %}
+                                    <p>
+                                        {% for error in form.email.errors %}
+                                            <h6><strong>{{ error|escape }}</strong></h6>
+                                        {% endfor %}
+                                    </p>
+                                    {% endif %}
+                                        {% comment %} <input class="form-control" type="email" placeholder="E-mail ... "> {% endcomment %}
+                                        {% render_field form.email  class="form-" placeholder="E-mail ... " id="email"  data-error="Email." %}
                                         <span class="input-group-btn">
-                                            <button class="btn btn-primary subscribe" type="button"><i class="pe-7s-paper-plane pe-2x"></i></button>
+                                            <button class="btn btn-primary subscribe" type="submit"><i class="pe-7s-paper-plane pe-2x"></i></button>
                                         </span>
                                     </div>
                                     <!-- /input-group -->
@@ -642,11 +674,11 @@
 
                                 <div class="social pull-right"> 
                                     <ul>
-                                        <li><a class="wow fadeInUp animated" href="https://twitter.com/kimarotec"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a class="wow fadeInUp animated" href="https://www.facebook.com/kimarotec" data-wow-delay="0.2s"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a class="wow fadeInUp animated" href="https://plus.google.com/kimarotec" data-wow-delay="0.3s"><i class="fa fa-google-plus"></i></a></li>
-                                        <li><a class="wow fadeInUp animated" href="https://instagram.com/kimarotec" data-wow-delay="0.4s"><i class="fa fa-instagram"></i></a></li>
-                                        <li><a class="wow fadeInUp animated" href="https://instagram.com/kimarotec" data-wow-delay="0.6s"><i class="fa fa-dribbble"></i></a></li>
+                                        <li><a class="wow fadeInUp animated" href="#"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s"><i class="fa fa-google-plus"></i></a></li>
+                                        <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.4s"><i class="fa fa-instagram"></i></a></li>
+                                        <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s"><i class="fa fa-dribbble"></i></a></li>
                                     </ul> 
                                 </div>
                             </div>
@@ -676,7 +708,7 @@
 
         </div>
 
-        <script src="{% static 'authentication/assets/js/vendor/modernizr-2.6.2.min.js' %}"></script>
+        <script src="{% static 'authentication/assets/js/modernizr-2.6.2.min.js' %}"></script>
         <script src="{% static 'authentication/assets/js//jquery-1.10.2.min.js' %}"></script>
         <script src="{% static 'authentication/bootstrap/js/bootstrap.min.js' %}"></script>
         <script src="{% static 'authentication/assets/js/bootstrap-select.min.js' %}"></script>

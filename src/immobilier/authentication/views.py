@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, redirect
 from django.views.generic import View
+from django.views.generic.edit import CreateView,DeleteView,UpdateView
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from authentication import forms
@@ -16,6 +17,7 @@ from django.utils.encoding import force_bytes,force_text
 
 
 from immobilier import settings
+from service.models import SubmitProperty
 from .tokens import generate_token
 from authentication.forms import User
 
@@ -108,7 +110,7 @@ class  LoginView(View):
                     
                     login(request, user)
                     fname = user.username
-                    messages.success(request, "Bienvenue  d'être connecté.")
+                    messages.success(request, "Bienvenue , vous êtes connecté.")
                     
                     return redirect('user-property')
                 elif user and user.is_superuser:
@@ -116,7 +118,7 @@ class  LoginView(View):
                     fname = user.get_full_name
                   
                     #messages.success(request, "f Bonjour {fname}! Merci d'avoir d'être connecté.")
-                    return redirect('user-property')
+                    return redirect('submit-property')
                 
                 else:
                     messages.error(request, "Votre adresse email doit être confirmer avant de vous connecter, merci!")
@@ -126,29 +128,84 @@ class  LoginView(View):
         return render(request, self.template_name, context={'form': form})
 
 
-class ContactView(View):
-    template_name ="web/pages/contat.html"
-    class_form = 'Contact'
-    
+class Contact(View):
+    template_name=''
+    class_form = forms.ContactForm
     def get(self, request):
-        
-        return render(request, self.template_name , locals())
+        form = self.class_form()
+        return render(request, self.template_name, locals())
+
+    def post(self, request):
+        form = self.class_form(request.POST)
+        if form.is_valid():
+            form.save()
+
+        return render(request, self.template_name, locals())
+
 
 
 def user_profiles(request):
     return render(request, "authentication/pages/user-profile.html", locals())
 
-@login_required
-def submit_property(request):
-   
-    return render(request, "authentication/pages/submit-property.html", locals())
+#@login_required
+
+class UserProperty(View):
+    template_name='authentication/pages/user-properties.html'
+    
 
 
-def user_property(request):
-    template_name = "authentication/pages/user-properties.html"
-    return render(request, 'authentication/pages/user-properties.html', locals())
+    def get(self, request):
+        # count_bed = SubmitProperty.objects.filter(active=True).count()
+        # property = SubmitProperty.objects.filter(active=True)
+        # count_shaweds = SubmitProperty.objects.filter(active=True).count()
+        return render(request, self.template_name, locals())
+
+    def post(self, request):
+        
+        return redirect('user-profiles')
+
+    def delete(self, request ):
+        #delete_property = SubmitProperty.objects.get(pk=id).delete()
+        pass
+    def update(self, request ):
+        pass
+    def puth(self, request ):
+        pass
+
+class SubmitProperty(View):
+    template_name='authentication/pages/submit-property.html'
+    form_class= forms.SubmitProperForm
+    
+    def get(self,request):
+        
+        form = self.form_class()
+        return render(request, self.template_name, locals())
+    
+    def post(self,request):
+    
+        user =get_user_model().objects.get(username=request.user)
+        form =self.form_class(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('user-properties')
+        
+        return render(request, self.template_name, locals())
+        
+        
 
 
+class  AllPropertiesView(View):
+    template_name='authentication/pages/properties.html'
+    
+    def get(self, request):
+        all_properties= SubmitProperty.objects.all()
+        return render(request, self.template_name, locals())
+    def post(self, request):
+        
+        #all_properties_db = SubmitProperty.objects.filter(active=True)
+        return render(request, self.template_name, locals())
+
+#vue de confirmation email avec token
 def activate(request, uidb64, token):
     User = get_user_model()
     try:

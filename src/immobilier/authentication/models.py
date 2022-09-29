@@ -4,7 +4,8 @@ from django.contrib.auth.models import AbstractUser
 from phonenumber_field.modelfields import PhoneNumberField
 from django.utils import timezone
 
-class RepeatFields(models.Model):
+
+class FieldsDate(models.Model):
     created = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
@@ -13,12 +14,12 @@ class RepeatFields(models.Model):
         abstract = True
         
        
-class TypePiece(RepeatFields):
+class TypePiece(FieldsDate):
     name = models.CharField(max_length=150)
-    def __str__(self) -> str:
+    def __str__(self):
         return self.name
 
-class InfoPiece(RepeatFields):
+class InfoPiece(FieldsDate):
     type_piece = models.ForeignKey(
         TypePiece,
         on_delete=models.SET_NULL,
@@ -28,26 +29,30 @@ class InfoPiece(RepeatFields):
     number = models.CharField(max_length=150, blank=True)
     photo_front = models.ImageField(blank=True, null=True)
     photo_back = models.ImageField(blank=True, null=True)
-    def __str__(self) -> str:
+    def __str__(self):
         return self.number
 
-class Country(RepeatFields):
+class Country(FieldsDate):
     name = models.CharField(max_length=150)
-    def __str__(self) -> str:
+    def __str__(self):
         return self.name
     
-class Nationality(RepeatFields):
+    
+class Nationality(FieldsDate):
     name = models.CharField(max_length=150)
-    def __str__(self) -> str:
+    def __str__(self):
         return self.name
-class Social_link(RepeatFields):
+    
+    
+class Social_link(FieldsDate):
     name = models.CharField(max_length=30)
     icon = models.TextField(max_length=50)
     link = models.URLField()
     def __str__(self):
         return self.name
     
-class User(AbstractUser, RepeatFields):
+    
+class User(AbstractUser, FieldsDate):
     photo =models.FileField()
     is_estate_agent= models.BooleanField(default=False)
     number_phone = PhoneNumberField(region="CI")
