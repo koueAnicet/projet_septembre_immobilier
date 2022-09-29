@@ -1,8 +1,10 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.conf import settings
 from tinymce.models import HTMLField
 from phonenumber_field.modelfields import PhoneNumberField
 
+from authentication.models import User 
 
 class StatusProperty(models.Model):
     name = models.CharField(max_length=150)
@@ -48,19 +50,24 @@ class City(models.Model):
 
 
 class SubmitProperty(models.Model):
-    user_property_submit = get_user_model()
+    user_property_submit = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        related_name='submit_user',
+        null=True
+    )
     image_first = models.FileField(upload_to='image_first')
     name=models.CharField(max_length=150, blank=True, null=True)
     price = models.PositiveIntegerField(blank=True, null=True)
     phone = PhoneNumberField(region="CI", blank=True, null=True)
     description =HTMLField(blank=True, null=True)
-    state = models.ForeignKey(
-        State,
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True,
-        related_name='property_state',
-    )
+    # state = models.ForeignKey(
+    #     State,
+    #     on_delete=models.SET_NULL,
+    #     blank=True,
+    #     null=True,
+    #     related_name='property_state',
+    # )
     city = models.ForeignKey(
         City,
         on_delete=models.SET_NULL,

@@ -138,6 +138,7 @@ class SubmitProperForm(forms.ModelForm):
             'price',
             'phone',
             'description',
+        
             'city',
             'status',
             'bed_numbers',

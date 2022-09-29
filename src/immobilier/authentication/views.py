@@ -13,7 +13,7 @@ from django.template.loader import render_to_string
 from django.contrib.auth import get_user_model
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes,force_text
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 from immobilier import settings
@@ -172,7 +172,7 @@ class UserProperty(View):
     def puth(self, request ):
         pass
 
-class SubmitProperty(View):
+class SubmitProperty(LoginRequiredMixin, View):
     template_name='authentication/pages/submit-property.html'
     form_class= forms.SubmitProperForm
     
@@ -182,11 +182,14 @@ class SubmitProperty(View):
         return render(request, self.template_name, locals())
     
     def post(self,request):
-    
-        user =get_user_model().objects.get(username=request.user)
-        form =self.form_class(request.POST, request.FILES, instance=user)
+        form =self.form_class(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            f = form.save(commit=False)
+            
+            print("eroorrrrrrrrr", request.user)
+            f.user_property_submit = request.user 
+            f.save()
+            
             return redirect('user-properties')
         
         return render(request, self.template_name, locals())
@@ -219,7 +222,7 @@ def activate(request, uidb64, token):
         user.save()
         messages.success(request, "Votre compte est activé ,connectez vous maintenant!! ")
         #login(request, user)
-        return redirect('login')
+        return redirect('home')
     else:
         #messages.error(request, " Ooop, activation a échoué !!!!")
         return render(request, 'authentication/pages/activation_echoue.html', locals())

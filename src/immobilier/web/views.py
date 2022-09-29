@@ -14,7 +14,7 @@ class HomeView(View):
         
         # banner = Banner.objects.filter(active=True)
         # other_banner = OtherBanner.objects.filter(active=True)
-        site_infos = SiteInfos.objects.filter(active=True)
+        site_infos = SiteInfos.objects.first()
         return render(request, self.templates_name, locals())
     
     # def post(self, request):

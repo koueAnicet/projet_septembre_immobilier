@@ -51,8 +51,8 @@
                     <div class="col-md-5 col-sm-8  col-xs-12">
                         <div class="header-half header-call">
                             <p>
-                                <span><i class="pe-7s-call"></i> +1 234 567 7890</span>
-                                <span><i class="pe-7s-mail"></i> your@company.com</span>
+                                <span><i class="pe-7s-call"></i>{{site_infos.contact}}</span>
+                                <span><i class="pe-7s-mail"></i> {{site_infos.emails}}</span>
                             </p>
                         </div>
                     </div>
@@ -91,23 +91,23 @@
                     <div class="button navbar-right">
                         {% if user.is_authenticated %}
                         {% comment %} {% if  messages %}{{messages|escape }}{% endif%} {% endcomment %}
-                            <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.open('{% url 'submit-property' %}')" data-wow-delay="0.48s" style="color:black">Submit</button>
-                            <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.open('{% url 'user-logout' %}')" data-wow-delay="0.48s" style="color:black">Logout</button>
-                            <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.open('{% url 'user-profiles' %}')" data-wow-delay="0.48s" style="color:black">
+                            <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.open('{% url 'submit-property' %}')" data-wow-delay="0.48s" style="color:green"><strong>Submit</strong></button>
+                            <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.open('{% url 'user-logout' %}')" data-wow-delay="0.48s" style="color:red"><strong>Logout</strong></button>
+                            <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.open('{% url 'user-profiles' %}')" data-wow-delay="0.48s" style="color:blue;">
                                 {% if user.is_authenticated and user.get_full_name %}
-                                    {{ user.get_full_name }}
+                                    <strong><i>{{ user.get_full_name }}</i></strong>
                                 {% else %}
-                                    {{ user.username }}
+                                    <strong><i>{{ user.username }}</i></strong>
                                 {% endif  %}
                             </button>
                         {% else %}
-                            <button class="navbar-btn nav-button wow bounceInRight login" onclick=" window.open('{% url 'login' %}')" data-wow-delay="0.45s" >Login</button>
+                            <button class="navbar-btn nav-button wow bounceInRight login" onclick=" window.open('{% url 'login' %}')" data-wow-delay="0.45s"  style="color:white"><strong>Login</strong></button>
                         {% endif %}
                     </div>
                     <ul class="main-nav nav navbar-nav navbar-right">
                         <li class="dropdown ymm-sw " data-wow-delay="0.1s">
-                            <a href="{% url 'home' %}" class="dropdown-toggle active" data-toggle="dropdown" data-hover="dropdown" data-delay="200" style="color:black">Home <b class="caret"></b></a>
-                            <ul class="dropdown-menu navbar-nav">
+                            <a href="{% url 'home' %}" class="dropdown-toggle active" data-toggle="dropdown" data-hover="dropdown" data-delay="200" style="color:black"><strong>Home</strong><b class="caret"></b></a>
+                            {% comment %} <ul class="dropdown-menu navbar-nav">
                                 <li>
                                     <a href="index-2.html">Home Style 2</a>
                                 </li>
@@ -121,18 +121,18 @@
                                     <a href="index-5.html">Home Style 5</a>
                                 </li>
 
-                            </ul>
+                            </ul> {% endcomment %}
                         </li>
                         
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="{% url 'properties' %}" style="color:black">Properties</a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="{% url 'properties' %}" style="color:black"><strong>Properties</strong></a></li>
                         {% comment %} <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="property.html" style="color:black">Property</a></li> {% endcomment %}
                         <li class="dropdown yamm-fw" data-wow-delay="0.1s">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200" style="color:black">Template <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200" style="color:black"><strong>Pages</strong><b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
                                     <div class="yamm-content">
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            {% comment %} <div class="col-sm-3">
                                                 <h5>Home pages</h5>
                                                 <ul>
                                                     <li>
@@ -151,8 +151,8 @@
                                                         <a href="index-5.html">Home Style 5</a>
                                                     </li>
                                                 </ul>
-                                            </div>
-                                            <div class="col-sm-3">
+                                            </div> {% endcomment %}
+                                            <div class="col-sm-4">
                                                 <h5>Pages and blog</h5>
                                                 <ul>
                                                     <li><a href="blog.html">Blog listing</a>  </li>
@@ -166,7 +166,7 @@
                                                     <li><a href="404.html">404 page</a>  </li>
                                                 </ul>
                                             </div>
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-4">
                                                 <h5>Property</h5>
                                                 <ul>
                                                     <li><a href="property-1.html">Property pages style (1)</a> </li>
@@ -181,7 +181,7 @@
                                                     <li><a href="properties-3.html">Properties list style (3)</a> </li> 
                                                 </ul>                                               
                                             </div>
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-4">
                                                 <h5>Property process</h5>
                                                 <ul> 
                                                     <li><a href="submit-property.html">Submit - step 1</a> </li>
@@ -204,7 +204,7 @@
                             </ul>
                         </li>
 
-                        <li class="wow fadeInDown" data-wow-delay="0.4s" ><a href="{% url 'contact' %}" style="color:black">Contact</a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.4s" ><a href="{% url 'contact' %}" style="color:black"><strong>Contact</strong></a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
@@ -570,7 +570,7 @@
                                 <h4>About us </h4>
                                 <div class="footer-title-line"></div>
 
-                                <img src="{% static 'authentication/assets/img/footer-logo.png' %}" alt="" class="wow pulse" data-wow-delay="1s">
+                                <h3><strong id=""><a href="{% url 'home' %}" style="color:gray">Anick Delacoste</a></strong></h3>
                                 <p>Lorem ipsum dolor cum necessitatibus su quisquam molestias. Vel unde, blanditiis.</p>
                                 <ul class="footer-adress">
                                     <li><i class="pe-7s-map-marker strong"> </i> 9089 your adress her</li>
@@ -692,14 +692,14 @@
                 <div class="container">
                     <div class="row">
                         <div class="pull-left">
-                            <span> (C) <a href="http://www.KimaroTec.com">KimaroTheme</a> , All rights reserved 2016  </span> 
+                            <span> (C) <a href="https://delacoste.pythonanywhere.com/">{{site_infos.name}}</a> , All rights reserved {{site_infos.year}}  </span> 
                         </div> 
                         <div class="bottom-menu pull-right"> 
                             <ul> 
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">Home</a></li>
+                                <li><a class="wow fadeInUp animated" href="{% url 'home' %}" data-wow-delay="0.2s">Home</a></li>
                                 <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s">Property</a></li>
                                 <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.4s">Faq</a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s">Contact</a></li>
+                                <li><a class="wow fadeInUp animated" href="{% url 'contact' %}" data-wow-delay="0.6s">Contact</a></li>
                             </ul> 
                         </div>
                     </div>
