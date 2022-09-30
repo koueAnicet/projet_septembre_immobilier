@@ -67,9 +67,10 @@ def send_news_letter(request):
 
 class NewsLetterView(View):
     templates_name="web/pages/index.html"
-    class_from = NewsLetterForm        
-    # def get(self, request):
-    #     form = self.class_from()
+    class_from = NewsLetterForm   
+         
+    def get(self, request):
+        form = self.class_from()
     #     # banner = Banner.objects.filter(active=True)
     #     # other_banner = OtherBanner.objects.filter(active=True)
     #     site_infos = SiteInfos.objects.filter(active=True)

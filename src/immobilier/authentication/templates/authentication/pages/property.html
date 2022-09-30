@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -15,26 +17,26 @@
 
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800' rel='stylesheet' type='text/css'>
 
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <!-- Place favicon.ico and apple-touch-icon.png' %} in the root directory -->
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
         <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-        <link rel="stylesheet" href="assets/css/normalize.css">
-        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-        <link rel="stylesheet" href="assets/css/fontello.css">
-        <link href="assets/fonts/icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet">
-        <link href="assets/fonts/icon-7-stroke/css/helper.css" rel="stylesheet">
-        <link href="assets/css/animate.css" rel="stylesheet" media="screen">
-        <link rel="stylesheet" href="assets/css/bootstrap-select.min.css"> 
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/css/icheck.min_all.css">
-        <link rel="stylesheet" href="assets/css/price-range.css">
-        <link rel="stylesheet" href="assets/css/owl.carousel.css">  
-        <link rel="stylesheet" href="assets/css/owl.theme.css">
-        <link rel="stylesheet" href="assets/css/owl.transitions.css">
-        <link rel="stylesheet" href="assets/css/lightslider.min.css">
-        <link rel="stylesheet" href="assets/css/style.css">
-        <link rel="stylesheet" href="assets/css/responsive.css">
+        <link rel="stylesheet" href="{% static 'authentication/assets/css/normalize.css' %}">
+        <link rel="stylesheet" href="{% static 'authentication/assets/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'authentication/assets/css/fontello.css' %}">
+        <link href="{% static 'authentication/assets/fonts/icon-7-stroke/css/pe-icon-7-stroke.css' %}" rel="stylesheet">
+        <link href="{% static 'authentication/assets/fonts/icon-7-stroke/css/helper.css' %}" rel="stylesheet">
+        <link href="{% static 'authentication/assets/css/animate.css' %}" rel="stylesheet" media="screen">
+        <link rel="stylesheet" href="{% static 'authentication/assets/css/bootstrap-select.min.css' %}"> 
+        <link rel="stylesheet" href="{% static 'authentication/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'authentication/assets/css/icheck.min_all.css' %}">
+        <link rel="stylesheet" href="{% static 'authentication/assets/css/price-range.css' %}">
+        <link rel="stylesheet" href="{% static 'authentication/assets/css/owl.carousel.css' %}">  
+        <link rel="stylesheet" href="{% static 'authentication/assets/css/owl.theme.css' %}">
+        <link rel="stylesheet" href="{% static 'authentication/assets/css/owl.transitions.css' %}">
+        <link rel="stylesheet" href="{% static 'authentication/assets/css/lightslider.min.css' %}">
+        <link rel="stylesheet" href="{% static 'authentication/assets/css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'authentication/assets/css/responsive.css' %}">
     </head>
     <body>
 
@@ -82,19 +84,31 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html"><img src="assets/img/logo.png" alt=""></a>
+                    <a class="navbar-brand" href="index.html"><img src="{% static 'authentication/assets/img/logo.png' %}" alt=""></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse yamm" id="navigation">
                     <div class="button navbar-right">
-                        <button class="navbar-btn nav-button wow bounceInRight login" onclick=" window.open('register.html')" data-wow-delay="0.4s">Login</button>
-                        <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.open('submit-property.html')" data-wow-delay="0.5s">Submit</button>
+                        {% if user.is_authenticated %}
+                        {% comment %} {% if  messages %}{{messages|escape }}{% endif%} {% endcomment %}
+                            <button class="navbar-btn nav-button wow fadeInRight" onclick="window.open('{% url 'submit-property' %}')" data-wow-delay="0.48s"style="color:green">Submit</button>
+                            <button class="navbar-btn nav-button wow fadeInRight" onclick="window.open('{% url 'user-profiles' %}')" data-wow-delay="0.48s">
+                                {% if user.is_authenticated and user.get_full_name %}
+                                {{ user.get_full_name }}
+                                {% else %}
+                                {{ user.username }}
+                                {% endif  %}
+                            </button>
+                            <button class="navbar-btn nav-button wow fadeInRight" onclick="window.open('{% url 'user-logout' %}')" data-wow-delay="0.48s"style="color:red">Logout</button>
+                        {% else %}
+                            <button class="navbar-btn nav-button wow bounceInRight login" onclick="window.open('{% url 'login' %}')" data-wow-delay="0.45s" style="color:black">Login</button>
+                        {% endif %}
                     </div>
                     <ul class="main-nav nav navbar-nav navbar-right">
                         <li class="dropdown ymm-sw " data-wow-delay="0.1s">
-                            <a href="index.html" class="dropdown-toggle active" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Home <b class="caret"></b></a>
-                            <ul class="dropdown-menu navbar-nav">
+                            <a href="{% url 'home' %}" class="dropdown-toggle active" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Home <b class="caret"></b></a>
+                            {% comment %} <ul class="dropdown-menu navbar-nav">
                                 <li>
                                     <a href="index-2.html">Home Style 2</a>
                                 </li>
@@ -108,7 +122,7 @@
                                     <a href="index-5.html">Home Style 5</a>
                                 </li>
 
-                            </ul>
+                            </ul> {% endcomment %}
                         </li>
 
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="properties.html">Properties</a></li>
@@ -228,17 +242,17 @@
                                     </div> 
 
                                     <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
-                                        <li data-thumb="assets/img/property-1/property1.jpg"> 
-                                            <img src="assets/img/property-1/property1.jpg" />
+                                        <li data-thumb="{% static 'authentication/assets/img/property-1/property1.jpg' %}"> 
+                                            <img src="{% static 'authentication/assets/img/property-1/property1.jpg' %}" />
                                         </li>
-                                        <li data-thumb="img/property-1/property2.jpg"> 
-                                            <img src="assets/img/property-1/property3.jpg" />
+                                        <li data-thumb="{% static 'authentication/img/property-1/property2.jpg' %}"> 
+                                            <img src="{% static 'authentication/assets/img/property-1/property3.jpg' %}" />
                                         </li>
-                                        <li data-thumb="assets/img/property-1/property3.jpg"> 
-                                            <img src="assets/img/property-1/property3.jpg" />
+                                        <li data-thumb="{% static 'authentication/assets/img/property-1/property3.jpg' %}"> 
+                                            <img src="{% static 'authentication/assets/img/property-1/property3.jpg' %}" />
                                         </li>
-                                        <li data-thumb="assets/img/property-1/property4.jpg"> 
-                                            <img src="assets/img/property-1/property4.jpg" />
+                                        <li data-thumb="{% static 'authentication/assets/img/property-1/property4.jpg' %}"> 
+                                            <img src="{% static 'authentication/assets/img/property-1/property4.jpg' %}" />
                                         </li>                                         
                                     </ul>
                                 </div>
@@ -382,7 +396,7 @@
                                 <h4 class="s-property-title">Property Video</h4> 
                                 <div class="video-thumb">
                                     <a class="video-popup" href="yout" title="Virtual Tour">
-                                        <img src="assets/img/property-video.jpg" class="img-responsive wp-post-image" alt="Exterior">            
+                                        <img src="{% static 'authentication/assets/img/property-video.jpg' %}" class="img-responsive wp-post-image" alt="Exterior">            
                                     </a>
                                 </div>
                             </div>
@@ -399,7 +413,7 @@
                                         <div class="clear">
                                             <div class="col-xs-4 col-sm-4 dealer-face">
                                                 <a href="">
-                                                    <img src="assets/img/client-face1.png" class="img-circle">
+                                                    <img src="{% static 'authentication/assets/img/client-face1.png' %}" class="img-circle">
                                                 </a>
                                             </div>
                                             <div class="col-xs-8 col-sm-8 ">
@@ -450,7 +464,7 @@
                                     <ul>
                                         <li>
                                             <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                                <a href="single.html"><img src="assets/img/demo/small-property-2.jpg"></a>
+                                                <a href="single.html"><img src="{% static 'authentication/assets/img/demo/small-property-2.jpg' %}"></a>
                                                 <span class="property-seeker">
                                                     <b class="b-1">A</b>
                                                     <b class="b-2">S</b>
@@ -463,7 +477,7 @@
                                         </li>
                                         <li>
                                             <div class="col-md-3 col-sm-3  col-xs-3 blg-thumb p0">
-                                                <a href="single.html"><img src="assets/img/demo/small-property-1.jpg"></a>
+                                                <a href="single.html"><img src="{% static 'authentication/assets/img/demo/small-property-1.jpg' %}"></a>
                                                 <span class="property-seeker">
                                                     <b class="b-1">A</b>
                                                     <b class="b-2">S</b>
@@ -476,7 +490,7 @@
                                         </li>
                                         <li>
                                             <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                                <a href="single.html"><img src="assets/img/demo/small-property-3.jpg"></a>
+                                                <a href="single.html"><img src="{% static 'authentication/assets/img/demo/small-property-3.jpg' %}"></a>
                                                 <span class="property-seeker">
                                                     <b class="b-1">A</b>
                                                     <b class="b-2">S</b>
@@ -490,7 +504,7 @@
 
                                         <li>
                                             <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                                <a href="single.html"><img src="assets/img/demo/small-property-2.jpg"></a>
+                                                <a href="single.html"><img src="{% static 'authentication/assets/img/demo/small-property-2.jpg' %}"></a>
                                                 <span class="property-seeker">
                                                     <b class="b-1">A</b>
                                                     <b class="b-2">S</b>
@@ -513,7 +527,7 @@
                                     <h3 class="panel-title">Ads her  </h3>
                                 </div>
                                 <div class="panel-body recent-property-widget">
-                                    <img src="assets/img/ads.jpg">
+                                    <img src="{% static 'authentication/assets/img/ads.jpg' %}">
                                 </div>
                             </div>
 
@@ -704,7 +718,7 @@
                                 <h4>About us </h4>
                                 <div class="footer-title-line"></div>
 
-                                <img src="assets/img/footer-logo.png" alt="" class="wow pulse" data-wow-delay="1s">
+                                <img src="{% static 'authentication/assets/img/footer-logo.png' %}" alt="" class="wow pulse" data-wow-delay="1s">
                                 <p>Lorem ipsum dolor cum necessitatibus su quisquam molestias. Vel unde, blanditiis.</p>
                                 <ul class="footer-adress">
                                     <li><i class="pe-7s-map-marker strong"> </i> 9089 your adress her</li>
@@ -735,7 +749,7 @@
                                     <li>
                                         <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
                                             <a href="single.html">
-                                                <img src="assets/img/demo/small-proerty-2.jpg">
+                                                <img src="{% static 'authentication/assets/img/demo/small-proerty-2.jpg' %}">
                                             </a>
                                             <span class="blg-date">12-12-2016</span>
 
@@ -749,7 +763,7 @@
                                     <li>
                                         <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
                                             <a href="single.html">
-                                                <img src="assets/img/demo/small-proerty-2.jpg">
+                                                <img src="{% static 'authentication/assets/img/demo/small-proerty-2.jpg' %}">
                                             </a>
                                             <span class="blg-date">12-12-2016</span>
 
@@ -763,7 +777,7 @@
                                     <li>
                                         <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
                                             <a href="single.html">
-                                                <img src="assets/img/demo/small-proerty-2.jpg">
+                                                <img src="{% static 'authentication/assets/img/demo/small-proerty-2.jpg' %}">
                                             </a>
                                             <span class="blg-date">12-12-2016</span>
 
@@ -830,19 +844,19 @@
 
         </div>
 
-        <script src="assets/js/vendor/modernizr-2.6.2.min.js"></script>
-        <script src="assets/js/jquery-1.10.2.min.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/js/bootstrap-select.min.js"></script>
-        <script src="assets/js/bootstrap-hover-dropdown.js"></script>
-        <script src="assets/js/easypiechart.min.js"></script>
-        <script src="assets/js/jquery.easypiechart.min.js"></script>
-        <script src="assets/js/owl.carousel.min.js"></script>
-        <script src="assets/js/wow.js"></script>
-        <script src="assets/js/icheck.min.js"></script>
-        <script src="assets/js/price-range.js"></script>
-        <script type="text/javascript" src="assets/js/lightslider.min.js"></script>
-        <script src="assets/js/main.js"></script>
+        <script src="{% static 'authentication/assets/js/vendor/modernizr-2.6.2.min.js' %}"></script>
+        <script src="{% static 'authentication/assets/js/jquery-1.10.2.min.js' %}"></script>
+        <script src="{% static 'authentication/bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'authentication/assets/js/bootstrap-select.min.js' %}"></script>
+        <script src="{% static 'authentication/assets/js/bootstrap-hover-dropdown.js' %}"></script>
+        <script src="{% static 'authentication/assets/js/easypiechart.min.js' %}"></script>
+        <script src="{% static 'authentication/assets/js/jquery.easypiechart.min.js' %}"></script>
+        <script src="{% static 'authentication/assets/js/owl.carousel.min.js' %}"></script>
+        <script src="{% static 'authentication/assets/js/wow.js' %}"></script>
+        <script src="{% static 'authentication/assets/js/icheck.min.js' %}"></script>
+        <script src="{% static 'authentication/assets/js/price-range.js' %}"></script>
+        <script type="text/javascript" src="{% static 'authentication/assets/js/lightslider.min.js' %}"></script>
+        <script src="{% static 'authentication/assets/js/main.js' %}"></script>
 
         <script>
                             $(document).ready(function () {

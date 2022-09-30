@@ -9,7 +9,9 @@
             <div class="container">
                 <div class="row">
                     <div class="page-head-content">
-                        <h1 class="page-title">List Layout With Sidebar</h1>               
+                        {% if user.is_authenticated %}
+                        <h1 class="page-title"><strong>{% if user.username %}{{ user.username }}{% else %}{{user.get_full_name}}{% endif %}</strong> Properties</h1>   
+                        {% endif %}            
                     </div>
                 </div>
             </div>

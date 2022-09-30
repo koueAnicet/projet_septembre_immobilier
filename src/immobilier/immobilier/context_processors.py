@@ -13,5 +13,5 @@ def get_site_infos(request):
 
 
 def get_site_infos(request)-> dict:
-    site_infos=SiteInfos.objects.filter(active=True)
+    site_infos=SiteInfos.objects.first()
     return {'site_infos': site_infos}

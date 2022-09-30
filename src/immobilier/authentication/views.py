@@ -149,14 +149,14 @@ def user_profiles(request):
 
 #@login_required
 
-class UserProperty(View):
+class UserPropertyView(View):
     template_name='authentication/pages/user-properties.html'
     
 
 
     def get(self, request):
         # count_bed = SubmitProperty.objects.filter(active=True).count()
-        # property = SubmitProperty.objects.filter(active=True)
+        AllProperties= SubmitProperty.objects.filter(active=True)
         # count_shaweds = SubmitProperty.objects.filter(active=True).count()
         return render(request, self.template_name, locals())
 
@@ -172,7 +172,7 @@ class UserProperty(View):
     def puth(self, request ):
         pass
 
-class SubmitProperty(LoginRequiredMixin, View):
+class SubmitPropertyView(LoginRequiredMixin, View):
     template_name='authentication/pages/submit-property.html'
     form_class= forms.SubmitProperForm
     
@@ -195,6 +195,17 @@ class SubmitProperty(LoginRequiredMixin, View):
         return render(request, self.template_name, locals())
         
         
+class DetailPropertyView(View):
+     
+    template_name="authentication/pages/property.html"
+    
+    def get(self, request):
+        return render(request, self.template_name, locals())
+
+    def post(self, request, ):
+        #info_house= SubmitProperty.objects.get_or_404(pk=id_house)
+        return render(request, self.template_name, locals())
+
 
 
 class  AllPropertiesView(View):
@@ -207,6 +218,8 @@ class  AllPropertiesView(View):
         
         #all_properties_db = SubmitProperty.objects.filter(active=True)
         return render(request, self.template_name, locals())
+
+
 
 #vue de confirmation email avec token
 def activate(request, uidb64, token):

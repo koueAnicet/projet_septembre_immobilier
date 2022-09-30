@@ -76,5 +76,6 @@ class User(AbstractUser, FieldsDate):
         blank=True,
         related_name="user_social_link"
     )
+    description_agent_estate= models.CharField(max_length=1000 , blank=True, null=True)
     def __str__(self):
         return self.username

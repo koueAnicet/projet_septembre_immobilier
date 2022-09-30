@@ -4,9 +4,58 @@ from django.conf import settings
 from tinymce.models import HTMLField
 from phonenumber_field.modelfields import PhoneNumberField
 
-from authentication.models import User 
+from authentication.models import User
+from authentication.models import FieldsDate
 
-class StatusProperty(models.Model):
+
+class CategoryProperty(FieldsDate):
+    name = models.CharField(max_length=50)
+    def __str__(self):
+            return self.name
+    class Meta:
+        db_table = 'CategoryProperty'
+        managed = True
+        verbose_name = 'CategoryProperty'
+        verbose_name_plural = 'CategoryProerties'
+    
+    
+class BedNumber(FieldsDate):  #lit 
+    interval = models.PositiveBigIntegerField()
+    
+    
+class GarageNumber(FieldsDate):  
+    interval = models.PositiveBigIntegerField(blank=True, null=True)   
+      
+      
+class BathNumber(FieldsDate):  #salle de bain     
+    interval = models.PositiveBigIntegerField()
+
+
+class AdditonalDetails(FieldsDate):       
+    built_in =models.PositiveIntegerField(blank=True, null=True)#annee de construction
+    water_front = models.CharField(max_length=3, blank=True, null=True)#bordure eau
+    accessible_vehicule = models.CharField(max_length=3, blank=True, null=True)
+    child_bredroom =models.CharField(max_length=3, blank=True, null=True)#chambre enfant
+    desc_water_front =models.CharField(max_length=150, blank=True, null=True)
+    
+    def __str__(self):
+            return self.name
+    class Meta:
+        db_table = 'AdditonalDetails'
+        managed = True
+        verbose_name = 'AdditonalDetail'
+        verbose_name_plural = 'AdditonalDetails'
+     
+
+class PriceRange(FieldsDate):#grille de prix
+    interval = models.PositiveBigIntegerField()
+     
+
+class AreaProperty(FieldsDate):
+    interval = models.PositiveSmallIntegerField()   
+
+
+class StatusProperty(FieldsDate):
     name = models.CharField(max_length=150)
     def __str__(self):
         return self.name
@@ -16,7 +65,8 @@ class StatusProperty(models.Model):
         verbose_name = 'StatusProperty'
         verbose_name_plural = 'StatusProperties'
 
-class State(models.Model):
+
+class State(FieldsDate):
     name = models.CharField(max_length=150)
     
     class Meta:
@@ -28,7 +78,7 @@ class State(models.Model):
         return self.name
 
 
-class City(models.Model):
+class City(FieldsDate):
     state = models.ForeignKey(
         State,
         on_delete=models.SET_NULL,
@@ -48,8 +98,7 @@ class City(models.Model):
         return self.name
 
 
-
-class SubmitProperty(models.Model):
+class SubmitProperty(FieldsDate):
     user_property_submit = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
@@ -61,13 +110,6 @@ class SubmitProperty(models.Model):
     price = models.PositiveIntegerField(blank=True, null=True)
     phone = PhoneNumberField(region="CI", blank=True, null=True)
     description =HTMLField(blank=True, null=True)
-    # state = models.ForeignKey(
-    #     State,
-    #     on_delete=models.SET_NULL,
-    #     blank=True,
-    #     null=True,
-    #     related_name='property_state',
-    # )
     city = models.ForeignKey(
         City,
         on_delete=models.SET_NULL,
@@ -82,9 +124,60 @@ class SubmitProperty(models.Model):
         null=True,
         related_name='property_status',
     )
-    bed_numbers=models.PositiveBigIntegerField(blank=True, null=True)
-    bath_numbers=models.PositiveBigIntegerField(blank=True, null=True)
-    area_numbers=models.PositiveBigIntegerField(blank=True, null=True)
+    bed_numbers = models.ForeignKey(
+        BedNumber,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name='property_bed',
+    )
+    bath_numbers = models.ForeignKey(
+        BathNumber,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name='property_bath',
+    )
+    area_numbers = models.ForeignKey(
+        AreaProperty,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name='property_area',
+    )
+    price_range = models.ForeignKey(
+        PriceRange,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name='property_price',
+    )
+    piscine = models.BooleanField(default=False)
+    terrain = models.BooleanField(default=False)
+    cheminer=models.BooleanField(default=False)
+    sortie_secours=models.BooleanField(default=False)
+    jadin=models.BooleanField(default=False)
+    garage_number = models.ForeignKey(
+        GarageNumber,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name='property_Garage',
+    )
+    additional_detail = models.ForeignKey(
+        AdditonalDetails,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name='property_additionaldetails',
+    )
+    category_property= models.ForeignKey(
+        CategoryProperty,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name='property_category',
+    )
     image1 = models.ImageField(upload_to='img1',blank=True, null=True)
     image2 = models.ImageField(upload_to='img2',blank=True, null=True)
     image3 = models.ImageField(upload_to='img3',blank=True, null=True)
