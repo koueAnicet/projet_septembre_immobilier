@@ -105,6 +105,7 @@ class  LoginView(View):
                 username=form.cleaned_data["username"],
                 password=form.cleaned_data["password"],
             )
+            my_user= User.objects.get(username=user.uusername)
             if user is not None:
                 if user.is_estate_agent and user.is_active != False:
                     
@@ -113,6 +114,9 @@ class  LoginView(View):
                     messages.success(request, "Bienvenue , vous êtes connecté.")
                     
                     return redirect('user-property')
+                elif my_user.is_active==False:
+                    messages.error(request, "Vous n'avez pas confirmé votre adresse email , merci de le faire.")
+                    
                 elif user and user.is_superuser:
                     login(request, user)
                     fname = user.get_full_name
