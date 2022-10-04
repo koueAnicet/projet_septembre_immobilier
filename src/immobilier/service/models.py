@@ -22,43 +22,40 @@ class CategoryProperty(FieldsDate):
 class BedNumber(FieldsDate):  #lit 
     interval = models.PositiveBigIntegerField()
     
+
+    
     
 class GarageNumber(FieldsDate):  
     interval = models.PositiveBigIntegerField(blank=True, null=True)   
-      
+    
+    
       
 class BathNumber(FieldsDate):  #salle de bain     
     interval = models.PositiveBigIntegerField()
+   
 
 
-class AdditonalDetails(FieldsDate):       
-    built_in =models.PositiveIntegerField(blank=True, null=True)#annee de construction
-    water_front = models.CharField(max_length=3, blank=True, null=True)#bordure eau
-    accessible_vehicule = models.CharField(max_length=3, blank=True, null=True)
-    child_bredroom =models.CharField(max_length=3, blank=True, null=True)#chambre enfant
-    desc_water_front =models.CharField(max_length=150, blank=True, null=True)
-    
-    def __str__(self):
-            return self.name
-    class Meta:
-        db_table = 'AdditonalDetails'
-        managed = True
-        verbose_name = 'AdditonalDetail'
-        verbose_name_plural = 'AdditonalDetails'
      
 
-class PriceRange(FieldsDate):#grille de prix
+class PriceRangeMin(FieldsDate):#grille de prix
     interval = models.PositiveBigIntegerField()
-     
+    
+    
+    
+class PriceRangeMax(FieldsDate):#grille de prix
+    interval = models.PositiveBigIntegerField()
+    
 
 class AreaProperty(FieldsDate):
     interval = models.PositiveSmallIntegerField()   
-
-
+    
+    
+    
 class StatusProperty(FieldsDate):
     name = models.CharField(max_length=150)
     def __str__(self):
         return self.name
+    
     class Meta:
         db_table = 'StatusProperty'
         managed = True
@@ -74,6 +71,7 @@ class State(FieldsDate):
         managed = True
         verbose_name = 'State'
         verbose_name_plural = 'States'
+        
     def __str__(self):
         return self.name
 
@@ -146,17 +144,25 @@ class SubmitProperty(FieldsDate):
         related_name='property_area',
     )
     price_range = models.ForeignKey(
-        PriceRange,
+        PriceRangeMin,
         on_delete=models.SET_NULL,
         blank=True,
         null=True,
         related_name='property_price',
     )
+    price_range = models.ForeignKey(
+        PriceRangeMax,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name='property_price',
+    )
+    
     piscine = models.BooleanField(default=False)
     terrain = models.BooleanField(default=False)
     cheminer=models.BooleanField(default=False)
     sortie_secours=models.BooleanField(default=False)
-    jadin=models.BooleanField(default=False)
+    jardin=models.BooleanField(default=False)
     garage_number = models.ForeignKey(
         GarageNumber,
         on_delete=models.SET_NULL,
@@ -164,13 +170,7 @@ class SubmitProperty(FieldsDate):
         null=True,
         related_name='property_Garage',
     )
-    additional_detail = models.ForeignKey(
-        AdditonalDetails,
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True,
-        related_name='property_additionaldetails',
-    )
+  
     category_property= models.ForeignKey(
         CategoryProperty,
         on_delete=models.SET_NULL,
@@ -178,6 +178,12 @@ class SubmitProperty(FieldsDate):
         null=True,
         related_name='property_category',
     )
+    #----infos additional--#
+    built_in = models.PositiveIntegerField(max_length=4,  blank=True, null=True)
+    water_front = models.BooleanField(default=False)#bordure eau
+    accessible_vehicule = models.BooleanField(default=False)#bordure eau
+    child_bredroom = models.BooleanField(default=False)#chambre enfant
+    desc_water_front =HTMLField(blank=True, null=True)
     image1 = models.ImageField(upload_to='img1',blank=True, null=True)
     image2 = models.ImageField(upload_to='img2',blank=True, null=True)
     image3 = models.ImageField(upload_to='img3',blank=True, null=True)
@@ -188,6 +194,7 @@ class SubmitProperty(FieldsDate):
     def __str__(self):
         return self.name
 
+    
     class Meta:
         db_table = 'SubmitProperty'
         managed = True

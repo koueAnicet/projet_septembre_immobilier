@@ -297,7 +297,7 @@
                                             <div class="col-sm-12">
                                                 <div class="col-sm-3">
                                                     <div class="form-group">
-                                                        <label style="color:black">Property State :</label>
+                                                        <label style="color:black">Property Category :</label>
                                                         {% comment %} <select id="lunchBegins" name="" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Select your city">
                                                             <option>Seoul</option>
                                                             <option>Paris</option>
@@ -306,7 +306,7 @@
                                                             <option>Marraekch</option>
                                                             <option>kyoto , shibua</option>
                                                         </select> {% endcomment %}
-                                                    {% render_field form.state class="form-control " name="discrition" data-error="Name." %}
+                                                    {% render_field form.category_property class="form-control "  data-error="Name." %}
 
                                                     </div>
                                                 </div>
@@ -355,45 +355,62 @@
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 padding-top-15">                                                   
-                                                <div class="col-sm-4">
+                                                <div class="col-sm-3">
                                                     <div class="form-group">
-                                                        <label for="property-geo" style="color:black">Min bed :</label>
-                                                        <input type="text" class="span2" value="" data-slider-min="0" 
+                                                        <label for="property-geo" style="color:black">Bed Numbers :</label>
+                                                        {% comment %} <input type="text" class="span2" value="" data-slider-min="0" 
                                                                data-slider-max="600" data-slider-step="5" 
                                                                data-slider-value="[250,450]" id="min-bed" ><br />
                                                         <b class="pull-left color">1</b> 
-                                                        <b class="pull-right color">120</b>
+                                                        <b class="pull-right color">120</b> {% endcomment %}
+                                                    {% render_field form.bed_numbers class="form-control "  data-error="Minbed.." %}
+
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-4">
+                                                <div class="col-sm-3">
 
                                                     <div class="form-group">
-                                                        <label for="price-range" style="color:black">Min baths :</label>
-                                                        <input type="text" class="span2" value="" data-slider-min="0" 
+                                                        <label for="price-range" style="color:black">Baths Numbers :</label>
+                                                        {% comment %} <input type="text" class="span2" value="" data-slider-min="0" 
                                                                data-slider-max="600" data-slider-step="5" 
                                                                data-slider-value="[250,450]" id="min-baths" ><br />
                                                         <b class="pull-left color">1</b> 
-                                                        <b class="pull-right color">120</b>
+                                                        <b class="pull-right color">120</b> {% endcomment %}
+                                                        {% render_field form.bath_numbers class="form-control "  data-error="Minbath.." %}
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-4">
+                                                <div class="col-sm-3">
 
                                                     <div class="form-group">
                                                         <label for="property-geo" style="color:black">Property geo (m2) :</label>
-                                                        <input type="text" class="span2" value="" data-slider-min="0" 
+                                                        {% comment %} <input type="text" class="span2" value="" data-slider-min="0" 
                                                                data-slider-max="600" data-slider-step="5" 
                                                                data-slider-value="[50,450]" id="property-geo" ><br />
                                                         <b class="pull-left color">40m</b> 
-                                                        <b class="pull-right color">12000m</b>
+                                                        <b class="pull-right color">12000m</b> {% endcomment %}
+                                                        {% render_field form.area_numbers class="form-control "  data-error="Areanumbers.." %}       
                                                     </div>
                                                 </div>   
+                                                <div class="col-sm-3">
+
+                                                    <div class="form-group">
+                                                        <label for="property-garage-number" style="color:black">Garage Numbers:</label>
+                                                        {% comment %} <input type="text" class="span2" value="" data-slider-min="0" 
+                                                               data-slider-max="600" data-slider-step="5" 
+                                                               data-slider-value="[50,450]" id="property-geo" ><br />
+                                                        <b class="pull-left color">40m</b> 
+                                                        <b class="pull-right color">12000m</b> {% endcomment %}
+                                                        {% render_field form.area_numbers class="form-control "  data-error="Areanumbers.." %}       
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="col-sm-12 padding-top-15">
                                                 <div class="col-sm-3">
                                                     <div class="form-group">
                                                         <div class="checkbox">
                                                             <label style="color:black">
-                                                                <input type="checkbox"> Swimming Pool
+                                                                {% comment %} <input type="checkbox"> Piscine {% endcomment %}
+                                                                {% render_field form.piscine class="form-control " data-error="Areanumbers.." %} Piscine               
                                                             </label>
                                                         </div>
                                                     </div>
@@ -402,7 +419,8 @@
                                                     <div class="form-group">
                                                         <div class="checkbox">
                                                             <label style="color:black"> 
-                                                                <input type="checkbox"> 2 Stories
+                                                                {% comment %} <input type="checkbox"> 2 Stories {% endcomment %}
+                                                                {% render_field form.terrain class="form-control "  data-error="Areanumbers.." %}Terrain      
                                                             </label>
                                                         </div>
                                                     </div>
@@ -411,7 +429,8 @@
                                                     <div class="form-group">
                                                         <div class="checkbox">
                                                             <label style="color:black">
-                                                                <input type="checkbox"> Emergency Exit
+                                                                {% comment %} <input type="checkbox"> Emergency Exit {% endcomment %}
+                                                                {% render_field form.cheminer class="form-control "  data-error="Areanumbers.." %}Cheminer
                                                             </label>
                                                         </div>
                                                     </div>
@@ -420,7 +439,8 @@
                                                     <div class="form-group">
                                                         <div class="checkbox">
                                                             <label style="color:black">
-                                                                <input type="checkbox"> Fire Place 
+                                                                {% comment %} <input type="checkbox"> Fire Place  {% endcomment %}
+                                                                {% render_field form.sortie_secours class="form-control "  data-error="Areanumbers.." %}Sortie Secours
                                                             </label>
                                                         </div>
                                                     </div>
@@ -431,7 +451,17 @@
                                                     <div class="form-group">
                                                         <div class="checkbox">
                                                             <label style="color:black">
-                                                                <input type="checkbox"> Laundry Room
+                                                                {% comment %} <input type="checkbox"> Laundry Room {% endcomment %}
+                                                                {% render_field form.jardin class="form-control "  data-error="Areanumbers.." %}Jardin
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                               <div class="col-sm-3">
+                                                    <div class="form-group">
+                                                        <div class="checkbox">
+                                                            <label style="color:black">
+                                                                {% render_field form.water_front class="form-control "  data-error="Areanumbers.." %}Water Front
                                                             </label>
                                                         </div>
                                                     </div>
@@ -440,7 +470,7 @@
                                                     <div class="form-group">
                                                         <div class="checkbox">
                                                             <label style="color:black">
-                                                                <input type="checkbox"> Jog Path
+                                                               {% render_field form.accessible_vehicule class="form-control "  data-error="Areanumbers.." %}Accessible Vehicule
                                                             </label>
                                                         </div>
                                                     </div>
@@ -449,19 +479,19 @@
                                                     <div class="form-group">
                                                         <div class="checkbox">
                                                             <label style="color:black">
-                                                                <input type="checkbox"> Ceilings
+                                                               {% render_field form.accessible_vehicule class="form-control "  data-error="Areanumbers.." %}Child_Bredroom
                                                             </label>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <div class="form-group">
-                                                        <div class="checkbox">
-                                                            <label style="color:black">
-                                                                <input type="checkbox"> Dual Sinks
-                                                            </label>
-                                                        </div>
-                                                    </div>
+                                                </div> 
+                                                <div class="col-sm-12"> 
+                                                    <div class="col-sm-12"> 
+                                                        <div class="form-group">
+                                                            <label style="color:black">Front Description :</label>
+                                                            {% render_field form.desc_water_front class="form-control " name="discrition" data-error="Name." %}
+                                                        {% comment %} <textarea name="discrition" class="form-control" ></textarea> {% endcomment %}
+                                                        </div> 
+                                                    </div> 
                                                 </div>
                                             </div>
                                             <br>
@@ -573,9 +603,9 @@
                                 <h3><strong id=""><a href="{% url 'home' %}" style="color:gray">Anick Delacoste</a></strong></h3>
                                 <p>Lorem ipsum dolor cum necessitatibus su quisquam molestias. Vel unde, blanditiis.</p>
                                 <ul class="footer-adress">
-                                    <li><i class="pe-7s-map-marker strong"> </i> 9089 your adress her</li>
-                                    <li><i class="pe-7s-mail strong"> </i> email@yourcompany.com</li>
-                                    <li><i class="pe-7s-call strong"> </i> +1 908 967 5906</li>
+                                    <li><i class="pe-7s-map-marker strong"> </i> {{site_infos.address}}</li>
+                                    <li><i class="pe-7s-mail strong"> </i>{{site_infos.emails}}</li>
+                                    <li><i class="pe-7s-call strong"> </i> {{site_infos.contact}}</li>
                                 </ul>
                             </div>
                         </div>
@@ -584,7 +614,7 @@
                                 <h4>Quick links </h4>
                                 <div class="footer-title-line"></div>
                                 <ul class="footer-menu">
-                                    <li><a href="properties.html">Properties</a>  </li> 
+                                    <li><a href="{% url 'properties' %}">Properties</a>  </li> 
                                     <li><a href="#">Services</a>  </li> 
                                     <li><a href="submit-property.html">Submit property </a></li> 
                                     <li><a href="contact.html">Contact us</a></li> 

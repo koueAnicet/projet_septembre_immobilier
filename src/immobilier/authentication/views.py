@@ -1,4 +1,5 @@
 
+from urllib import request
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, redirect
@@ -105,7 +106,7 @@ class  LoginView(View):
                 username=form.cleaned_data["username"],
                 password=form.cleaned_data["password"],
             )
-            my_user= User.objects.get(username=user.uusername)
+            my_user= User.objects.get(username=user.username)
             if user is not None:
                 if user.is_estate_agent and user.is_active != False:
                     
@@ -148,17 +149,27 @@ class Contact(View):
 
 
 
-def user_profiles(request):
-    return render(request, "authentication/pages/user-profile.html", locals())
+class UserProfiles(View):
+    class_form = forms.NewsLetterForm
+    template_name="authentication/pages/user-profile.html"
+    
+    def get(self, request):
+        form = self.class_form()
+        
+        return render(request, "authentication/pages/user-profile.html", locals())
+    
+    def post(self, request):
+        return render(request, "authentication/pages/user-profile.html", locals())
 
 #@login_required
 
 class UserPropertyView(View):
     template_name='authentication/pages/user-properties.html'
-    
+    class_form = forms.NewsLetterForm
 
 
     def get(self, request):
+        form = self.class_form()
         # count_bed = SubmitProperty.objects.filter(active=True).count()
         AllProperties= SubmitProperty.objects.filter(active=True)
         # count_shaweds = SubmitProperty.objects.filter(active=True).count()
@@ -200,10 +211,11 @@ class SubmitPropertyView(LoginRequiredMixin, View):
         
         
 class DetailPropertyView(View):
-     
+    class_form = forms.NewsLetterForm
     template_name="authentication/pages/property.html"
     
     def get(self, request):
+        form = self.class_form()
         return render(request, self.template_name, locals())
 
     def post(self, request, ):
@@ -214,8 +226,9 @@ class DetailPropertyView(View):
 
 class  AllPropertiesView(View):
     template_name='authentication/pages/properties.html'
-    
+    class_form = forms.NewsLetterForm
     def get(self, request):
+        form = self.class_form()
         all_properties= SubmitProperty.objects.all()
         return render(request, self.template_name, locals())
     def post(self, request):

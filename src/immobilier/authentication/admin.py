@@ -17,9 +17,9 @@ class AdminUser(admin.ModelAdmin):
         'nationality',
         'is_estate_agent',
         'social_link',
-        'photo',
-        
-        
+        'photo', 
     )
+    search_fields =['username', 'first_name', 'last_name', 'number_phone']
+    
     def image_agent(self, obj):
         return mark_safe(f'<img src="{obj.photo.url}" style="height:100px; width:200px">')

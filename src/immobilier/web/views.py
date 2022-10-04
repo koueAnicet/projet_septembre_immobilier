@@ -9,9 +9,9 @@ from authentication.forms import TestimonialForm
 
 class HomeView(View):
     templates_name="web/pages/index.html"
-          
+    class_form = NewsLetterForm
     def get(self, request):
-        
+        form = self.class_form()
         # banner = Banner.objects.filter(active=True)
         # other_banner = OtherBanner.objects.filter(active=True)
         site_infos = SiteInfos.objects.first()

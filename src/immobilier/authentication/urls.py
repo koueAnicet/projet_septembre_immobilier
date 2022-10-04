@@ -13,7 +13,7 @@ urlpatterns = [
     path('properties/', views.AllPropertiesView.as_view(), name='properties'),
     path('detail-property/', views.DetailPropertyView.as_view(), name='detail-property'),
     path('user-logout/', views.logout_user_auth, name='user-logout'),
-    path('user-profiles/', views.user_profiles, name='user-profiles'),
+    path('user-profiles/', views.UserProfiles.as_view(), name='user-profiles'),
     
     path('activate/<uidb64>/<token>/', views.activate, name='activate'),
     
