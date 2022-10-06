@@ -72,7 +72,7 @@ class CityAdmin(admin.ModelAdmin):
         )
 @admin.register(SubmitProperty)
 class SubmitPropertyAdmin(admin.ModelAdmin): 
-    list_select_related = ('bed_numbers', 'SubmitPropertyAdmin')
+    
     list_display=(
         'user_property_submit',
         'image_first',
@@ -105,4 +105,5 @@ class SubmitPropertyAdmin(admin.ModelAdmin):
         'accept_condition',
     )
     search_fields =['status', 'city']
-   # raw_id_fields=['user_property_submit']
+    raw_id_fields=['user_property_submit']
+    #action = ['active', 'accept_condition']

@@ -50,6 +50,7 @@ class ContactView(View):
     
     def get(self, request):
         form = self.class_form()
+        site_infos = SiteInfos.objects.first()
         return render(request, self.template_name, locals())
 
     def post(self, request):

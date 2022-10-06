@@ -63,9 +63,8 @@
 
                         <div class="section"> 
                             <div id="list-type" class="proerty-th-list">
-                                {% comment %} emplacement de la boucle {% endcomment %}
-                                {% comment %} {% for property in properties %} {% endcomment %}
-                                <div class="col-md-4 p0">
+                               
+                                {% comment %} <div class="col-md-4 p0">
                                     <div class="box-two proerty-item">
                                         <div class="item-thumb">
                                             <a href="property-1.html" ><img src="{% static 'authentication/assets/img/demo/property-3.jpg' %}"></a>
@@ -92,7 +91,7 @@
                                         </div>
                                     </div>
                                 </div>                             
-                                {% comment %}{% endfor %} {% endcomment %}
+                                
                                 <div class="col-md-4 p0">
                                     <div class="box-two proerty-item">
                                         <div class="item-thumb">
@@ -263,22 +262,76 @@
 
 
                                     </div>
-                                </div>                                                        
+                                </div>    {% endcomment %}
+                                     {% comment %} emplacement de la boucle {% endcomment %}
+                                {% for Property in page_obj%}
+                                    {% if user.is_authenticated %}
+                                        
+                                <div class="col-md-4 p0">
+                                    <div class="box-two proerty-item">
+                                        <div class="item-thumb">
+                                            <a href="property-1.html" ><img src="{{ Property.image_first.url }}"></a>
+                                        </div>
+
+                                        <div class="item-entry overflow">
+                                            <h5><a href="{% url 'detail-property' %}">{{ Property.name }} </a></h5>
+                                            <div class="dot-hr"></div>
+                                            <span class="pull-left"><b> Area :</b>{% if Property.area_numbers != None %}{{ Property.area_numbers}}m {% else %} 0 {% endif %} </span>
+                                            <span class="proerty-price pull-right">{% if Property.price != None %}{{ Property.price }} {% else %} 0 {% endif %}Frcs</span>
+                                            <p style="display: none;">{{ Property.description|truncatewords:15|safe}}</p>
+                                            <div class="property-icon">
+                                                <img src="{% static 'authentication/assets/img/icon/bed.png' %}">({{Property.bed_numbers.interval}})|
+                                                <img src="{% static 'authentication/assets/img/icon/shawer.png' %}">({{Property.bath_numbers.interval}})|
+                                                <img src="{% static 'authentication/assets/img/icon/cars.png' %}">({{Property.garage_number.interval}})  
+
+                                                <div class="dealer-action pull-right">                                        
+                                                    <a href="{% url 'submit-property' %}" class="button" ><strong style="color:blue">Edit</strong></a>
+                                                    <a href="#" class="button delete_user_car"><strong style="color:red">Delete</strong></a>
+                                                    <a href="{% url 'detail-property' %}" class="button"><strong style="color:green">View</strong></a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div> 
+                                    {% endif %}
+                               {% endfor %} 
                             </div>
                         </div>
 
                         <div class="section"> 
+                            
                             <div class="pull-right">
                                 <div class="pagination">
-                                    <ul>
-                                        <li><a href="#">Prev</a></li>
-                                        <li><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">Next</a></li>
-                                    </ul>
+                                
+                                    <span class="step-links">
+                                        {% if page_obj.has_previous %}
+                                             {% comment %} <a href="?page=1">&laquo; first</a>  {% endcomment %}
+                                            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                                        {% endif %}
+                                
+                                        <span class="current">
+                                            {% for i in page_obj.paginator.page_range  %}
+                                                
+                                                {% if page_obj.number == i %}
+                                                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                                    {% else %}
+                                                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                                {% endif %}  
+                                            {% endfor %}
+                                                {% comment %} Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}. {% endcomment %}
+                                        </span>
+                                
+                                        {% if page_obj.has_next %}
+                                            <a href="?page={{ page_obj.next_page_number }}">next</a>
+                                            
+                                            {% comment %} <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a> {% endcomment %}
+                                        {% endif %}
+                                    </span>
+                                    {% comment %} </div> {% endcomment %}
                                 </div>
+
                             </div>                
                         </div>
 

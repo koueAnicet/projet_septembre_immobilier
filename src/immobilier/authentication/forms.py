@@ -130,6 +130,7 @@ class NewsLetterForm(forms.ModelForm):
     
 class SubmitProperForm(forms.ModelForm):   
     class Meta:
+        
         model = SubmitProperty
         fields = [
             

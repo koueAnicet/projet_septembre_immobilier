@@ -15,7 +15,7 @@ from django.contrib.auth import get_user_model
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes,force_text
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.core.paginator import Paginator
 
 from immobilier import settings
 from service.models import SubmitProperty
@@ -171,9 +171,14 @@ class UserPropertyView(View):
     def get(self, request):
         form = self.class_form()
         # count_bed = SubmitProperty.objects.filter(active=True).count()
-        AllProperties= SubmitProperty.objects.filter(active=True)
+        AllProperties= SubmitProperty.objects.all()
+        paginator = Paginator(AllProperties, 2)
+        page_number = request.GET.get('page')
+        
+        page_obj = paginator.get_page(page_number)
+        
         # count_shaweds = SubmitProperty.objects.filter(active=True).count()
-        return render(request, self.template_name, locals())
+        return render(request, self.template_name,locals())
 
     def post(self, request):
         

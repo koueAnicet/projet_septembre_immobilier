@@ -51,8 +51,8 @@
                     <div class="col-md-5 col-sm-8  col-xs-12">
                         <div class="header-half header-call">
                             <p>
-                                <span><i class="pe-7s-call"></i>{{site_infos.contact}}</span>
-                                <span><i class="pe-7s-mail"></i> {{site_infos.emails}}</span>
+                                <span><i class="pe-7s-call"></i>{{ site_infos.contact }}</span>
+                                <span><i class="pe-7s-mail"></i>{{ site_infos.emails }}</span>
                             </p>
                         </div>
                     </div>
@@ -106,7 +106,7 @@
                     </div>
                     <ul class="main-nav nav navbar-nav navbar-right">
                         <li class="dropdown ymm-sw " data-wow-delay="0.1s">
-                            <a href="{% url 'home' %}" class="dropdown-toggle active" data-toggle="dropdown" data-hover="dropdown" data-delay="200" style="color:black"><strong>Home</strong><b class="caret"></b></a>
+                            <a href="{% url 'home' %}" class="dropdown-toggle active" style="color:black"><strong>Home</strong><b class="caret"></b></a>
                             {% comment %} <ul class="dropdown-menu navbar-nav">
                                 <li>
                                     <a href="index-2.html">Home Style 2</a>
@@ -288,6 +288,7 @@
                                                 <div class="col-sm-12"> 
                                                     <div class="form-group">
                                                         <label style="color:black">Property Description :</label>
+                                                        {{ form.media }}
                                                     {% render_field form.description class="form-control " name="discrition" data-error="Name." %}
                                                     {% comment %} <textarea name="discrition" class="form-control" ></textarea> {% endcomment %}
                                                     </div> 
@@ -488,6 +489,7 @@
                                                     <div class="col-sm-12"> 
                                                         <div class="form-group">
                                                             <label style="color:black">Front Description :</label>
+                                                            {{ form.media }}
                                                             {% render_field form.desc_water_front class="form-control " name="discrition" data-error="Name." %}
                                                         {% comment %} <textarea name="discrition" class="form-control" ></textarea> {% endcomment %}
                                                         </div> 

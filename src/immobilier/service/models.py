@@ -18,37 +18,47 @@ class CategoryProperty(FieldsDate):
         verbose_name = 'CategoryProperty'
         verbose_name_plural = 'CategoryProerties'
     
+class BuiltIn(FieldsDate):
+    year_built = models.PositiveIntegerField(blank=True, null=True)   
+    def __str__(self):
+        return str(self.year_built)
     
 class BedNumber(FieldsDate):  #lit 
     interval = models.PositiveBigIntegerField()
     
-
+    def __str__(self):
+        return str(self.interval)
     
     
 class GarageNumber(FieldsDate):  
     interval = models.PositiveBigIntegerField(blank=True, null=True)   
     
-    
+    def __str__(self):
+        return str(self.interval)
       
 class BathNumber(FieldsDate):  #salle de bain     
     interval = models.PositiveBigIntegerField()
    
-
+    def __str__(self):
+        return str(self.interval)
 
      
 
 class PriceRangeMin(FieldsDate):#grille de prix
     interval = models.PositiveBigIntegerField()
     
-    
+    def __str__(self):
+        return str(self.interval)
     
 class PriceRangeMax(FieldsDate):#grille de prix
     interval = models.PositiveBigIntegerField()
-    
+    def __str__(self):
+        return str(self.interval)
 
 class AreaProperty(FieldsDate):
     interval = models.PositiveSmallIntegerField()   
-    
+    def __str__(self):
+        return str(self.interval)
     
     
 class StatusProperty(FieldsDate):
@@ -100,7 +110,7 @@ class SubmitProperty(FieldsDate):
     user_property_submit = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
-        related_name='submit_user',
+        related_name='submit_prperty',
         null=True
     )
     image_first = models.FileField(upload_to='image_first')
@@ -113,49 +123,42 @@ class SubmitProperty(FieldsDate):
         on_delete=models.SET_NULL,
         blank=True,
         null=True,
-        related_name='property_city',
+        related_name='city',
     )
     status = models.ForeignKey(
         StatusProperty,
         on_delete=models.SET_NULL,
         blank=True,
         null=True,
-        related_name='property_status',
+        related_name='status',
     )
     bed_numbers = models.ForeignKey(
         BedNumber,
         on_delete=models.SET_NULL,
         blank=True,
         null=True,
-        related_name='property_bed',
+        related_name='bed_numbers',
     )
     bath_numbers = models.ForeignKey(
         BathNumber,
         on_delete=models.SET_NULL,
         blank=True,
         null=True,
-        related_name='property_bath',
+        related_name='bath_numbers',
     )
     area_numbers = models.ForeignKey(
         AreaProperty,
         on_delete=models.SET_NULL,
         blank=True,
         null=True,
-        related_name='property_area',
+        related_name='area_numbers',
     )
     price_range = models.ForeignKey(
         PriceRangeMin,
         on_delete=models.SET_NULL,
         blank=True,
         null=True,
-        related_name='property_price',
-    )
-    price_range = models.ForeignKey(
-        PriceRangeMax,
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True,
-        related_name='property_price',
+        related_name='price_range',
     )
     
     piscine = models.BooleanField(default=False)
@@ -168,7 +171,7 @@ class SubmitProperty(FieldsDate):
         on_delete=models.SET_NULL,
         blank=True,
         null=True,
-        related_name='property_Garage',
+        related_name='garage_number',
     )
   
     category_property= models.ForeignKey(
@@ -176,10 +179,15 @@ class SubmitProperty(FieldsDate):
         on_delete=models.SET_NULL,
         blank=True,
         null=True,
-        related_name='property_category',
+        related_name='category_property',
     )
     #----infos additional--#
-    built_in = models.PositiveIntegerField(max_length=4,  blank=True, null=True)
+    built_in = models.ForeignKey(
+        BuiltIn, 
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True
+    )
     water_front = models.BooleanField(default=False)#bordure eau
     accessible_vehicule = models.BooleanField(default=False)#bordure eau
     child_bredroom = models.BooleanField(default=False)#chambre enfant
@@ -200,3 +208,5 @@ class SubmitProperty(FieldsDate):
         managed = True
         verbose_name = 'SubmitProperty'
         verbose_name_plural = 'SubmitProperties'
+        
+    
