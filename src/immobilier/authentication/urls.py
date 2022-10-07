@@ -11,7 +11,7 @@ urlpatterns = [
     path('submit-property/', views.SubmitPropertyView.as_view(), name='submit-property'),
     path('user-properties/', views.UserPropertyView.as_view(), name='user-properties'),
     path('properties/', views.AllPropertiesView.as_view(), name='properties'),
-    path('detail-property/', views.DetailPropertyView.as_view(), name='detail-property'),
+    path('detail-property/<int:property>/', views.DetailPropertyView.as_view(), name='detail-property'),
     path('user-logout/', views.logout_user_auth, name='user-logout'),
     path('user-profiles/', views.UserProfiles.as_view(), name='user-profiles'),
     

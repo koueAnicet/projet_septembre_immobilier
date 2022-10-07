@@ -39,6 +39,12 @@ class Country(FieldsDate):
     
     
 class Nationality(FieldsDate):
+    contry = models.ForeignKey(
+        Country, 
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+    )
     name = models.CharField(max_length=150)
     def __str__(self):
         return self.name
@@ -53,7 +59,7 @@ class Social_link(FieldsDate):
     
     
 class User(AbstractUser, FieldsDate):
-    photo =models.FileField()
+    photo =models.FileField(upload_to="User_photo")
     is_estate_agent= models.BooleanField(default=False)
     number_phone = PhoneNumberField(region="CI")
     number_phone_two = PhoneNumberField(region="CI")

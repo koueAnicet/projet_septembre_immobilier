@@ -171,6 +171,7 @@ class UserPropertyView(View):
     def get(self, request):
         form = self.class_form()
         # count_bed = SubmitProperty.objects.filter(active=True).count()
+        
         AllProperties= SubmitProperty.objects.all()
         paginator = Paginator(AllProperties, 2)
         page_number = request.GET.get('page')
@@ -219,8 +220,9 @@ class DetailPropertyView(View):
     class_form = forms.NewsLetterForm
     template_name="authentication/pages/property.html"
     
-    def get(self, request):
+    def get(self, request, property):
         form = self.class_form()
+        property_index = SubmitProperty.objects.get(id=property)
         return render(request, self.template_name, locals())
 
     def post(self, request, ):
@@ -234,7 +236,13 @@ class  AllPropertiesView(View):
     class_form = forms.NewsLetterForm
     def get(self, request):
         form = self.class_form()
-        all_properties= SubmitProperty.objects.all()
+        all_properties= SubmitProperty.objects.filter(active=True)
+        
+        paginator = Paginator(all_properties, 6)
+        page_number = request.GET.get('page')
+        
+        page_obj = paginator.get_page(page_number)
+        
         return render(request, self.template_name, locals())
     def post(self, request):
         

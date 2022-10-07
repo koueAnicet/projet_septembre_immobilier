@@ -81,6 +81,6 @@ class NewsLetterView(View):
         form = self.class_from(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Email envoyé avec succes.')
+            messages.success(request, 'Email envoyé avec succes!')
         return render(request, self.templates_name, locals())
     

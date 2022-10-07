@@ -263,7 +263,8 @@
 
                                     </div>
                                 </div>    {% endcomment %}
-                                     {% comment %} emplacement de la boucle {% endcomment %}
+
+                                    <!-- emplacement de la boucle -->> 
                                 {% for Property in page_obj%}
                                     {% if user.is_authenticated %}
                                         
@@ -274,7 +275,7 @@
                                         </div>
 
                                         <div class="item-entry overflow">
-                                            <h5><a href="{% url 'detail-property' %}">{{ Property.name }} </a></h5>
+                                            <h5><a href="{% url 'detail-property' Property.id  %}">{{ Property.name }} </a></h5>
                                             <div class="dot-hr"></div>
                                             <span class="pull-left"><b> Area :</b>{% if Property.area_numbers != None %}{{ Property.area_numbers}}m {% else %} 0 {% endif %} </span>
                                             <span class="proerty-price pull-right">{% if Property.price != None %}{{ Property.price }} {% else %} 0 {% endif %}Frcs</span>
@@ -287,7 +288,7 @@
                                                 <div class="dealer-action pull-right">                                        
                                                     <a href="{% url 'submit-property' %}" class="button" ><strong style="color:blue">Edit</strong></a>
                                                     <a href="#" class="button delete_user_car"><strong style="color:red">Delete</strong></a>
-                                                    <a href="{% url 'detail-property' %}" class="button"><strong style="color:green">View</strong></a>
+                                                    <a href="{% url 'detail-property' Property.id %}" class="button"><strong style="color:green">View</strong></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -329,7 +330,7 @@
                                             {% comment %} <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a> {% endcomment %}
                                         {% endif %}
                                     </span>
-                                    {% comment %} </div> {% endcomment %}
+                                    
                                 </div>
 
                             </div>                

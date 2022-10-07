@@ -22,3 +22,10 @@ voler
 verbe intransitif
 FAMILIER
 Frauder, tricher.
+
+#-----------taches--------#
+    -ajout image tags video
+
+
+*reste:
+    -faire le delete

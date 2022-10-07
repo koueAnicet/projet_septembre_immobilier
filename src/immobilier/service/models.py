@@ -1,3 +1,4 @@
+from re import M
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.conf import settings
@@ -153,12 +154,19 @@ class SubmitProperty(FieldsDate):
         null=True,
         related_name='area_numbers',
     )
-    price_range = models.ForeignKey(
+    price_range_max = models.ForeignKey(
+        PriceRangeMax,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name='price_rangemax',
+    )
+    price_range_min = models.ForeignKey(
         PriceRangeMin,
         on_delete=models.SET_NULL,
         blank=True,
         null=True,
-        related_name='price_range',
+        related_name='price_rangemin',
     )
     
     piscine = models.BooleanField(default=False)
@@ -191,13 +199,15 @@ class SubmitProperty(FieldsDate):
     water_front = models.BooleanField(default=False)#bordure eau
     accessible_vehicule = models.BooleanField(default=False)#bordure eau
     child_bredroom = models.BooleanField(default=False)#chambre enfant
-    desc_water_front =HTMLField(blank=True, null=True)
+    desc_parking = models.CharField(max_length=50, blank=True, null=True)
+    vue  = models.CharField(max_length=30, blank=True, null=True)
+    desc_water_front =HTMLField( max_length=255, blank=True, null=True)
     image1 = models.ImageField(upload_to='img1',blank=True, null=True)
     image2 = models.ImageField(upload_to='img2',blank=True, null=True)
     image3 = models.ImageField(upload_to='img3',blank=True, null=True)
     image4 = models.ImageField(upload_to='img4',blank=True, null=True)
     videos = models.URLField(blank=True, null=True)
-    videos2 = models.ImageField(upload_to='videos2', blank=True, null=True)
+    videos2 = models.FileField(upload_to='videos2', blank=True, null=True)
     accept_condition = models.BooleanField(default=False)
     def __str__(self):
         return self.name

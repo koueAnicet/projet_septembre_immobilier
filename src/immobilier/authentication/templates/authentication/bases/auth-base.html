@@ -284,19 +284,23 @@
                         <div class="col-md-3 col-sm-6 wow fadeInRight animated">
                             <div class="single-footer news-letter">
                                 <h4>Stay in touch</h4>
-                                {% for message in messages %}
-                                    <strong class="alert alert-danger">{% if message %} {{message}} {% endif %}</strong>
-                                {% endfor %}
+                                
                                 <div class="footer-title-line"></div>
                                 <p>Lorem ipsum dolor sit amet, nulla  suscipit similique quisquam molestias. Vel unde, blanditiis.</p>
 
                                 <form  action="{% url 'news-letter' %}" method="post">
                                     {% csrf_token %}
+                                    {% if form.email.errors %}
                                     <p>
                                         {% for error in form.email.errors %}
                                             <h6><strong class="text-center" style="color:red;">{{ error|escape }}</strong></h6>
                                         {% endfor %}
                                     </p>
+                                    {% elif messages %} 
+                                        {% for message in messages %}
+                                        <strong class="alert alert-danger">{% if message %} {{message}} {% endif %}</strong>
+                                        {% endfor %}
+                                    {% endif %}
                                     <div class="input-group">
                                         {% comment %} <input class="form-control" type="email" placeholder="E-mail ... "> {% endcomment %}
                                         {% render_field form.email class="form-control " placeholder="E-mail ... " id="email"  data-error="Email." %}
