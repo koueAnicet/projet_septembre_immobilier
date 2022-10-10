@@ -23,7 +23,7 @@ verbe intransitif
 FAMILIER
 Frauder, tricher.
 
-#-----------taches--------#
+-----------taches--------
     -ajout image tags video
 
 
