@@ -312,9 +312,9 @@
                                                 </a>
                                             </h5>
                                             <div class="dot-hr"></div>
-                                            <span class="pull-left"><b> Area :</b>{% if properties.area_numbers != None %}{{ properties.area_numbers}}m {% else %} 0 {% endif %}  m </span>
+                                            <span class="pull-left"><b> Area :</b>{% if properties.area_numbers != None %}{{ properties.area_numbers}} {% else %} 0 {% endif %} m </span>
                                             <span class="proerty-price pull-right">{% if properties.price != None %}{{ properties.price }} {% else %} 0 {% endif %}Frcs</span>
-                                            <p style="display: none;">{{ properties.description|truncatewords:15|safe }}</p>
+                                            {% comment %} <p style="display: none;">{{ properties.description|truncatewords:15|safe }}</p> {% endcomment %}
                                             <div class="property-icon">
                                                 <img src="{% static 'authentication/assets/img/icon/bed.png' %}">({{properties.bed_numbers.interval}})|
                                                 <img src="{% static 'authentication/assets/img/icon/shawer.png' %}">({{properties.bath_numbers.interval}})|
@@ -344,7 +344,7 @@
                                         {% for i in page_obj.paginator.page_range  %}
                                             
                                             {% if page_obj.number == i %}
-                                                <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                                <li class="current active"><a href="?page={{ i }}">{{ i }}</a></li>
                                                 {% else %}
                                                 <li><a href="?page={{ i }}">{{ i }}</a></li>
                                             {% endif %}  

@@ -177,10 +177,10 @@
                                                 <h5>User account</h5>
                                                 <ul>
                                                     <li><a href="register.html">Register / login</a>   </li>
-                                                    <li><a href="user-properties.html">Your properties</a>  </li>
-                                                    <li><a href="submit-property.html">Submit property</a>  </li>
-                                                    <li><a href="change-password.html">Change password</a> </li>
-                                                    <li><a href="user-profile.html">Your profile</a>  </li>
+                                                    <li><a href="{% url 'user-properties' %}">Your properties</a>  </li>
+                                                    <li><a href="{% url 'submit-property' %}">Submit property</a>  </li>
+                                                    <li><a href="{% url 'reset-password' %}">Change password</a> </li>
+                                                    <li><a href="{% url 'user-profiles' %}">Your profile</a>  </li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -252,7 +252,9 @@
                         <div class="single-property-wrapper">
                             <div class="single-property-header">                                          
                                 <h1 class="property-title pull-left">Villa in Coral Gables</h1>
-                                <span class="property-price pull-right">{% if property_index.price != None %}{{ property_index.price }} {% else %} 0 {% endif %} Frcs</span>
+                                <span class="property-price pull-right">
+                                    <strong>{% if property_index.price != None %}{{ property_index.price }} {% else %} 0 {% endif %} </strong>Frcs
+                                </span>
                             </div>
 
                             <div class="property-meta entry-meta clearfix ">   
@@ -265,7 +267,7 @@
                                     </span>
                                     <span class="property-info-entry">
                                         <span class="property-info-label">Status</span>
-                                        <span class="property-info-value">{{ property_index.status.name }}</span>
+                                        <span class="property-info-value"><strong>{{ property_index.status.name }}</strong></span>
                                     </span>
                                 </div>
 
@@ -277,7 +279,9 @@
                                     </span>
                                     <span class="property-info-entry">
                                         <span class="property-info-label">Area</span>
-                                        <span class="property-info-value">{{ property_index.area_numbers.interval }}<b class="property-info-unit">Sq Ft</b></span>
+                                        <span class="property-info-value">
+                                            <strong>{{ property_index.area_numbers.interval }} </strong><b class="property-info-unit">m<sup>2</up></b>
+                                        </span>
                                     </span>
                                 </div>
 
@@ -289,7 +293,7 @@
                                     </span>
                                     <span class="property-info-entry">
                                         <span class="property-info-label">Bedrooms</span>
-                                        <span class="property-info-value">{{ property_index.bed_numbers.interval }}</span>
+                                        <span class="property-info-value"><strong>{{ property_index.bed_numbers.interval }}</strong></span>
                                     </span>
                                 </div>
 
@@ -301,7 +305,7 @@
                                     </span>
                                     <span class="property-info-entry">
                                         <span class="property-info-label">Bathrooms</span>
-                                        <span class="property-info-value">{{ property_index.bath_numbers.interval }}</span>
+                                        <span class="property-info-value"><strong>{{ property_index.bath_numbers.interval }}</strong></span>
                                     </span>
                                 </div>
 
@@ -313,7 +317,7 @@
                                     </span>
                                     <span class="property-info-entry">
                                         <span class="property-info-label">Garages</span>
-                                        <span class="property-info-value">{{ property_index.garage_number.interval }}</span>
+                                        <span class="property-info-value"><strong>{{ property_index.garage_number.interval }}<strong></span>
                                     </span>
                                 </div>
 
@@ -400,11 +404,11 @@
                                                     
                                         </a> 
                                     </p>
-                                    <a class="video-popup" href="{{ property_index.videos }}" title="Virtual Tour">
+                                    <a class="video-popup" href="{{ property_index.videos2 }}" title="Virtual Tour">
                                         <!-- <img src="{{property_index.image_first.url }}" class="img-responsive wp-post-image" alt="Exterior"> -->  
                                         <video width="680" height="350" controls>
-                                            <source src="{{ property_index.videos2 }}" autoplay poster="{{ property_index.image_first.url }}" type="video/mp4">
-                                            <source src="{{ property_index.videos2 }}"  autoplay poster="{{ property_index.image_first.url }}" type="video/ogg">
+                                            <source src="{{ property_index.videos2.url }}"  poster="{{property_index.image_first.url }}" type="video/mp4">
+                                            <source src="{{ property_index.videos2.url }}"   poster="https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217" type="video/ogg">
                                             Your browser does not support the video tag.
                                           </video>         
                                     </a>
@@ -423,7 +427,9 @@
                                         <div class="clear">
                                             <div class="col-xs-4 col-sm-4 dealer-face">
                                                 <a href="">
-                                                    <img src="{{ property_index.user_property_submit.photo.url }}" class="img-circle">
+                                                    {% if property_index.user_property_submit.photo.url != ValueError %}
+                                                        <img src="{{ property_index.user_property_submit.photo.url }}" class="img-circle">
+                                                    {% endif %}
                                                 </a>
                                             </div>
                                             <div class="col-xs-8 col-sm-8 ">
@@ -789,7 +795,7 @@
                                             <span class="blg-date">12-12-2016</span>
 
                                         </div>
-                                        <div class="col-md-8  col-sm-8 col-xs-8  blg-entry">
+                                        Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu'il est prêt ou que la mise en page est achevée. Généralement, on utilise un texte en faux latin, le Lorem ipsum ou Lipsum.video        <div class="col-md-8  col-sm-8 col-xs-8  blg-entry">
                                             <h6> <a href="single.html">Add news functions </a></h6> 
                                             <p style="line-height: 17px; padding: 8px 2px;">Lorem ipsum dolor sit amet, nulla ...</p>
                                         </div>

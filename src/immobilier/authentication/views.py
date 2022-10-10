@@ -185,9 +185,7 @@ class UserPropertyView(View):
         
         return redirect('user-profiles')
 
-    def delete(self, request ):
-        #delete_property = SubmitProperty.objects.get(pk=id).delete()
-        pass
+    
     def update(self, request ):
         pass
     def puth(self, request ):
@@ -236,7 +234,7 @@ class  AllPropertiesView(View):
     class_form = forms.NewsLetterForm
     def get(self, request):
         form = self.class_form()
-        all_properties= SubmitProperty.objects.filter(active=True)
+        all_properties= SubmitProperty.objects.filter(active=True).order_by('created')
         
         paginator = Paginator(all_properties, 6)
         page_number = request.GET.get('page')
@@ -249,7 +247,11 @@ class  AllPropertiesView(View):
         #all_properties_db = SubmitProperty.objects.filter(active=True)
         return render(request, self.template_name, locals())
 
-
+#suppression de property
+def delete_property( request, delete_id):
+    template_name='authentication/pages/user-properties.html'
+    delete_property = SubmitProperty.objects.get(pk=delete_id).delete()
+    return render(request, template_name, locals())
 
 #vue de confirmation email avec token
 def activate(request, uidb64, token):

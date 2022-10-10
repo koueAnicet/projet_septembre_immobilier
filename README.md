@@ -28,4 +28,4 @@ Frauder, tricher.
 
 
 *reste:
-    -faire le delete
+    -faire le delete 

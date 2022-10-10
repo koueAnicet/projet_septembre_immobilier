@@ -199,7 +199,7 @@ class SubmitProperty(FieldsDate):
     water_front = models.BooleanField(default=False)#bordure eau
     accessible_vehicule = models.BooleanField(default=False)#bordure eau
     child_bredroom = models.BooleanField(default=False)#chambre enfant
-    desc_parking = models.CharField(max_length=50, blank=True, null=True)
+    desc_parking = models.CharField(max_length=125, blank=True, null=True)
     vue  = models.CharField(max_length=30, blank=True, null=True)
     desc_water_front =HTMLField( max_length=255, blank=True, null=True)
     image1 = models.ImageField(upload_to='img1',blank=True, null=True)
