@@ -294,10 +294,10 @@
                             <a class="layout-grid active" href="javascript:void(0);"> <i class="fa fa-th"></i> </a>                          
                         </div><!--/ .layout-switcher-->
                     </div>
-
+                    {% if page_obj %}
                     <div class="col-md-12 clear"> 
                         <div id="list-type" class="proerty-th">
-
+                           
                             {% for properties in page_obj %}
                                 <div class="col-sm-6 col-md-4 p0">
                                     <div class="box-two proerty-item">
@@ -358,11 +358,12 @@
                                         {% comment %} <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a> {% endcomment %}
                                     {% endif %}
                                 </span>
-                                
+                               
                             </div>
 
                         </div>                
                     </div>
+                    {% endif %}
                 </div>  
                 </div>              
             </div>

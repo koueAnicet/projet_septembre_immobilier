@@ -17,7 +17,11 @@
             </div>
         </div>
         <!-- End page header -->
-
+        <h6>
+            {% for message in messages %}
+                <strong class="alert alert-danger">{% if message %} {{message}} {% endif %}</strong>
+            {% endfor %}
+        </h6>
         <!-- property area -->
         <div class="content-area recent-property" style="background-color: #FFF;">
             <div class="container">   
@@ -85,7 +89,7 @@
                                                 <img src="{% static 'authentication/assets/img/icon/cars.png' %}">({{Property.garage_number.interval}})  
 
                                                 <div class="dealer-action pull-right">                                        
-                                                    <a href="{% url 'submit-property' %}" class="button" ><strong style="color:blue">Edit</strong></a>
+                                                    <a href="{% url 'update-property' Property.id %}" class="button" ><strong style="color:blue">Edit</strong></a>
                                                     <a href="{% url 'delete-property' Property.id %}" class="button delete_user_car"><strong style="color:red">Delete</strong></a>
                                                     <a href="{% url 'detail-property' Property.id %}" class="button"><strong style="color:green">View</strong></a>
                                                 </div>

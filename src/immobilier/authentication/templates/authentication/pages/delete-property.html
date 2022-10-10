@@ -1,0 +1,19 @@
+{% extends 'authentication/bases/auth-base.html' %}
+{% load static %}
+
+{% block content %}
+{% load widget_tweaks %}
+<div class="text-center">
+
+    <h1>Suppression de la propriéte</h1>
+
+
+    <p class="mt-50">Etes-vous sûr de vouloir supprimer la propriéte : <strong style="color:red" >{{ delete_property.name }} ?</strong></p>
+    <form action="" method="post">
+        {% csrf_token %}
+        
+        
+        <button class=" text-canter  btn-primary" type="submit">Supprimer</button>
+    </form>
+</div>
+{% endblock content %}

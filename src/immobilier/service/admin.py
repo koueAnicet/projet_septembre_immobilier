@@ -1,7 +1,11 @@
 from django.contrib import admin
+from django.contrib import messages
+from django.utils.translation import ngettext
 
 # Register your models here.
 from service.models  import *
+
+
 
 @admin.register(CategoryProperty)
 class CategoryPropertyAdmin(admin.ModelAdmin): 
@@ -70,6 +74,8 @@ class CityAdmin(admin.ModelAdmin):
         'state',
         'name',
         )
+    
+    
 @admin.register(SubmitProperty)
 class SubmitPropertyAdmin(admin.ModelAdmin): 
     
@@ -106,4 +112,14 @@ class SubmitPropertyAdmin(admin.ModelAdmin):
     )
     search_fields =['status', 'city']
     raw_id_fields=['user_property_submit']
+    ordering = ['name']
+    @admin.action(description='Mark selected properties as published')
+    def make_published(self, request, queryset):
+        updated= queryset.update(active=True)
+        self.message_user(request, ngettext(
+            '%d property was successfully marked as published.',
+            '%d properties were successfully marked as published.',
+            updated,
+        ) % updated, messages.SUCCESS)
+    actions = [make_published]
     #action = ['active', 'accept_condition']

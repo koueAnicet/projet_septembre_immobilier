@@ -1,5 +1,4 @@
 
-from urllib import request
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, redirect
@@ -159,6 +158,7 @@ class UserProfiles(View):
         return render(request, "authentication/pages/user-profile.html", locals())
     
     def post(self, request):
+        
         return render(request, "authentication/pages/user-profile.html", locals())
 
 #@login_required
@@ -205,7 +205,7 @@ class SubmitPropertyView(LoginRequiredMixin, View):
         if form.is_valid():
             f = form.save(commit=False)
             
-            print("eroorrrrrrrrr", request.user)
+            
             f.user_property_submit = request.user 
             f.save()
             
@@ -249,10 +249,30 @@ class  AllPropertiesView(View):
 
 #suppression de property
 def delete_property( request, delete_id):
-    template_name='authentication/pages/user-properties.html'
-    delete_property = SubmitProperty.objects.get(pk=delete_id).delete()
+    template_name='authentication/pages/delete-property.html'
+    delete_property = SubmitProperty.objects.get(pk=delete_id)
+    if request.method == 'POST':
+        delete_property.delete()
+        messages.success(request, 'Votre propriété a été supprimée avec succes.')
+        return redirect('user-properties')
     return render(request, template_name, locals())
-
+#update property
+def update_property(request, update_id):
+    template_name='authentication/pages/submit-property.html'
+    property_update = SubmitProperty.objects.get(pk=update_id)
+    print('fbfbbbgb', property_update.name)
+    form= forms.SubmitProperForm(instance=property_update)
+    
+    print("dsddffbfg",  request.method )
+    if request.method == 'POST':
+        form = forms.SubmitProperForm(request.POST ,  request.FILES, instance=property_update)
+        
+        if form.is_valid():
+            form.save() 
+            messages.success(request, 'Votre propriété a été modifier avec succès')
+            return redirect('detail-property', property_update.id)
+    return render(request, template_name , locals())
+    
 #vue de confirmation email avec token
 def activate(request, uidb64, token):
     User = get_user_model()
