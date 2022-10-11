@@ -13,6 +13,9 @@ class OtherBannerAdmin(admin.ModelAdmin):
 class BannerAdmin(admin.ModelAdmin): 
     list_display=(
         'title',
+        'slide_1',
+        'slide_2',
+        'slide_3',
         'description',
     )
    

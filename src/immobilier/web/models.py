@@ -9,15 +9,19 @@ class OtherBanner(FieldsDate):
 
 class Banner(FieldsDate):
     title = models.CharField( max_length=150)
+    slide_1 = models.ImageField(upload_to="slide_1", blank=True, null=True)
+    slide_2 = models.ImageField(upload_to="slide_2", blank=True, null=True)
+    slide_3= models.ImageField(upload_to="slide_3", blank=True, null=True)
     description = HTMLField()
+    
     def __str__(self):
-        return self.description
+        return self.title
 
 
 class NewsLetter(FieldsDate):
     email = models.EmailField( max_length=150)
-    # def __str__(self):
-    #     return self.email
+    def __str__(self):
+        return str(self.email)
     
 class SocialLinks(FieldsDate):
     name= models.CharField(max_length=150)

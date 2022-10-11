@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.views.generic import View
 
 from authentication.forms import ContactForm, NewsLetterForm,SubmitProperForm
+from service.models import SubmitProperty
 
 from web.models import OtherBanner,Banner, SiteInfos,NewsLetter
 from authentication.forms import TestimonialForm
@@ -10,11 +11,14 @@ from authentication.forms import TestimonialForm
 class HomeView(View):
     templates_name="web/pages/index.html"
     class_form = NewsLetterForm
+    class_form2 = SubmitProperForm
     def get(self, request):
         form = self.class_form()
+        form2 = self.class_form2()
         # banner = Banner.objects.filter(active=True)
         # other_banner = OtherBanner.objects.filter(active=True)
         site_infos = SiteInfos.objects.first()
+        banner = Banner.objects.first()
         return render(request, self.templates_name, locals())
     
     # def post(self, request):
@@ -84,3 +88,69 @@ class NewsLetterView(View):
             messages.success(request, 'Email envoyé avec succes!')
         return render(request, self.templates_name, locals())
     
+
+#barre de recherche
+def search_property(request):
+    
+    try:
+        
+        all_request_data = request.GET
+        print('rghgh', all_request_data) 
+        all_house = SubmitProperty.objects.all().filter(active=True)
+        
+        #word = request.GET["word"]
+        # city = request.GET["city"]
+        status = all_request_data.get("status")
+        # bed_numbers = request.GET("bed_numbers")
+        # bath_numbers = request.GET("bath_numbers")
+        # area_numbers = request.GET("area_numbers")
+        # price_range_min = request.GET("price_range_min")
+        # price_range_max = request.GET("price_range_max")
+        # piscine = request.GET("piscine")
+        # terrain = request.GET("terrain")
+        # jardin = request.GET("jardin")
+        # garage_number = request.GET("garage_number")
+        
+        # if city and int(city) != -1:
+        #     all_house = all_house.filter(city__id = int(city))
+        
+        if status and int(status) != 1:
+            all_house = all_house.filter(status__id = int(status))
+        
+        # if bed_numbers and int(bed_numbers) != 1:
+        #     all_house = all_house.filter(bed_numbers__id = int(bed_numbers))
+        
+        # if bath_numbers and int(bath_numbers) != 1:
+        #         all_house = all_house.filter(bath_numbers__id = int(bath_numbers))
+        
+        # if area_numbers and int(area_numbers) != 1:
+        #         all_house = all_house.filter(area_numbers__id = int(area_numbers))
+        
+        # if price_range_min and int(price_range_min) != 1:
+        #         all_house = all_house.filter(rice_range_min__id = int(price_range_min))
+        
+        # if price_range_max and int(price_range_max) != 1:
+        #         all_house = all_house.filter(rice_range_max__id = int(price_range_max))
+        
+        # if piscine and int(piscine) != 1:
+        #         all_house = all_house.filter(piscine__id = int(piscine))
+        
+        # if terrain and int(terrain) != 1:
+        #         all_house = all_house.filter(terrain__id = int(terrain))
+        
+        # if jardin and int(jardin) != 1:
+        #         all_house = all_house.filter(jardin__id = int(jardin))
+        
+        # if garage_number and int(garage_number) != 1:
+        #         all_house = all_house.filter(garage_number__id = int(garage_number))
+        
+        data = {
+                    "houses": all_house
+                }
+        return render(request, "web/pages/index.html", data, all_house)
+    
+    except Exception as e:
+        print("Exception ",str(e))
+        
+    return ''
+

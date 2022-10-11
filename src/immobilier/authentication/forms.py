@@ -97,7 +97,7 @@ class ContactForm(forms.ModelForm):
             raise ValidationError('Cet champ doit pas être vide.')  
         return message
 
-        
+
         
 class NewsLetterForm(forms.ModelForm):
     

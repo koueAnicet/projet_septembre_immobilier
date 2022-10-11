@@ -196,7 +196,6 @@ class SubmitPropertyView(LoginRequiredMixin, View):
     form_class= forms.SubmitProperForm
     
     def get(self,request):
-        
         form = self.form_class()
         return render(request, self.template_name, locals())
     
@@ -247,6 +246,8 @@ class  AllPropertiesView(View):
         #all_properties_db = SubmitProperty.objects.filter(active=True)
         return render(request, self.template_name, locals())
 
+
+
 #suppression de property
 def delete_property( request, delete_id):
     template_name='authentication/pages/delete-property.html'
@@ -256,6 +257,8 @@ def delete_property( request, delete_id):
         messages.success(request, 'Votre propriété a été supprimée avec succes.')
         return redirect('user-properties')
     return render(request, template_name, locals())
+
+
 #update property
 def update_property(request, update_id):
     template_name='authentication/pages/submit-property.html'
