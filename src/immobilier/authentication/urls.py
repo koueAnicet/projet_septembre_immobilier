@@ -14,6 +14,7 @@ urlpatterns = [
     path('detail-property/<int:property>/', views.DetailPropertyView.as_view(), name='detail-property'),
     path('delete-property/<int:delete_id>/', views.delete_property, name='delete-property'),
     path('update-property/<int:update_id>/', views.update_property, name='update-property'),
+    # path('email-visitor/<int:update_id>/', views.update_property, name='email-visitor'),
     
     path('user-logout/', views.logout_user_auth, name='user-logout'),
     path('user-profiles/', views.UserProfiles.as_view(), name='user-profiles'),

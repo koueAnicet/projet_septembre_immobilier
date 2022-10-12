@@ -18,7 +18,7 @@
         <div class="slider-content">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
-                    <h2>property Searching Just Got So Easy</h2>
+                    <h2>{{banner.title}}</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi deserunt deleniti, ullam commodi sit ipsam laboriosam velit adipisci quibusdam aliquam teneturo!</p>
                     <div class="search-form wow pulse" data-wow-delay="0.8s">
 
@@ -40,7 +40,7 @@
                                     <option>kyoto , shibua</option>
                                 </select>
                                 -- >
-                                {% render_field form2.city class="form-control" id="lunchBegins"  data-live-search="true" data-live-search-style="begins" title="Select your city" data-error="Username." %}
+                                {% render_field form2.city class="form-control" id="lunchBegins"  title="Select your city" data-error="Username." %}
 
                             </div>
                             <div class="form-group">                                     
@@ -218,159 +218,39 @@
 
             <div class="row">
                 <div class="proerty-th">
-                    <div class="col-sm-6 col-md-3 p0">
-                        <div class="box-two proerty-item">
-                            <div class="item-thumb">
-                                <a href="property-1.html" ><img src="{% static 'web/assets/img/demo/property-1.jpg' %}"></a>
-                            </div>
-                            <div class="item-entry overflow">
-                                <h5><a href="property-1.html" >Super nice villa </a></h5>
-                                <div class="dot-hr"></div>
-                                <span class="pull-left"><b>Area :</b> 120m </span>
-                                <span class="proerty-price pull-right">$ 300,000</span>
-                                <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
-                                <div class="property-icon">
-                                    <img src="{% static 'authentication/assets/img/icon/bed.png' %}">(5)|
-                                    <img src="{% static 'authentication/assets/img/icon/shawer.png' %}">(2)|
-                                    <img src="{% static 'authentication/assets/img/icon/cars.png' %}">(1)  
+                    {% for property in all_properties %}
+                        <div class="col-sm-6 col-md-3 p0">
+                            <div class="box-two proerty-item">
+                                <div class="item-thumb">
+                                    <a href="{% url 'detail-property' property.id %}" ><img src="{{ property.image_first.url }}"></a>
                                 </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-3 p0">
-                        <div class="box-two proerty-item">
-                            <div class="item-thumb">
-                                <a href="property-2.html" ><img src="{% static 'web/assets/img/demo/property-2.jpg' %}"></a>
-                            </div>
-                            <div class="item-entry overflow">
-                                <h5><a href="property-2.html" >Super nice villa </a></h5>
-                                <div class="dot-hr"></div>
-                                <span class="pull-left"><b>Area :</b> 120m </span>
-                                <span class="proerty-price pull-right">$ 300,000</span>
-                                <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
-                                <div class="property-icon">
-                                    <img src="{% static 'authentication/assets/img/icon/bed.png' %}">(5)|
-                                    <img src="{% static 'authentication/assets/img/icon/shawer.png' %}">(2)|
-                                    <img src="{% static 'authentication/assets/img/icon/cars.png' %}">(1)  
+                                <div class="item-entry overflow">
+                                    <h5><a href="{% url 'detail-property' property.id %}" >{{ property.name }}</a></h5>
+                                    <div class="dot-hr"></div>
+                                    <span class="pull-left"><b>Area :</b> {% if property.area_numbers != None %}{{ property.area_numbers}}{% else %} 0 {% endif %} m<sup>2</sup></span>
+                                    <span class="proerty-price pull-right">{% if property.price != None %}{{ property.price }} {% else %} 0 {% endif %}Frcs</span>
+                                    <!--<p style="display: none;">{{ property.description|truncatewords:15|safe }}</p>-->
+                                    <div class="property-icon">
+                                        <img src="{% static 'authentication/assets/img/icon/bed.png' %}">({{ property.bed_numbers.interval }})|
+                                        <img src="{% static 'authentication/assets/img/icon/shawer.png' %}">({{ property.bath_numbers.interval }})|
+                                        <img src="{% static 'authentication/assets/img/icon/cars.png' %}">({{ property.garage_number.interval }})  
+                                    </div>
                                 </div>
+                                
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-3 p0">
-                        <div class="box-two proerty-item">
-                            <div class="item-thumb">
-                                <a href="property-3.html" ><img src="{% static 'web/assets/img/demo/property-3.jpg' %}"></a>
-
-                            </div>
-                            <div class="item-entry overflow">
-                                <h5><a href="property-3.html" >Super nice villa </a></h5>
-                                <div class="dot-hr"></div>
-                                <span class="pull-left"><b>Area :</b> 120m </span>
-                                <span class="proerty-price pull-right">$ 300,000</span>
-                                <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
-                                <div class="property-icon">
-                                    <img src="{% static 'authentication/assets/img/icon/bed.png' %}">(5)|
-                                    <img src="{% static 'authentication/assets/img/icon/shawer.png' %}">(2)|
-                                    <img src="{% static 'authentication/assets/img/icon/cars.png' %}">(1)  
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-3 p0">
-                        <div class="box-two proerty-item">
-                            <div class="item-thumb">
-                                <a href="property-1.html" ><img src="{% static 'web/assets/img/demo/property-4.jpg' %}"></a>
-
-                            </div>
-                            <div class="item-entry overflow">
-                                <h5><a href="property-1.html" >Super nice villa </a></h5>
-                                <div class="dot-hr"></div>
-                                <span class="pull-left"><b>Area :</b> 120m </span>
-                                <span class="proerty-price pull-right">$ 300,000</span>
-                                <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
-                                <div class="property-icon">
-                                    <img src="{% static 'authentication/assets/img/icon/bed.png' %}">(5)|
-                                    <img src="{% static 'authentication/assets/img/icon/shawer.png' %}">(2)|
-                                    <img src="{% static 'authentication/assets/img/icon/cars.png' %}">(1)  
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-sm-6 col-md-3 p0">
-                        <div class="box-two proerty-item">
-                            <div class="item-thumb">
-                                <a href="property-3.html" ><img src="{% static 'web/assets/img/demo/property-2.jpg' %}"></a>
-                            </div>
-                            <div class="item-entry overflow">
-                                <h5><a href="property-3.html" >Super nice villa </a></h5>
-                                <div class="dot-hr"></div>
-                                <span class="pull-left"><b>Area :</b> 120m </span>
-                                <span class="proerty-price pull-right">$ 300,000</span>
-                                <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
-                                <div class="property-icon">
-                                    <img src="{% static 'authentication/assets/img/icon/bed.png' %}">(5)|
-                                    <img src="{% static 'authentication/assets/img/icon/shawer.png' %}">(2)|
-                                    <img src="{% static 'authentication/assets/img/icon/cars.png' %}">(1)  
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-3 p0">
-                        <div class="box-two proerty-item">
-                            <div class="item-thumb">
-                                <a href="property-2.html" ><img src="{% static 'web/assets/img/demo/property-4.jpg' %}"></a>
-                            </div>
-                            <div class="item-entry overflow">
-                                <h5><a href="property-2.html" >Super nice villa </a></h5>
-                                <div class="dot-hr"></div>
-                                <span class="pull-left"><b>Area :</b> 120m </span>
-                                <span class="proerty-price pull-right">$ 300,000</span>
-                                <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
-                                <div class="property-icon">
-                                    <img src="{% static 'authentication/assets/img/icon/bed.png' %}">(5)|
-                                    <img src="{% static 'authentication/assets/img/icon/shawer.png' %}">(2)|
-                                    <img src="{% static 'authentication/assets/img/icon/cars.png' %}">(1)  
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-3 p0">
-                        <div class="box-two proerty-item">
-                            <div class="item-thumb">
-                                <a href="property-1.html" ><img src="{% static 'web/assets/img/demo/property-3.jpg' %}"></a>
-                            </div>
-                            <div class="item-entry overflow">
-                                <h5><a href="property-1.html" >Super nice villa </a></h5>
-                                <div class="dot-hr"></div>
-                                <span class="pull-left"><b>Area :</b> 120m </span>
-                                <span class="proerty-price pull-right">$ 300,000</span>
-                                <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
-                                <div class="property-icon">
-                                    <img src="{% static 'authentication/assets/img/icon/bed.png' %}">(5)|
-                                    <img src="{% static 'authentication/assets/img/icon/shawer.png' %}">(2)|
-                                    <img src="{% static 'authentication/assets/img/icon/cars.png' %}">(1)  
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    {% endfor %}
                     <div class="col-sm-6 col-md-3 p0">
                         <div class="box-tree more-proerty text-center">
                             <div class="item-tree-icon">
                                 <i class="fa fa-th"></i>
                             </div>
                             <div class="more-entry overflow">
-                                <h5><a href="property-1.html" >CAN'T DECIDE ? </a></h5>
+                                <h5><a href="{% url 'properties' %}" >CAN'T DECIDE ? </a></h5>
                                 <h5 class="tree-sub-ttl">Show all properties</h5>
-                                <button class="btn border-btn more-black" value="All properties">All properties</button>
+                                <button class="btn border-btn more-black" value="All properties">
+                                   <a href="{% url 'properties' %}" >All properties</a>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -390,7 +270,7 @@
                             <div class="row">
                                 <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
                                     <!-- /.feature title -->
-                                    <h2>GARO ESTATE </h2>
+                                    <h2>{{site_infos.name}}</h2>
                                 </div>
                             </div>
                         </div>
@@ -465,7 +345,7 @@
                                     <h4><strong>Ohidul Islam, </strong><i>Web Designer</i></h4>
                                 </div>
                                 <div class="client-face wow fadeInRight" data-wow-delay=".9s"> 
-                                    <img src="{% static 'web/assets/img/client-face1.png' %}' %}" alt="">
+                                    <img src="{% static 'web/assets/img/client-face1.png' %}" alt="">
                                 </div>
                             </div>
                             <div class="item">
@@ -474,7 +354,7 @@
                                     <h4><strong>Ohidul Islam, </strong><i>Web Designer</i></h4>
                                 </div>
                                 <div class="client-face">
-                                    <img src="{% static 'web/assets/img/client-face2.png' %}' %}" alt="">
+                                    <img src="{% static 'web/assets/img/client-face2.png' %}" alt="">
                                 </div>
                             </div>
                             <div class="item">
@@ -483,7 +363,7 @@
                                     <h4><strong>Ohidul Islam, </strong><i>Web Designer</i></h4>
                                 </div>
                                 <div class="client-face">
-                                    <img src="{% static 'web/assets/img/client-face1.png' %}' %}" alt="">
+                                    <img src="{% static 'web/assets/img/client-face1.png' %}" alt="">
                                 </div>
                             </div>
                             <div class="item">
@@ -492,7 +372,7 @@
                                     <h4><strong>Ohidul Islam, </strong><i>Web Designer</i></h4>
                                 </div>
                                 <div class="client-face">
-                                    <img src="{% static 'web/assets/img/client-face2.png' %}' %}" alt="">
+                                    <img src="{% static 'web/assets/img/client-face2.png' %}" alt="">
                                 </div>
                             </div>
                         </div>
@@ -532,7 +412,7 @@
                                     <span class="pe-7s-home"></span>
                                 </div>
                                 <div class="chart" data-percent="12000">
-                                    <h2 class="percent" id="counter1">0</h2>
+                                    <h2 class="percent" >{{ properties_count }}</h2>
                                     <h5>Properties in stock</h5>
                                 </div>
                             </div> 
@@ -543,7 +423,7 @@
                                     <span class="pe-7s-flag"></span>
                                 </div>
                                 <div class="chart" data-percent="120">
-                                    <h2 class="percent" id="counter2">0</h2>
+                                    <h2 class="percent">{{ city }}</h2>
                                     <h5>City registered </h5>
                                 </div>
                             </div> 
@@ -581,7 +461,7 @@
                             <p> varius od lio eget conseq uat blandit, lorem auglue comm lodo nisl no us nibh mas lsa</p>                                        
                         </div>
                         <div class="asks-first-arrow">
-                            <a href="properties.html"><span class="fa fa-angle-right"></span></a>
+                            <a href="{% url 'properties' %}"><span class="fa fa-angle-right"></span></a>
                         </div>
                     </div>
                 </div>
@@ -595,12 +475,12 @@
                             <p> varius od lio eget conseq uat blandit, lorem auglue comm lodo nisl no us nibh mas lsa</p>
                         </div>
                         <div class="asks-first-arrow">
-                            <a href="properties.html"><span class="fa fa-angle-right"></span></a>
+                            <a href="{% url 'submit-property' %}"><span class="fa fa-angle-right"></span></a>
                         </div>
                     </div>
                 </div>
                 <div class="col-xs-12">
-                    <p  class="asks-call" style="color:black">QUESTIONS? CALL US  : <span class="strong"> + 3-123- 424-5700</span></p>
+                    <p  class="asks-call" style="color:black">QUESTIONS? CALL US  : <span class="strong">+225 {{ site_infos.contact }}</span></p>
                 </div>
             </div>
         </div>

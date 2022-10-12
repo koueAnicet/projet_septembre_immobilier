@@ -58,13 +58,16 @@
                     <div class="col-md-2 col-md-offset-5  col-sm-3 col-sm-offset-1  col-xs-12">
                         <div class="header-half header-social">
                             <ul class="list-inline">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-vine"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            </ul>
+                                <li><a href="https://www.facebook.com"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="https://twitter.com"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="https://vine.com"><i class="fa fa-vine"></i></a></li>
+                                <li><a href="https://linkedin.com"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="https://dribbble.com"><i class="fa fa-dribbble"></i></a></li>
+                                <li><a href="https://instagram.com"><i class="fa fa-instagram"></i></a></li>
+                                
+
+
+
                         </div>
                     </div>
                 </div>
@@ -73,7 +76,7 @@
         <!--End top header -->
 
         <nav class="navbar navbar-default ">
-            <div class="container">
+            <div class="container ">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
@@ -105,22 +108,8 @@
                     </div>
                     <ul class="main-nav nav navbar-nav navbar-right">
                         <li class="dropdown ymm-sw " data-wow-delay="0.1s">
-                            <a href="{% url 'home' %}" class="dropdown-toggle active" data-toggle="dropdown" data-delay="200"style="color:black">Home <b class="caret"></b></a>
-                            <!--<ul class="dropdown-menu navbar-nav">
-                                <li>
-                                    <a href="index-2.html">Home Style 2</a>
-                                </li>
-                                <li>
-                                    <a href="index-3.html">Home Style 3</a>
-                                </li>
-                                <li>
-                                    <a href="index-4.html">Home Style 4</a>
-                                </li>
-                                <li>
-                                    <a href="index-5.html">Home Style 5</a>
-                                </li>
-
-                            </ul>-->
+                            <a href="{% url 'home' %}" class="dropdown-toggle" data-toggle="dropdown" data-delay="200"style="color:black">Home <b class="caret"></b></a>
+         
                         </li>
 
                         <li class="wow fadeInDown" data-wow-delay="0.2s"><a class="" href="{% url 'properties' %}"style="color:black">Properties</a></li>
@@ -132,47 +121,24 @@
                                     <div class="yamm-content">
                                         <div class="row">
                                            
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-6">
                                                 <h5>Pages and blog</h5>
                                                 <ul>
-                                                    <li><a href="blog.html">Blog listing</a>  </li>
-                                                    <li><a href="single.html">Blog Post (full)</a>  </li>
-                                                    <li><a href="single-right.html">Blog Post (Right)</a>  </li>
-                                                    <li><a href="single-left.html">Blog Post (left)</a>  </li>
-                                                    <li><a href="contact.html">Contact style (1)</a> </li>
-                                                    <li><a href="contact-3.html">Contact style (2)</a> </li>
-                                                    <li><a href="contact_3.html">Contact style (3)</a> </li>
-                                                    <li><a href="faq.html">FAQ page</a> </li> 
-                                                    <li><a href="404.html">404 page</a>  </li>
+                                                    <li><a href="blog.html">Blog listing</a></li>
+                                                    <li><a href="single-left.html">Blog Post</a></li>
+                                                    <li><a href="contact-2.html">Contact </a></li>
+                                                    <li><a href="faq.html">FAQ page</a></li> 
+                                                    <!--<li><a href="404.html">404 page</a>  </li>-->
                                                 </ul>
                                             </div>
-                                            <div class="col-sm-4">
-                                                <h5>Property</h5>
-                                                <ul>
-                                                    <li><a href="property-1.html">Property pages style (1)</a> </li>
-                                                    <li><a href="property-2.html">Property pages style (2)</a> </li>
-                                                    <li><a href="property-3.html">Property pages style (3)</a> </li>
-                                                </ul>
-
-                                                <h5>Properties list</h5>
-                                                <ul>
-                                                    <li><a href="properties.html">Properties list style (1)</a> </li> 
-                                                    <li><a href="properties-2.html">Properties list style (2)</a> </li> 
-                                                    <li><a href="properties-3.html">Properties list style (3)</a> </li> 
-                                                </ul>                                               
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <h5>Property process</h5>
-                                                <ul> 
-                                                    <li><a href="submit-property.html">Submit - step 1</a> </li>
-                                                    <li><a href="submit-property.html">Submit - step 2</a> </li>
-                                                    <li><a href="submit-property.html">Submit - step 3</a> </li> 
-                                                </ul>
+                                            
+                                            <div class="col-sm-6">
+                                                
                                                 <h5>User account</h5>
                                                 <ul>
+                                                    <li><a href="{% url 'register' %}">Register</a></li>
                                                     {% if user.is_authenticated %}
                                                     <li><a href="{% url 'user-properties' %}">Your properties</a>  </li>
-
                                                     <li><a href="{% url 'submit-property' %}">Submit property</a>  </li>
                                                     <li><a href="{% url 'reset-password' %}">Change password</a> </li>
                                                     <li><a href="{% url 'user-profiles' %}">Your profile</a>  </li>
@@ -313,11 +279,11 @@
 
                                 <div class="social pull-right"> 
                                     <ul>
-                                        <li><a class="wow fadeInUp animated" href="https://twitter.com/kimarotec"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a class="wow fadeInUp animated" href="https://www.facebook.com/kimarotec" data-wow-delay="0.2s"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a class="wow fadeInUp animated" href="https://plus.google.com/kimarotec" data-wow-delay="0.3s"><i class="fa fa-google-plus"></i></a></li>
-                                        <li><a class="wow fadeInUp animated" href="https://instagram.com/kimarotec" data-wow-delay="0.4s"><i class="fa fa-instagram"></i></a></li>
-                                        <li><a class="wow fadeInUp animated" href="https://instagram.com/kimarotec" data-wow-delay="0.6s"><i class="fa fa-dribbble"></i></a></li>
+                                        <li><a class="wow fadeInUp animated" href="https://twitter.com"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a class="wow fadeInUp animated" href="https://www.facebook.com" data-wow-delay="0.2s"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a class="wow fadeInUp animated" href="https://plus.google.com" data-wow-delay="0.3s"><i class="fa fa-google-plus"></i></a></li>
+                                        <li><a class="wow fadeInUp animated" href="https://instagram.com" data-wow-delay="0.4s"><i class="fa fa-instagram"></i></a></li>
+                                        <li><a class="wow fadeInUp animated" href="https://instagram.com" data-wow-delay="0.6s"><i class="fa fa-dribbble"></i></a></li>
                                     </ul> 
                                 </div>
                             </div>

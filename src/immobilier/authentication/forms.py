@@ -7,7 +7,7 @@ from tinymce.models import HTMLField
 
 from django.contrib.auth import get_user_model
 from authentication.models import User
-from service.models import SubmitProperty
+from service.models import SubmitProperty, EmailVisitor
 
 from web import models
 from service import models as service_models
@@ -163,4 +163,12 @@ class SubmitProperForm(forms.ModelForm):
             'videos2',
             'accept_condition',
             
+        ]
+
+class VisitorEmailForm(forms.ModelForm):
+    class Meta:
+        model= EmailVisitor
+        fields=[
+            'emailvisitor',
+            'phonevisitor',
         ]

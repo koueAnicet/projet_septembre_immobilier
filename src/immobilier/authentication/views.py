@@ -17,6 +17,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 
 from immobilier import settings
+from web.models import SiteInfos
 from service.models import SubmitProperty
 from .tokens import generate_token
 from authentication.forms import User
@@ -46,8 +47,7 @@ class  RegisterView(View):
         if form.is_valid():
             
             form.is_active = False
-            print('##########')
-            print(form.is_active)
+           
             user = form.save()
             
             login(request, user)
@@ -55,8 +55,8 @@ class  RegisterView(View):
             
             #Email de bienvenu
             
-            subject = "Bienvenue sur GARO ESTATE!!"
-            message = "Hello "+ user.first_name + "!!\n" + "Bienvenue à GARO ESTATE!!\n Merci pour la visite sur notre site web\n Nous t'avons envoyé un email de confirmation, s'il vous plait confirmez votre adresse email afin d'activer votre compte.\n\n Nous vous remercions\n GARO ESTATE TEAM\n"
+            subject = "Bienvenue sur ANICK DELACOSTE ESTATE!!"
+            message = "Hello "+ user.first_name + "!!\n" + "Bienvenue à ANICK DELACOSTE ESTATE!!\n Merci pour la visite sur notre site web\n Nous t'avons envoyé un email de confirmation, s'il vous plait confirmez votre adresse email afin d'activer votre compte.\n\n Nous vous remercions\n GARO ESTATE TEAM\n"
             from_email = settings.EMAIL_HOST_USER
             to_list =[user.email]#on peu envoyer a plusier personne
             send_mail(subject, message, from_email, to_list, fail_silently=False)
@@ -79,8 +79,7 @@ class  RegisterView(View):
             )
             email.fail_silently = False
             email.send()
-            print('##########@') 
-            print(email)
+            
             
             return redirect(settings.LOGIN_REDIRECT_URL)
         return render(request, self.template_name, locals())
@@ -148,7 +147,7 @@ class Contact(View):
 
 
 
-class UserProfiles(View):
+class UserProfiles(LoginRequiredMixin,View):
     class_form = forms.NewsLetterForm
     template_name="authentication/pages/user-profile.html"
     
@@ -163,7 +162,7 @@ class UserProfiles(View):
 
 #@login_required
 
-class UserPropertyView(View):
+class UserPropertyView(LoginRequiredMixin,View):
     template_name='authentication/pages/user-properties.html'
     class_form = forms.NewsLetterForm
 
@@ -178,6 +177,7 @@ class UserPropertyView(View):
         
         page_obj = paginator.get_page(page_number)
         
+        site_infos = SiteInfos.objects.first()
         # count_shaweds = SubmitProperty.objects.filter(active=True).count()
         return render(request, self.template_name,locals())
 
@@ -185,26 +185,22 @@ class UserPropertyView(View):
         
         return redirect('user-profiles')
 
-    
-    def update(self, request ):
-        pass
-    def puth(self, request ):
-        pass
+
 
 class SubmitPropertyView(LoginRequiredMixin, View):
     template_name='authentication/pages/submit-property.html'
     form_class= forms.SubmitProperForm
     
-    def get(self,request):
+    def get(self, request):
         form = self.form_class()
         return render(request, self.template_name, locals())
     
-    def post(self,request):
-        form =self.form_class(request.POST, request.FILES)
+    def post(self, request):
+        form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
+            #attente d'user
             f = form.save(commit=False)
-            
-            
+
             f.user_property_submit = request.user 
             f.save()
             
@@ -214,15 +210,38 @@ class SubmitPropertyView(LoginRequiredMixin, View):
         
         
 class DetailPropertyView(View):
-    class_form = forms.NewsLetterForm
     template_name="authentication/pages/property.html"
+    class_form = forms.NewsLetterForm
+    class_form2 = forms.EmailVisitor
     
     def get(self, request, property):
         form = self.class_form()
+        form2 = self.class_form2()
+        
         property_index = SubmitProperty.objects.get(id=property)
         return render(request, self.template_name, locals())
 
-    def post(self, request, ):
+    def post(self, request, property):
+        
+        property_index = SubmitProperty.objects.get(id=property)
+        
+        form = self.class_form2(request.POST)
+        if form.is_valid():
+            #ontacter argent par Email
+                    
+            subject = "Bienvenue sur ANICK DELACOSTE ESTATE!!"
+            message = "Bonjour monsieur " + property_index.user_property_submit + "!!\n" + "Je suis interessé par cette maison ci :\n Nom propriété: " + property_index.name + "\n Nom propriété: " + property_index.area_numbers +  "\n Prix propriété: " + property_index.price + "\n Merci " + property_index.area_numbers +"\n"
+            from_email = property_index.user_property_submit
+            to_list =[form.emailvisitor]#on peu envoyer a plusier personne
+            send_mail(subject, message, from_email, to_list, fail_silently=False)
+           
+            form.save()
+            messages.success(request, 'Votre message a été envoyé avec succès')
+            return redirect('detail-property')
+        else:
+            messages.error(request, "Votre message n'a été envoyé")
+            return redirect('detail-property') 
+   
         #info_house= SubmitProperty.objects.get_or_404(pk=id_house)
         return render(request, self.template_name, locals())
 
@@ -239,7 +258,7 @@ class  AllPropertiesView(View):
         page_number = request.GET.get('page')
         
         page_obj = paginator.get_page(page_number)
-        
+        site_infos = SiteInfos.objects.first()
         return render(request, self.template_name, locals())
     def post(self, request):
         
@@ -249,6 +268,7 @@ class  AllPropertiesView(View):
 
 
 #suppression de property
+@login_required
 def delete_property( request, delete_id):
     template_name='authentication/pages/delete-property.html'
     delete_property = SubmitProperty.objects.get(pk=delete_id)
@@ -260,13 +280,13 @@ def delete_property( request, delete_id):
 
 
 #update property
+@login_required
 def update_property(request, update_id):
     template_name='authentication/pages/submit-property.html'
     property_update = SubmitProperty.objects.get(pk=update_id)
-    print('fbfbbbgb', property_update.name)
+   
     form= forms.SubmitProperForm(instance=property_update)
     
-    print("dsddffbfg",  request.method )
     if request.method == 'POST':
         form = forms.SubmitProperForm(request.POST ,  request.FILES, instance=property_update)
         
@@ -275,7 +295,18 @@ def update_property(request, update_id):
             messages.success(request, 'Votre propriété a été modifier avec succès')
             return redirect('detail-property', property_update.id)
     return render(request, template_name , locals())
-    
+
+#ontacter argent
+def conatact_agent(request):
+    #Email de bienvenu
+            
+    subject = "Bienvenue sur ANICK DELACOSTE ESTATE!!"
+    message = "Hello "+ user.first_name + "!!\n" + "Bienvenue à ANICK DELACOSTE ESTATE!!\n Merci pour la visite sur notre site web\n Nous t'avons envoyé un email de confirmation, s'il vous plait confirmez votre adresse email afin d'activer votre compte.\n\n Nous vous remercions\n GARO ESTATE TEAM\n"
+    from_email = settings.EMAIL_HOST_USER
+    to_list =[user.email]#on peu envoyer a plusier personne
+    send_mail(subject, message, from_email, to_list, fail_silently=False)
+    return ''
+   
 #vue de confirmation email avec token
 def activate(request, uidb64, token):
     User = get_user_model()

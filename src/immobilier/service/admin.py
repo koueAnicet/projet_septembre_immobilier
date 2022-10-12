@@ -90,6 +90,7 @@ class SubmitPropertyAdmin(admin.ModelAdmin):
         'status',
         'bed_numbers',
         'bath_numbers',
+        'garage_number',
         'piscine',
         'terrain',
         'cheminer',
@@ -123,3 +124,11 @@ class SubmitPropertyAdmin(admin.ModelAdmin):
         ) % updated, messages.SUCCESS)
     actions = [make_published]
     #action = ['active', 'accept_condition']
+    
+    
+@admin.register(EmailVisitor)
+class EmailVisitorAdmin(admin.ModelAdmin): 
+    list_display=(
+        'emailvisitor',
+        'phonevisitor',
+    )

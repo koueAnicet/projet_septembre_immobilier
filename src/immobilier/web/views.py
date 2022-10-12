@@ -1,8 +1,11 @@
+import random
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views.generic import View
+from django.core.paginator import Paginator
 
 from authentication.forms import ContactForm, NewsLetterForm,SubmitProperForm
+from service.models import City
 from service.models import SubmitProperty
 
 from web.models import OtherBanner,Banner, SiteInfos,NewsLetter
@@ -19,6 +22,14 @@ class HomeView(View):
         # other_banner = OtherBanner.objects.filter(active=True)
         site_infos = SiteInfos.objects.first()
         banner = Banner.objects.first()
+        
+        all_properties= SubmitProperty.objects.filter(active=True).order_by('created')
+        properties_count= SubmitProperty.objects.all().count()
+        city = City.objects.all().count()
+        
+        # faire un choix de 4 elements
+        
+        
         return render(request, self.templates_name, locals())
     
     # def post(self, request):

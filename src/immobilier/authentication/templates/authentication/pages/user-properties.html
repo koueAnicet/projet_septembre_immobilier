@@ -4,7 +4,7 @@
 {% block content %}
 
 {% load widget_tweaks %}
-
+{% if user.is_authenticated %}
         <div class="page-head"> 
             <div class="container">
                 <div class="row">
@@ -69,8 +69,7 @@
                             <div id="list-type" class="proerty-th-list">
                                     <!-- emplacement de la boucle --> 
                                 {% for Property in page_obj%}
-                                    {% if user.is_authenticated %}
-                                        
+                                    {% if user == Property.user_property_submit %}
                                 <div class="col-md-4 p0">
                                     <div class="box-two proerty-item">
                                         <div class="item-thumb">
@@ -99,6 +98,7 @@
 
                                     </div>
                                 </div> 
+                                       
                                     {% endif %}
                                {% endfor %} 
                             </div>
@@ -147,7 +147,7 @@
                                 <div class="panel-heading">
                                     <h3 class="panel-title">Hello
                                         {% if user.is_authenticated and user.get_full_name %}
-                                            {{ user.get_full_name }}
+                                            <strong>{{ user.get_full_name }}</strong>
                                         {% else %}
                                             {{ user.username }}
                                         {% endif  %}
@@ -171,5 +171,5 @@
                 </div>
             </div>
         </div>
-
-        {% endblock content %}
+        {% endif %}
+{% endblock content %}

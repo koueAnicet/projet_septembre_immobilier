@@ -219,4 +219,16 @@ class SubmitProperty(FieldsDate):
         verbose_name = 'SubmitProperty'
         verbose_name_plural = 'SubmitProperties'
         
+ 
+class EmailVisitor(models.Model):
+    phonevisitor = PhoneNumberField(region="CI", blank=True, null=True)
+    emailvisitor = models.EmailField(null=True)
     
+    
+    def __str__(self) -> str:
+        return self.emailvisitor
+    
+    db_table = 'EmailVisitor'
+    managed = True
+    verbose_name = 'EmailVisitor'
+    verbose_name_plural = 'EmailVisitors'
