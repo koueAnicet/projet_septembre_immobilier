@@ -375,7 +375,7 @@
                                 </div>
                             </div>
                             <!-- End video area  -->
-                            <form  method="post">
+                            <form  method="post" action="{% url 'detail-property' property_index.id %}">
                                 {% csrf_token %}
                                 {% if form.email.errors %}
                                 <p>
@@ -384,24 +384,22 @@
                                     {% endfor %}
                                 </p>
                                 {% elif messages %} 
-                                    {% for message in messages %}
-                                    <strong class="alert alert-danger">{% if message %} {{message}} {% endif %}</strong>
+                                    {% for message2 in messages %}
+                                    <strong class="alert alert-danger"><span class"form-control">{% if message2 %} {{message2}} {% endif %}</span></strong>
                                     {% endfor %}
                                 {% endif %}
                                  <h4 class="text-center" ><span>Contactez l'argent</span></h4> 
-                                <div class="input-group">
+                                <div class="input-group col-xs-12">
                                     {% comment %} <input class="form-control" type="email" placeholder="E-mail ... "> {% endcomment %}
                                    
-                                    {% render_field form.emailvisitor class="form-control " placeholder="E-mail ... " id="email"  style='background-color:bluelight' %}                            
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-primary subscribe" type="submit"><i class="pe-7s-paper-plane pe-2x"></i></button>
-                                    </span>
+                                    {% render_field form2.emailvisitor class="form-control " placeholder="E-mail ... " id="email"  style='background-color:bluelight' %}                            
+                                
+                                    {% render_field form2.phonevisitor class="form-control " placeholder="+225 00 0000 0000 " id="email"  data-error="+225 00 0000 0000." %}
+                                    
                                 </div>
-                                <div class="input-group mt-10">
-                                                                      
-                                    {% render_field form.phonevisitor class="form-control " placeholder="E-mail ... " id="email"  data-error="+225 00 0000 0000." %}
+                                <div class="text-center ">
                                     <span class="input-group-btn">
-                                        <button class="btn btn-primary subscribe" type="submit"><i class="pe-7s-paper-plane pe-2x"></i></button>
+                                        <input class="button btn largesearch-btn" value="Contact" type="submit">
                                     </span>
                                 </div>
                                 <!-- /input-group -->
@@ -422,13 +420,13 @@
                             <strong class="alert alert-danger">{% if message %} {{message}} {% endif %}</strong>
                             {% endfor %}
                         {% endif %}
-                        <div class="input-group">
+                        <!-- <div class="input-group">
                             {% comment %} <input class="form-control" type="email" placeholder="E-mail ... "> {% endcomment %}
                             {% render_field form.email class="form-control " placeholder="E-mail ... " id="email"  data-error="Email." %}
                             <span class="input-group-btn">
                                 <button class="btn btn-primary subscribe" type="submit"><i class="pe-7s-paper-plane pe-2x"></i></button>
                             </span>
-                        </div>
+                        </div>-->
                         <!-- /input-group -->
                     </form> 
                     <div class="col-md-4 p0">

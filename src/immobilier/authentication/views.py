@@ -20,8 +20,7 @@ from immobilier import settings
 from web.models import SiteInfos
 from service.models import SubmitProperty
 from .tokens import generate_token
-from authentication.forms import User
-
+from authentication.forms import User, VisitorEmailForm
 
 def logout_user_auth(request):
     logout(request)
@@ -212,7 +211,7 @@ class SubmitPropertyView(LoginRequiredMixin, View):
 class DetailPropertyView(View):
     template_name="authentication/pages/property.html"
     class_form = forms.NewsLetterForm
-    class_form2 = forms.EmailVisitor
+    class_form2 = forms.VisitorEmailForm
     
     def get(self, request, property):
         form = self.class_form()
@@ -224,18 +223,20 @@ class DetailPropertyView(View):
     def post(self, request, property):
         
         property_index = SubmitProperty.objects.get(id=property)
-        
-        form = self.class_form2(request.POST)
-        if form.is_valid():
+        print('ggggg', property_index)
+        form2 = self.class_form2(request.POST)
+        print('ggggg', form2.phonevisitor)
+        if form2.is_valid():
             #ontacter argent par Email
                     
             subject = "Bienvenue sur ANICK DELACOSTE ESTATE!!"
-            message = "Bonjour monsieur " + property_index.user_property_submit + "!!\n" + "Je suis interessé par cette maison ci :\n Nom propriété: " + property_index.name + "\n Nom propriété: " + property_index.area_numbers +  "\n Prix propriété: " + property_index.price + "\n Merci " + property_index.area_numbers +"\n"
-            from_email = property_index.user_property_submit
-            to_list =[form.emailvisitor]#on peu envoyer a plusier personne
+            message = f"Bonjour monsieur  {property_index.user_property_submit}!!\n Je suis interessé par cette maison ci :\n Nom propriété:  {property_index.name} \n Nom propriété: { property_index.area_numbers} \n Prix propriété:  {property_index.price} \n { property_index.area_numbers} \n Merci "
+            print('')
+            from_email = form2.emailvisitor
+            to_list =[property_index.user_property_submit.email]#on peu envoyer a plusier personne
             send_mail(subject, message, from_email, to_list, fail_silently=False)
            
-            form.save()
+            form2.save()
             messages.success(request, 'Votre message a été envoyé avec succès')
             return redirect('detail-property')
         else:
