@@ -28,8 +28,4 @@ Frauder, tricher.
 
 
 *reste:
-<<<<<<< HEAD
-    -faire le delete 
-=======
     -faire le delete
->>>>>>> 6d0150d7305771115f83ca934d98d979b904dc9e

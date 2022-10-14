@@ -122,7 +122,7 @@ def search_property(request):
             # faire un choix de 4 elements   
             all_request_data = request.GET
             print('rghgh', all_request_data) 
-            all_house = models.SubmitProperty.objects.filter(active=True)
+            all_house = SubmitProperty.objects.filter(active=True)
             
             #word = request.GET["word"]
             name = all_request_data.get("name")
