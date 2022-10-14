@@ -338,14 +338,12 @@
                             <div class="section property-features">      
 
                                 <h4 class="s-property-title">Features</h4>                            
-                                <ul>
-                                    <li><a href="properties.html">Swimming Pool</a></li>   
-                                    <li><a href="properties.html">3 Stories</a></li>
-                                    <li><a href="properties.html">Central Cooling</a></li>
-                                    <li><a href="properties.html">Jog Path 2</a></li>
-                                    <li><a href="properties.html">2 Lawn</a></li>
-                                    <li><a href="properties.html">Bike Path</a></li>
-                                </ul>
+                                {% comment %} <ul>
+                                    {% for cat_property in property_index.category_property.name %}
+                                    <li><a href="{% url 'properties' %}">{{ cat_property }}</a></li>   
+                                  
+                                    {% endfor %}
+                                </ul> {% endcomment %}
 
                             </div>
                             <!-- End features area  -->
@@ -723,7 +721,7 @@
                                             <span class="blg-date">12-12-2016</span>
 
                                         </div>
-                                        Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu'il est prêt ou que la mise en page est achevée. Généralement, on utilise un texte en faux latin, le Lorem ipsum ou Lipsum.video        <div class="col-md-8  col-sm-8 col-xs-8  blg-entry">
+                                         <div class="col-md-8  col-sm-8 col-xs-8  blg-entry">
                                             <h6> <a href="single.html">Add news functions </a></h6> 
                                             <p style="line-height: 17px; padding: 8px 2px;">Lorem ipsum dolor sit amet, nulla ...</p>
                                         </div>

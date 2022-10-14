@@ -11,6 +11,7 @@ from service.models  import *
 class CategoryPropertyAdmin(admin.ModelAdmin): 
     list_display=(
         'name',
+        'active',
         )
 
 

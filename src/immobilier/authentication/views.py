@@ -1,4 +1,5 @@
 
+from calendar import c
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, redirect
@@ -18,6 +19,7 @@ from django.core.paginator import Paginator
 
 from immobilier import settings
 from authentication.forms import SubmitProperForm
+from service.models import CategoryProperty
 
 
 
@@ -230,7 +232,7 @@ class DetailPropertyView(View):
     def post(self, request, property):
         
         property_index = SubmitProperty.objects.get(id=property)
-    
+        
         
         if request.method == 'POST':
             # namevisitor =  request.POST.get('namevisitor')
@@ -272,106 +274,82 @@ class  AllPropertiesView(View):
         form = self.class_form()
         form2 = self.class_form2()
         
-        
         ##
         
-        try:
-            if request.method == 'GET':
-               
-                
-                other_banner = OtherBanner.objects.filter(active=True)
-                site_infos = SiteInfos.objects.first()
-                banner = Banner.objects.first()
-                
-                all_properties= SubmitProperty.objects.filter(active=True).order_by('created')
-                
-                
-                
-                # faire un choix de 4 elements   
-                all_request_data = request.GET
-                print('rghgh', all_request_data) 
-                all_house = SubmitProperty.objects.filter(active=True)
-                
-                #word = request.GET["word"]
-                name = all_request_data.get("name")
-                # city = request.GET["city"]
-                status = all_request_data.get("status")
-                bed_numbers = request.GET("bed_numbers")
-                bath_numbers = request.GET("bath_numbers")
-                area_numbers = request.GET("area_numbers")
-                price_range_min = request.GET("price_range_min")
-                price_range_max = request.GET("price_range_max")
-                piscine = request.GET("piscine")
-                terrain = request.GET("terrain")
-                jardin = request.GET("jardin")
-                garage_number = request.GET("garage_number")
-                
-                # if city and int(city) != -1:
-                #     all_house = all_house.filter(city__id = int(city))
-                
-                if status and int(status) != 1:
-                    all_house = all_house.filter(status__id = int(status))
-                
-                if name and int(name) != 1:
-                    all_house = all_house.filter(name__id = int(name))
-                
-                if bed_numbers and int(bed_numbers) != 1:
-                    all_house = all_house.filter(bed_numbers__id = int(bed_numbers))
-                
-                if bath_numbers and int(bath_numbers) != 1:
-                        all_house = all_house.filter(bath_numbers__id = int(bath_numbers))
-                
-                if area_numbers and int(area_numbers) != 1:
-                        all_house = all_house.filter(area_numbers__id = int(area_numbers))
-                
-                if price_range_min and int(price_range_min) != 1:
-                        all_house = all_house.filter(rice_range_min__id = int(price_range_min))
-                
-                if price_range_max and int(price_range_max) != 1:
-                        all_house = all_house.filter(rice_range_max__id = int(price_range_max))
-                
-                if piscine and int(piscine) != 1:
-                        all_house = all_house.filter(piscine__id = int(piscine))
-                
-                if terrain and int(terrain) != 1:
-                        all_house = all_house.filter(terrain__id = int(terrain))
-                
-                if jardin and int(jardin) != 1:
-                        all_house = all_house.filter(jardin__id = int(jardin))
-                
-                if garage_number and int(garage_number) != 1:
-                        all_house = all_house.filter(garage_number__id = int(garage_number))
-                
-                data = {
-                            "houses": all_house
-                        }
-                
-                return  {
-                    'all_properties':  data,
-                    'form':  form,
-                    'form2':  form2,
-                    'site_infos':  site_infos,
-                }
-                    
-        
-        except Exception as e:
-            print("Exception ",str(e))
-            
-        return ''
-
-
-        ##
-        
-        
+        other_banner = OtherBanner.objects.filter(active=True)
+        site_infos = SiteInfos.objects.first()
+        banner = Banner.objects.first()
         
         all_properties= SubmitProperty.objects.filter(active=True).order_by('created')
+       
         
-        paginator = Paginator(all_properties, 6)
-        page_number = request.GET.get('page')
+       
+        # faire un choix de 4 elements   
+        all_request_data = request.GET
+        page_obj = SubmitProperty.objects.filter(active=True)
         
-        page_obj = paginator.get_page(page_number)
-        site_infos = SiteInfos.objects.first()
+        #word = request.GET["word"]
+        name = all_request_data.get("name")
+        city = all_request_data.get('city')
+        status = all_request_data.get("status")
+        bed_numbers = all_request_data.get("bed_numbers")
+       
+        bath_numbers = all_request_data.get("bath_numbers")
+        area_numbers = all_request_data.get("area_numbers")
+        price_range_min = all_request_data.get("price_range_min")
+        price_range_max = all_request_data.get("price_range_max")
+        piscine = all_request_data.get("piscine")
+        terrain = all_request_data.get("terrain")
+        jardin = all_request_data.get("jardin")
+        garage_number = all_request_data.get("garage_number")
+        
+        # if city and int(city) != -1:
+        #     all_house = all_house.filter(city__id = int(city))
+        
+        if status and int(status) != 1:
+            page_obj = page_obj.filter(status__id = int(status))
+        
+        if name and int(name) != 1:
+            page_obj = page_obj.filter(name__id = int(name))
+        
+        if bed_numbers and int(bed_numbers) != -1:
+            page_obj = page_obj.filter(bed_numbers__id = (bed_numbers))
+        
+        if bath_numbers and int(bath_numbers) != -1:
+                page_obj = page_obj.filter(bath_numbers__id = int(bath_numbers))
+        
+        if area_numbers and int(area_numbers) != -1:
+                page_obj = page_obj.filter(area_numbers__id = int(area_numbers))
+        
+        if price_range_min and int(price_range_min) != -1:
+                page_obj = page_obj.filter(price_range_min__id = int(price_range_min))
+        
+        if price_range_max and int(price_range_max) != -1:
+                page_obj = page_obj.filter(price_range_max__id = int(price_range_max))
+        
+        # if piscine and (piscine) != -1:
+        #         page_obj = page_obj.filter(piscine__ = (piscine))
+        
+        # if terrain and int(terrain) != -1:
+        #         page_obj = page_obj.filter(terrain__id = int(terrain))
+        
+        # if jardin and int(jardin) != -1:
+        #         page_obj = page_obj.filter(jardin__id = int(jardin))
+        
+        if garage_number and int(garage_number) != -1:
+                page_obj = page_obj.filter(garage_number__id = int(garage_number))
+        
+        
+        print("////////\/\/\/\/\/\/\/\/", page_obj)
+        # return1 = {
+        #     'all_properties':  data,
+        #     'form':  form,
+        #     'form2':  form2,
+        #     'site_infos':  site_infos,
+        # }
+            
         return render(request, self.template_name, locals())
+
     def post(self, request):
         
         #all_properties_db = SubmitProperty.objects.filter(active=True)

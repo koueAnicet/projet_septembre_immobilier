@@ -11,7 +11,7 @@ urlpatterns = [
     path('contact/',views.ContactView.as_view(), name="contact"),
     path('news-letter/',views.NewsLetterView.as_view(), name="news-letter"),
     path('send-email/',views.NewsLetterView.as_view(), name="news-letter"),
-    path('search_property/',views.search_property, name="search_property"),
+    #path('search_property/',views.search_property, name="search_property"),
     
     
 ]

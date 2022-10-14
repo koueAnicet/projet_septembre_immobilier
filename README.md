@@ -4,9 +4,9 @@ L'immobilier comprend la construction, la location et la vente de maisons ou de 
 
 
 instructions 
- - `N'oubliez pas de faire une vidéo pour YouTube, héberger votre code sur Github et le mettre en ligne avec un URL.`
- - `Soyez créatif.`
- - `Récompense surprise`
+ - N'oubliez pas de faire une vidéo pour YouTube, héberger votre code sur Github et le mettre en ligne avec un URL.
+ - Soyez créatif.
+ - Récompense surprise
 
 
 Dépouiller (qqn) par violence, fraude ou abus de pouvoir.
