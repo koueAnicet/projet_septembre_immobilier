@@ -40,6 +40,8 @@ class SiteInfosAdmin(admin.ModelAdmin):
         'contact',
         'address',
         'emails',
+        'body_image',
+        'year',
     )
 
 @admin.register(Testimonial)

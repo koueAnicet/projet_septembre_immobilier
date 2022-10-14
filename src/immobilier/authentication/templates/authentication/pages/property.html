@@ -10,7 +10,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>GARO ESTATE | Property  page</title>
+        <title>ANICK DELACOSTE ESTATE | Property  page</title>
         <meta name="description" content="GARO is a real-estate template">
         <meta name="author" content="Kimarotec">
         <meta name="keyword" content="html5, css, bootstrap, property, real-estate theme , bootstrap template">
@@ -53,7 +53,7 @@
                     <div class="col-md-5 col-sm-8  col-xs-12">
                         <div class="header-half header-call">
                             <p>
-                                <span><i class="pe-7s-call"></i>{{ site_infos.numbers }}</span>
+                                <span><i class="pe-7s-call"></i>+225{{ site_infos.contact }}</span>
                                 <span><i class="pe-7s-mail"></i>{{ site_infos.emails }}</span>
                             </p>
                         </div>
@@ -354,11 +354,11 @@
                                 <h4 class="s-property-title">Property Video</h4> 
                                 <div class="video-thumb">
                                     <p>
-                                        <h4 class="text-center" ><span>Présentation youtube</span></h4>   
+                                        
                                     
                                         <a class="video-popup" href="{{ property_index.videos }}" title="Virtual Tour">
                                             
-                                                <h4 class="text-center" ><span>Cliquez ici.</span></h4>  
+                                            <h4 class="text-center" ><span>Présentation youtube</span></h4>  
                                                     
                                         </a> 
                                     </p>
@@ -366,8 +366,8 @@
                                         <!-- <img src="{{property_index.image_first.url }}" class="img-responsive wp-post-image" alt="Exterior"> -->  
                                         <video width="680" height="350" controls>
                                             {% if property_index.videos2.url != None %}
-                                            <source src="{{ property_index.videos2.url }}"  poster="{{property_index.image_first.url }}" type="video/mp4">
-                                            <source src="{{ property_index.videos2.url }}"   poster="https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217" type="video/ogg">
+                                            <source src="{{ property_index.videos2.url }}"  poster="{{ property_index.image_first.url }}" type="video/mp4">
+                                            <source src="{{ property_index.videos2.url }}"   poster="{{ property_index.image_first.url }}" type="video/ogg">
                                             {% endif %}
                                             Your browser does not support the video tag.
                                           </video>         
@@ -385,16 +385,29 @@
                                 </p>
                                 {% elif messages %} 
                                     {% for message2 in messages %}
-                                    <strong class="alert alert-danger"><span class"form-control">{% if message2 %} {{message2}} {% endif %}</span></strong>
+                                    
+                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                        <strong class="alert alert-success"><span class"form-control">{% if message2 %} {{message2}} {% endif %}</span></strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+
                                     {% endfor %}
                                 {% endif %}
                                  <h4 class="text-center" ><span>Contactez l'argent</span></h4> 
                                 <div class="input-group col-xs-12">
-                                    {% comment %} <input class="form-control" type="email" placeholder="E-mail ... "> {% endcomment %}
+                                    <input class="form-control" name="namevisitor" type="text" placeholder="Firstname and Lasname " required> 
+                                    <br><br>
+                                    
+                                    <input class="form-control" name="emailvisitor" type="email" placeholder="E-mail ... " required> 
+                                    <br> <br>
                                    
-                                    {% render_field form2.emailvisitor class="form-control " placeholder="E-mail ... " id="email"  style='background-color:bluelight' %}                            
-                                
-                                    {% render_field form2.phonevisitor class="form-control " placeholder="+225 00 0000 0000 " id="email"  data-error="+225 00 0000 0000." %}
+                                    {% comment %} {% render_field form2.emailvisitor class="form-control " placeholder="E-mail ... " id="email"  style='background-color:bluelight' %}                             {% endcomment %}
+                                    <input class="form-control" name="phonevisitor"  type="telephone" placeholder="+225 00 0000 0000" required> 
+                                    <br><br>
+                                    
+                                    {% comment %} {% render_field form2.phonevisitor class="form-control " placeholder="+225 00 0000 0000 " id="email"  data-error="+225 00 0000 0000." %} {% endcomment %}
                                     
                                 </div>
                                 <div class="text-center ">
@@ -417,24 +430,22 @@
                         </p>
                         {% elif messages %} 
                             {% for message in messages %}
-                            <strong class="alert alert-danger">{% if message %} {{message}} {% endif %}</strong>
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <strong>{% if message %} {{ message }} {% endif %}</strong>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
                             {% endfor %}
                         {% endif %}
-                        <!-- <div class="input-group">
-                            {% comment %} <input class="form-control" type="email" placeholder="E-mail ... "> {% endcomment %}
-                            {% render_field form.email class="form-control " placeholder="E-mail ... " id="email"  data-error="Email." %}
-                            <span class="input-group-btn">
-                                <button class="btn btn-primary subscribe" type="submit"><i class="pe-7s-paper-plane pe-2x"></i></button>
-                            </span>
-                        </div>-->
-                        <!-- /input-group -->
+                      
                     </form> 
                     <div class="col-md-4 p0">
                         <aside class="sidebar sidebar-property blog-asside-right">
+                            {% if user.is_authenticated %}
                             <div class="dealer-widget">
                                 <div class="dealer-content">
                                     <div class="inner-wrapper">
-                                        {% if user.is_authenticated %}
                                         <div class="clear">
                                             <div class="col-xs-4 col-sm-4 dealer-face">
                                                 <a href="">
@@ -443,6 +454,7 @@
                                                     {% endif %}
                                                 </a>
                                             </div>
+                                            
                                             <div class="col-xs-8 col-sm-8 ">
                                                 
                                                 <h3 class="dealer-name">
@@ -477,6 +489,7 @@
                                                 </div>
                                                 {% endif %} 
                                             </div>
+                                            
                                         </div>
 
                                         <div class="clear">
@@ -486,78 +499,12 @@
                                                 <li>
                                                     <i class="pe-7s-call strong"></i>{{ user.number_phone }} | {% if user.number_phone_two  %}<i class="pe-7s-call strong"> </i>{{ user.number_phone_two }}{% endif %} </li>
                                             </ul>
-                                            <p>{{ user.description|truncatewords:20|safe}}</p>
+                                            <p>{{ user.description|truncatewords:20|safe }}</p>
                                         </div>
-                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
-
-
-                            <div class="panel panel-default sidebar-menu similar-property-wdg wow fadeInRight animated">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">Similar Properties</h3>
-                                </div>
-                                <div class="panel-body recent-property-widget">
-                                    <ul>
-                                        <li>
-                                            <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                                <a href="single.html"><img src="{% static 'authentication/assets/img/demo/small-property-2.jpg' %}"></a>
-                                                <span class="property-seeker">
-                                                    <b class="b-1">A</b>
-                                                    <b class="b-2">S</b>
-                                                </span>
-                                            </div>
-                                            <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                                                <h6> <a href="single.html">Super nice villa </a></h6>
-                                                <span class="property-price">3000000$</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="col-md-3 col-sm-3  col-xs-3 blg-thumb p0">
-                                                <a href="single.html"><img src="{% static 'authentication/assets/img/demo/small-property-1.jpg' %}"></a>
-                                                <span class="property-seeker">
-                                                    <b class="b-1">A</b>
-                                                    <b class="b-2">S</b>
-                                                </span>
-                                            </div>
-                                            <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                                                <h6> <a href="single.html">Super nice villa </a></h6>
-                                                <span class="property-price">3000000$</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                                <a href="single.html"><img src="{% static 'authentication/assets/img/demo/small-property-3.jpg' %}"></a>
-                                                <span class="property-seeker">
-                                                    <b class="b-1">A</b>
-                                                    <b class="b-2">S</b>
-                                                </span>
-                                            </div>
-                                            <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                                                <h6> <a href="single.html">Super nice villa </a></h6>
-                                                <span class="property-price">3000000$</span>
-                                            </div>
-                                        </li>
-
-                                        <li>
-                                            <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                                <a href="single.html"><img src="{% static 'authentication/assets/img/demo/small-property-2.jpg' %}"></a>
-                                                <span class="property-seeker">
-                                                    <b class="b-1">A</b>
-                                                    <b class="b-2">S</b>
-                                                </span>
-                                            </div>
-                                            <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                                                <h6> <a href="single.html">Super nice villa </a></h6>
-                                                <span class="property-price">3000000$</span>
-                                            </div>
-                                        </li>
-
-                                    </ul>
-                                </div>
-                            </div>
-
+                            {% endif %}
 
 
                             <div class="panel panel-default sidebar-menu wow fadeInRight animated">
@@ -574,11 +521,15 @@
                                     <h3 class="panel-title">Smart search</h3>
                                 </div>
                                 <div class="panel-body search-widget">
-                                    <form action="" class=" form-inline"> 
+                                    <form action="" method="get" class=" form-inline"> 
+                                        {% csrf_token %}
                                         <fieldset>
                                             <div class="row">
                                                 <div class="col-xs-12">
-                                                    <input type="text" class="form-control" placeholder="Key word">
+                                                    <label for="price-range">Category property :</label>
+
+                                                    {% render_field form3.category_property class="form-control" id="basic"  data-error="Username." %}
+                                                    {% comment %} <input type="text" class="form-control" placeholder="Key word"> {% endcomment %}
                                                 </div>
                                             </div>
                                         </fieldset>
@@ -587,25 +538,13 @@
                                             <div class="row">
                                                 <div class="col-xs-6">
 
-                                                    <select id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Select Your City">
+                                                {% render_field form2.city__city_name class="form-control"   title="Select your city" data-error="Username." %}
 
-                                                        <option>New york, CA</option>
-                                                        <option>Paris</option>
-                                                        <option>Casablanca</option>
-                                                        <option>Tokyo</option>
-                                                        <option>Marraekch</option>
-                                                        <option>kyoto , shibua</option>
-                                                    </select>
                                                 </div>
                                                 <div class="col-xs-6">
 
-                                                    <select id="basic" class="selectpicker show-tick form-control">
-                                                        <option> -Status- </option>
-                                                        <option>Rent </option>
-                                                        <option>Boy</option>
-                                                        <option>used</option>  
-
-                                                    </select>
+                             
+                                                {% render_field form2.status class="form-control"  data-error="Username." %}
                                                 </div>
                                             </div>
                                         </fieldset>
@@ -613,43 +552,28 @@
                                         <fieldset class="padding-5">
                                             <div class="row">
                                                 <div class="col-xs-6">
-                                                    <label for="price-range">Price range ($):</label>
-                                                    <input type="text" class="span2" value="" data-slider-min="0" 
-                                                           data-slider-max="600" data-slider-step="5" 
-                                                           data-slider-value="[0,450]" id="price-range" ><br />
-                                                    <b class="pull-left color">2000$</b> 
-                                                    <b class="pull-right color">100000$</b>                                                
+                                                    <label for="price-range">Price range min :</label>
+                                                    {% render_field form3.price_range_min class="form-control"  data-error="Username." %}
                                                 </div>
                                                 <div class="col-xs-6">
-                                                    <label for="property-geo">Property geo (m2) :</label>
-                                                    <input type="text" class="span2" value="" data-slider-min="0" 
-                                                           data-slider-max="600" data-slider-step="5" 
-                                                           data-slider-value="[50,450]" id="property-geo" ><br />
-                                                    <b class="pull-left color">40m</b> 
-                                                    <b class="pull-right color">12000m</b>                                                
-                                                </div>                                            
+                                                    <label for="price-range">Price range max :</label>
+                                                    {% render_field form3.price_range_max class="form-control"   data-error="Username." %}
+                                                </div>
+                                                                                       
                                             </div>
                                         </fieldset>                                
 
                                         <fieldset class="padding-5">
                                             <div class="row">
                                                 <div class="col-xs-6">
-                                                    <label for="price-range">Min baths :</label>
-                                                    <input type="text" class="span2" value="" data-slider-min="0" 
-                                                           data-slider-max="600" data-slider-step="5" 
-                                                           data-slider-value="[250,450]" id="min-baths" ><br />
-                                                    <b class="pull-left color">1</b> 
-                                                    <b class="pull-right color">120</b>                                                
+                                                    <label for="price-range">Baths :</label>
+                                                    {% render_field form3.bath_numbers  class="form-control"   data-error="Username." %}                                              
                                                 </div>
 
                                                 <div class="col-xs-6">
-                                                    <label for="property-geo">Min bed :</label>
-                                                    <input type="text" class="span2" value="" data-slider-min="0" 
-                                                           data-slider-max="600" data-slider-step="5" 
-                                                           data-slider-value="[250,450]" id="min-bed" ><br />
-                                                    <b class="pull-left color">1</b> 
-                                                    <b class="pull-right color">120</b>
-
+                                                    <label for="property-geo">Bed :</label>
+                                                    {% render_field form3.bed_numbers class="form-control"  data-error="Username." %}
+                                           
                                                 </div>
                                             </div>
                                         </fieldset>
@@ -658,13 +582,14 @@
                                             <div class="row">
                                                 <div class="col-xs-6">
                                                     <div class="checkbox">
-                                                        <label> <input type="checkbox" checked> Fire Place</label>
+                                                        {% render_field form3.piscine  data-error="Username." %}Piscine
                                                     </div> 
                                                 </div>
 
                                                 <div class="col-xs-6">
                                                     <div class="checkbox">
-                                                        <label> <input type="checkbox"> Dual Sinks</label>
+                                                    {% render_field form3.terrain data-error="Username." %}Terrain
+                                              
                                                     </div>
                                                 </div>                                            
                                             </div>
@@ -674,12 +599,12 @@
                                             <div class="row">
                                                 <div class="col-xs-6"> 
                                                     <div class="checkbox">
-                                                        <label> <input type="checkbox" checked> Swimming Pool</label>
+                                                        {% render_field form3.jardin  data-error="Username." %}Jardin
                                                     </div>
                                                 </div>  
                                                 <div class="col-xs-6"> 
                                                     <div class="checkbox">
-                                                        <label> <input type="checkbox" checked> 2 Stories </label>
+                                                        {% render_field form3.accessible_vehicule class="form-control" data-error="Username." %}Vehicule
                                                     </div>
                                                 </div>  
                                             </div>
@@ -689,12 +614,12 @@
                                             <div class="row">
                                                 <div class="col-xs-6"> 
                                                     <div class="checkbox">
-                                                        <label><input type="checkbox"> Laundry Room </label>
+                                                        {% render_field form3.child_bredroom class="form-control" data-error="Username." %}Child Bedroom
                                                     </div>
                                                 </div>  
                                                 <div class="col-xs-6"> 
                                                     <div class="checkbox">
-                                                        <label> <input type="checkbox"> Emergency Exit</label>
+                                                        {% render_field form3.sortie_secours class="form-control" data-error="Username." %}Sortie Secours
                                                     </div>
                                                 </div>  
                                             </div>
@@ -704,24 +629,16 @@
                                             <div class="row">
                                                 <div class="col-xs-6"> 
                                                     <div class="checkbox">
-                                                        <label>  <input type="checkbox" checked> Jog Path </label>
+                                                        {% render_field form3.cheminer class="form-control" data-error="Username." %}Cheminer
                                                     </div>
                                                 </div>  
                                                 <div class="col-xs-6"> 
                                                     <div class="checkbox">
-                                                        <label>  <input type="checkbox"> 26' Ceilings </label>
+                                                        {% render_field form3.water_front class="form-control" data-error="Username." %}water Front
+                                                        {% comment %} <label>  <input type="checkbox" checked> Jog Path </label> {% endcomment %}
                                                     </div>
-                                                </div>  
-                                            </div>
-                                        </fieldset>
-
-                                        <fieldset class="padding-5">
-                                            <div class="row">
-                                                <div class="col-xs-12"> 
-                                                    <div class="checkbox">
-                                                        <label>  <input type="checkbox"> Hurricane Shutters </label>
-                                                    </div>
-                                                </div>  
+                                                </div> 
+                                                
                                             </div>
                                         </fieldset>
 

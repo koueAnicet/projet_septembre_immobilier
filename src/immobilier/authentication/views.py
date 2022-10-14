@@ -17,10 +17,15 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 
 from immobilier import settings
-from web.models import SiteInfos
-from service.models import SubmitProperty
+from authentication.forms import SubmitProperForm
+
+
+
+from web.models import SiteInfos, Banner, OtherBanner
+from service.models import SubmitProperty, EmailVisitor
 from .tokens import generate_token
-from authentication.forms import User, VisitorEmailForm
+from authentication.forms import User,VisitorEmailForm
+
 
 def logout_user_auth(request):
     logout(request)
@@ -212,10 +217,12 @@ class DetailPropertyView(View):
     template_name="authentication/pages/property.html"
     class_form = forms.NewsLetterForm
     class_form2 = forms.VisitorEmailForm
+    class_form3 = forms.SubmitProperForm
     
     def get(self, request, property):
         form = self.class_form()
         form2 = self.class_form2()
+        form3 = self.class_form3()
         
         property_index = SubmitProperty.objects.get(id=property)
         return render(request, self.template_name, locals())
@@ -223,25 +230,33 @@ class DetailPropertyView(View):
     def post(self, request, property):
         
         property_index = SubmitProperty.objects.get(id=property)
-        print('ggggg', property_index)
-        form2 = self.class_form2(request.POST)
-        print('ggggg', form2.phonevisitor)
-        if form2.is_valid():
+    
+        
+        if request.method == 'POST':
+            # namevisitor =  request.POST.get('namevisitor')
+            emailvisitor = request.POST.get('emailvisitor')
+            phonevisitor = request.POST.get('phonevisitor')
+        
+            form2 = EmailVisitor(
+                # namevisitor = namevisitor,
+                phonevisitor = phonevisitor,
+                emailvisitor = emailvisitor,
+            )
             #ontacter argent par Email
                     
-            subject = "Bienvenue sur ANICK DELACOSTE ESTATE!!"
-            message = f"Bonjour monsieur  {property_index.user_property_submit}!!\n Je suis interessé par cette maison ci :\n Nom propriété:  {property_index.name} \n Nom propriété: { property_index.area_numbers} \n Prix propriété:  {property_index.price} \n { property_index.area_numbers} \n Merci "
-            print('')
+            subject = "INTERET POUR LA PROPRIETE!!"
+            message = f"Bonjour monsieur  {property_index.user_property_submit}!!\n Je suis interessé par cette maison ci :\n Nom propriété:  <strong style=color:red;>{property_index.name}</strong> \n Superficie propriété: <strong style=color:red;> m<sup>2</sup>{property_index.area_numbers}</strong> m<sup>2</sup> \n Prix propriété:  <strong style=color:red;>{property_index.price} Frcs</strong>\n  <strong style=color:red;>\n </strong> \n Merci!!"
+            
             from_email = form2.emailvisitor
             to_list =[property_index.user_property_submit.email]#on peu envoyer a plusier personne
             send_mail(subject, message, from_email, to_list, fail_silently=False)
            
             form2.save()
             messages.success(request, 'Votre message a été envoyé avec succès')
-            return redirect('detail-property')
+            return redirect('detail-property', property_index.id)
         else:
             messages.error(request, "Votre message n'a été envoyé")
-            return redirect('detail-property') 
+            return redirect('detail-property',  property_index.id) 
    
         #info_house= SubmitProperty.objects.get_or_404(pk=id_house)
         return render(request, self.template_name, locals())
@@ -251,8 +266,104 @@ class DetailPropertyView(View):
 class  AllPropertiesView(View):
     template_name='authentication/pages/properties.html'
     class_form = forms.NewsLetterForm
+    class_form2 = SubmitProperForm
+    
     def get(self, request):
         form = self.class_form()
+        form2 = self.class_form2()
+        
+        
+        ##
+        
+        try:
+            if request.method == 'GET':
+               
+                
+                other_banner = OtherBanner.objects.filter(active=True)
+                site_infos = SiteInfos.objects.first()
+                banner = Banner.objects.first()
+                
+                all_properties= SubmitProperty.objects.filter(active=True).order_by('created')
+                
+                
+                
+                # faire un choix de 4 elements   
+                all_request_data = request.GET
+                print('rghgh', all_request_data) 
+                all_house = models.SubmitProperty.objects.filter(active=True)
+                
+                #word = request.GET["word"]
+                name = all_request_data.get("name")
+                # city = request.GET["city"]
+                status = all_request_data.get("status")
+                bed_numbers = request.GET("bed_numbers")
+                bath_numbers = request.GET("bath_numbers")
+                area_numbers = request.GET("area_numbers")
+                price_range_min = request.GET("price_range_min")
+                price_range_max = request.GET("price_range_max")
+                piscine = request.GET("piscine")
+                terrain = request.GET("terrain")
+                jardin = request.GET("jardin")
+                garage_number = request.GET("garage_number")
+                
+                # if city and int(city) != -1:
+                #     all_house = all_house.filter(city__id = int(city))
+                
+                if status and int(status) != 1:
+                    all_house = all_house.filter(status__id = int(status))
+                
+                if name and int(name) != 1:
+                    all_house = all_house.filter(name__id = int(name))
+                
+                if bed_numbers and int(bed_numbers) != 1:
+                    all_house = all_house.filter(bed_numbers__id = int(bed_numbers))
+                
+                if bath_numbers and int(bath_numbers) != 1:
+                        all_house = all_house.filter(bath_numbers__id = int(bath_numbers))
+                
+                if area_numbers and int(area_numbers) != 1:
+                        all_house = all_house.filter(area_numbers__id = int(area_numbers))
+                
+                if price_range_min and int(price_range_min) != 1:
+                        all_house = all_house.filter(rice_range_min__id = int(price_range_min))
+                
+                if price_range_max and int(price_range_max) != 1:
+                        all_house = all_house.filter(rice_range_max__id = int(price_range_max))
+                
+                if piscine and int(piscine) != 1:
+                        all_house = all_house.filter(piscine__id = int(piscine))
+                
+                if terrain and int(terrain) != 1:
+                        all_house = all_house.filter(terrain__id = int(terrain))
+                
+                if jardin and int(jardin) != 1:
+                        all_house = all_house.filter(jardin__id = int(jardin))
+                
+                if garage_number and int(garage_number) != 1:
+                        all_house = all_house.filter(garage_number__id = int(garage_number))
+                
+                data = {
+                            "houses": all_house
+                        }
+                
+                return  {
+                    'all_properties':  data,
+                    'form':  form,
+                    'form2':  form2,
+                    'site_infos':  site_infos,
+                }
+                    
+        
+        except Exception as e:
+            print("Exception ",str(e))
+            
+        return ''
+
+
+        ##
+        
+        
+        
         all_properties= SubmitProperty.objects.filter(active=True).order_by('created')
         
         paginator = Paginator(all_properties, 6)
@@ -298,15 +409,20 @@ def update_property(request, update_id):
     return render(request, template_name , locals())
 
 #ontacter argent
-def conatact_agent(request):
+def conatact_agent(request, house_id):
     #Email de bienvenu
+    if request.method == 'POST':
+        property_find = SubmitProperty.objects.get(id= house_id)
+        user = User.objects.all()
+        
+        if property_find.user_property_submit in user:
             
-    subject = "Bienvenue sur ANICK DELACOSTE ESTATE!!"
-    message = "Hello "+ user.first_name + "!!\n" + "Bienvenue à ANICK DELACOSTE ESTATE!!\n Merci pour la visite sur notre site web\n Nous t'avons envoyé un email de confirmation, s'il vous plait confirmez votre adresse email afin d'activer votre compte.\n\n Nous vous remercions\n GARO ESTATE TEAM\n"
-    from_email = settings.EMAIL_HOST_USER
-    to_list =[user.email]#on peu envoyer a plusier personne
-    send_mail(subject, message, from_email, to_list, fail_silently=False)
-    return ''
+            subject = "Bienvenue sur ANICK DELACOSTE ESTATE!!"
+            message = "Hello "+ user.first_name + "!!\n" + "Bienvenue à ANICK DELACOSTE ESTATE!!\n Merci pour la visite sur notre site web\n Nous t'avons envoyé un email de confirmation, s'il vous plait confirmez votre adresse email afin d'activer votre compte.\n\n Nous vous remercions\n GARO ESTATE TEAM\n"
+            from_email = settings.EMAIL_HOST_USER
+            to_list =[user.email]#on peu envoyer a plusier personne
+            send_mail(subject, message, from_email, to_list, fail_silently=False)
+            return ''
    
 #vue de confirmation email avec token
 def activate(request, uidb64, token):

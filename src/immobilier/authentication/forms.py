@@ -149,6 +149,8 @@ class SubmitProperForm(forms.ModelForm):
             'sortie_secours',
             'jardin',
             'area_numbers',
+            'price_range_max',
+            'price_range_min',
             'built_in',
             'water_front',
             'accessible_vehicule',
@@ -169,6 +171,7 @@ class VisitorEmailForm(forms.ModelForm):
     class Meta:
         model= EmailVisitor
         fields=[
+            'namevisitor',
             'emailvisitor',
             'phonevisitor',
         ]

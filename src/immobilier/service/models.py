@@ -96,7 +96,7 @@ class City(FieldsDate):
         related_name='properti_state',
         
     )
-    name = models.CharField(max_length=150)
+    city_name = models.CharField(max_length=150)
     
     class Meta:
         db_table = 'City'
@@ -104,7 +104,7 @@ class City(FieldsDate):
         verbose_name = 'City'
         verbose_name_plural = 'Cities'
     def __str__(self):
-        return self.name
+        return self.city_name
 
 
 class SubmitProperty(FieldsDate):
@@ -221,8 +221,9 @@ class SubmitProperty(FieldsDate):
         
  
 class EmailVisitor(models.Model):
-    phonevisitor = PhoneNumberField(region="CI", blank=True, null=True)
+    namevisitor= models.CharField(max_length=50, null=True)
     emailvisitor = models.EmailField(null=True)
+    phonevisitor = PhoneNumberField(region="CI", null=True)
     
     
     def __str__(self) -> str:

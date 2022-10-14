@@ -19,7 +19,7 @@
         <!-- End page header -->
         <h6>
             {% for message in messages %}
-                <strong class="alert alert-danger">{% if message %} {{message}} {% endif %}</strong>
+                <strong class="alert alert-success">{% if message %} {{message}} {% endif %}</strong>
             {% endfor %}
         </h6>
         <!-- property area -->
@@ -68,8 +68,11 @@
                         <div class="section"> 
                             <div id="list-type" class="proerty-th-list">
                                     <!-- emplacement de la boucle --> 
+                                
                                 {% for Property in page_obj%}
+                                    {% if Property %}
                                     {% if user == Property.user_property_submit %}
+
                                 <div class="col-md-4 p0">
                                     <div class="box-two proerty-item">
                                         <div class="item-thumb">
@@ -99,6 +102,7 @@
                                     </div>
                                 </div> 
                                        
+                                    {% endif %}
                                     {% endif %}
                                {% endfor %} 
                             </div>

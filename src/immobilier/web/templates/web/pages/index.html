@@ -18,7 +18,7 @@
         <div class="slider-content">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
-                    <h2>{{banner.title}}</h2>
+                    <h2>{{ banner.title}}</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi deserunt deleniti, ullam commodi sit ipsam laboriosam velit adipisci quibusdam aliquam teneturo!</p>
                     <div class="search-form wow pulse" data-wow-delay="0.8s">
 
@@ -27,32 +27,18 @@
                             <button class="btn  toggle-btn" type="button"><i class="fa fa-bars"></i></button>
 
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Key word">
+                                {% comment %} <input type="text" class="form-control" placeholder="Key word"> {% endcomment %}
+                                {% render_field form2.name class="form-control"  title="Select your city" data-error="Username." %}
+                               
                             </div>
                             <div class="form-group">                                   
-                               <!-- <select id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Select your city">
-
-                                    <option>New york, CA</option>
-                                    <option>Paris</option>
-                                    <option>Casablanca</option>
-                                    <option>Tokyo</option>
-                                    <option>Marraekch</option>
-                                    <option>kyoto , shibua</option>
-                                </select>
-                                -- >
-                                {% render_field form2.city class="form-control" id="lunchBegins"  title="Select your city" data-error="Username." %}
-
+                                {% for cit in city.city_name %}
+                                <h1>{{ cit }}</h1>
+                                {% render_field form2.cit class="form-control" id="lunchBegins"  title="Select your city" data-error="Username." %}
+                                {% endfor %}
                             </div>
                             <div class="form-group">                                     
-                               <!-- <select id="basic" class="selectpicker show-tick form-control">
-                                    <option> -Status- </option>
-                                    <option>Rent </option>
-                                    <option>Boy</option>
-                                    <option>used</option>  
-
-                                </select>-->
                                 {% render_field form2.status class="form-control" id="basic"  data-error="Username." %}
-
                             </div>
                             <button class="btn search-btn" type="submit"><i class="fa fa-search"></i></button>
 
@@ -62,17 +48,17 @@
 
                                     <div class="form-group mar-r-20">
                                         <label for="price-range">Price range min($):</label>
-                                        {% render_field form2.price_range_min class="form-control" id="price-range"  data-error="Username." %}
+                                        {% render_field form2.price_range_min class="form-control"   data-error="Username." %}
                                     </div>
                                     <div class="form-group mar-r-20">
                                         <label for="price-range">Price range max ($):</label>
-                                        {% render_field form2.price_range_max class="form-control" id="price-range"  data-error="Username." %}
+                                        {% render_field form2.price_range_max  class="form-control"  data-error="Username." %}
                                     </div>
                                     <!-- End of  -->  
 
                                     <div class="form-group mar-l-20">
                                         <label for="property-geo">Property geo (m <sup>2</sup>) :</label>
-                                        {% render_field form2.area_numbers id="property-geo"  data-error="Username." %}
+                                        {% render_field form2.area_numbers class="form-control"   data-error="Username." %}
 
                                     </div>
                                     <!-- End of  --> 
@@ -82,13 +68,13 @@
 
                                     <div class="form-group mar-r-20">
                                         <label for="price-range">Baths :</label>
-                                        {% render_field form2.bath_numbers  id="min-baths"  data-error="Username." %}
+                                        {% render_field form2.bath_numbers  class="form-control"   data-error="Username." %}
                                     </div>
                                     <!-- End of  --> 
 
                                     <div class="form-group mar-l-30">
                                         <label for="property-geo">Bed :</label>
-                                        {% render_field form2.bed_numbers id="min-bed" data-error="Username." %}
+                                        {% render_field form2.bed_numbers class="form-control"  data-error="Username." %}
                                     </div>
                                     <!-- End of  --> 
 
@@ -100,7 +86,7 @@
                                         <div class="checkbox">
                                             <label>
                                                 {% comment %} <input type="checkbox"> {% endcomment %}
-                                                {% render_field form2.piscine class="form-control" data-error="Username." %}Piscine
+                                                {% render_field form2.piscine  data-error="Username." %}Piscine
                                             </label>
                                         </div>
                                     </div>
@@ -110,7 +96,7 @@
                                         <div class="checkbox">
                                             <label>
                                                 {% comment %} <input type="checkbox"> Dual Sinks(500) {% endcomment %}
-                                                {% render_field form2.piscine class="form-control" data-error="Username." %}Terrain
+                                                {% render_field form2.terrain data-error="Username." %}Terrain
                                             </label>
                                         </div>
                                     </div>
@@ -120,7 +106,7 @@
                                         <div class="checkbox">
                                             <label>
                                                 {% comment %} <input type="checkbox"> Hurricane Shutters(99) {% endcomment %}
-                                                {% render_field form2.piscine class="form-control" data-error="Username." %}Jardin
+                                                {% render_field form2.jardin  data-error="Username." %}Jardin
                                             </label>
                                         </div>
                                     </div>
@@ -211,7 +197,7 @@
             <div class="row">
                 <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
                     <!-- /.feature title -->
-                    <h2 style="color:black">Top submitted property</h2>
+                    <h2 style="color:black">MEILLEUR PROPRIÉTÉ SOUMIS</h2>
                     <p>Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium. Nullam sed arcu ultricies . </p>
                 </div>
             </div>

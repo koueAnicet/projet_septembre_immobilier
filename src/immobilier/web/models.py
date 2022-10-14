@@ -1,3 +1,4 @@
+from distutils.command.upload import upload
 from tinymce.models import HTMLField
 from django.db import models
 from django.core.exceptions import ValidationError
@@ -36,6 +37,7 @@ class SiteInfos(FieldsDate):
     contact = models.CharField(max_length=150)
     address = models.CharField(max_length=150)
     emails = models.EmailField(max_length=255)
+    body_image = models.ImageField(upload_to="body_image", null=True)
     year = models.PositiveIntegerField()
     def __str__(self):
         return self.name

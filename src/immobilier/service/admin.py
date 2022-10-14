@@ -72,7 +72,7 @@ class StateAdmin(admin.ModelAdmin):
 class CityAdmin(admin.ModelAdmin): 
     list_display=(
         'state',
-        'name',
+        'city_name',
         )
     
     
@@ -88,6 +88,7 @@ class SubmitPropertyAdmin(admin.ModelAdmin):
         'description',
         'city',
         'status',
+        'active',
         'bed_numbers',
         'bath_numbers',
         'garage_number',

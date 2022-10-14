@@ -9,7 +9,7 @@
             <div class="container">
                 <div class="row">
                     <div class="page-head-content">
-                        <h1 class="page-title">List Layout With Sidebar</h1>               
+                        <h1 class="page-title">List Properties </h1>               
                     </div>
                 </div>
             </div>
@@ -28,7 +28,8 @@
                                 <h3 class="panel-title">Smart search</h3>
                             </div>
                             <div class="panel-body search-widget">
-                                <form action="" class=" form-inline"> 
+                                <form action="{% url 'search_property' %}" method="get" class=" form-inline"> 
+                                     {% csrf_token %}
                                     <fieldset>
                                         <div class="row">
                                             <div class="col-xs-12">
@@ -41,25 +42,12 @@
                                         <div class="row">
                                             <div class="col-xs-6">
 
-                                                <select id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Select Your City">
-
-                                                    <option>New york, CA</option>
-                                                    <option>Paris</option>
-                                                    <option>Casablanca</option>
-                                                    <option>Tokyo</option>
-                                                    <option>Marraekch</option>
-                                                    <option>kyoto , shibua</option>
-                                                </select>
+                                                {% render_field form2.city__city_name class="form-control" id="lunchBegins"  title="Select your city" data-error="Username." %}
                                             </div>
                                             <div class="col-xs-6">
 
-                                                <select id="basic" class="selectpicker show-tick form-control">
-                                                    <option> -Status- </option>
-                                                    <option>Rent </option>
-                                                    <option>Boy</option>
-                                                    <option>used</option>  
+                                                {% render_field form2.status class="form-control" id="basic"  data-error="Username." %}
 
-                                                </select>
                                             </div>
                                         </div>
                                     </fieldset>
@@ -67,43 +55,35 @@
                                     <fieldset class="padding-5">
                                         <div class="row">
                                             <div class="col-xs-6">
-                                                <label for="price-range">Price range ($):</label>
-                                                <input type="text" class="span2" value="" data-slider-min="0" 
-                                                       data-slider-max="600" data-slider-step="5" 
-                                                       data-slider-value="[0,450]" id="price-range" ><br />
-                                                <b class="pull-left color">2000$</b> 
-                                                <b class="pull-right color">100000$</b>                                                
+                                                <label for="price-range">Price range min :</label>
+                                                {% render_field form2.price_range_min class="form-control"  data-error="Username." %}
                                             </div>
                                             <div class="col-xs-6">
-                                                <label for="property-geo">Property geo (m2) :</label>
-                                                <input type="text" class="span2" value="" data-slider-min="0" 
-                                                       data-slider-max="600" data-slider-step="5" 
-                                                       data-slider-value="[50,450]" id="property-geo" ><br />
-                                                <b class="pull-left color">40m</b> 
-                                                <b class="pull-right color">12000m</b>                                                
-                                            </div>                                            
+                                                <label for="price-range">Price range max :</label>
+                                                {% render_field form2.price_range_max class="form-control"   data-error="Username." %}
+                                            </div>
+                                                                                   
                                         </div>
                                     </fieldset>                                
-
+                                    <fieldset class="padding-5">
+                                        <div class="col-xs-12">
+                                            <label for="property-geo">Property geo (m <sup>2</sup>) :</label>
+                                           
+                                            {% render_field form2.area_numbers class="form-control"  data-error="Username." %}
+                                        </div>    
+                                    </fieldset>  
                                     <fieldset class="padding-5">
                                         <div class="row">
                                             <div class="col-xs-6">
-                                                <label for="price-range">Min baths :</label>
-                                                <input type="text" class="span2" value="" data-slider-min="0" 
-                                                       data-slider-max="600" data-slider-step="5" 
-                                                       data-slider-value="[250,450]" id="min-baths" ><br />
-                                                <b class="pull-left color">1</b> 
-                                                <b class="pull-right color">120</b>                                                
+                                                <label for="price-range">Baths :</label>
+                                              
+                                                {% render_field form2.bath_numbers  class="form-control"   data-error="Username." %}
                                             </div>
 
                                             <div class="col-xs-6">
-                                                <label for="property-geo">Min bed :</label>
-                                                <input type="text" class="span2" value="" data-slider-min="0" 
-                                                       data-slider-max="600" data-slider-step="5" 
-                                                       data-slider-value="[250,450]" id="min-bed" ><br />
-                                                <b class="pull-left color">1</b> 
-                                                <b class="pull-right color">120</b>
+                                                <label for="property-geo">Bed :</label>
 
+                                                {% render_field form2.bed_numbers class="form-control"  data-error="Username." %}
                                             </div>
                                         </div>
                                     </fieldset>
@@ -112,13 +92,15 @@
                                         <div class="row">
                                             <div class="col-xs-6">
                                                 <div class="checkbox">
-                                                    <label> <input type="checkbox" checked> Fire Place</label>
+                                                {% render_field form2.piscine  data-error="Username." %}Piscine
+                                                {% comment %} <label> <input type="checkbox" checked> Fire Place</label> {% endcomment %}
                                                 </div> 
                                             </div>
 
                                             <div class="col-xs-6">
                                                 <div class="checkbox">
-                                                    <label> <input type="checkbox"> Dual Sinks</label>
+                                                    {% comment %} <label> <input type="checkbox"> Dual Sinks</label> {% endcomment %}
+                                                {% render_field form2.terrain data-error="Username." %}Terrain
                                                 </div>
                                             </div>                                            
                                         </div>
@@ -128,12 +110,14 @@
                                         <div class="row">
                                             <div class="col-xs-6"> 
                                                 <div class="checkbox">
-                                                    <label> <input type="checkbox" checked> Swimming Pool</label>
+                                                    {% render_field form2.jardin  data-error="Username." %}Jardin
+                                                    {% comment %} <label> <input type="checkbox" checked> Swimming Pool</label> {% endcomment %}
                                                 </div>
                                             </div>  
                                             <div class="col-xs-6"> 
                                                 <div class="checkbox">
-                                                    <label> <input type="checkbox" checked> 2 Stories </label>
+                                                {% render_field form2.accessible_vehicule class="form-control" data-error="Username." %}Vehicule
+                                                {% comment %} <label> <input type="checkbox" checked> 2 Stories </label> {% endcomment %}
                                                 </div>
                                             </div>  
                                         </div>
@@ -143,12 +127,14 @@
                                         <div class="row">
                                             <div class="col-xs-6"> 
                                                 <div class="checkbox">
-                                                    <label><input type="checkbox"> Laundry Room </label>
+                                                {% render_field form2.child_bredroom class="form-control" data-error="Username." %}Child Bedroom
+                                                {% comment %} <label><input type="checkbox"> Laundry Room </label> {% endcomment %}
                                                 </div>
                                             </div>  
                                             <div class="col-xs-6"> 
                                                 <div class="checkbox">
-                                                    <label> <input type="checkbox"> Emergency Exit</label>
+                                                {% render_field form2.sortie_secours class="form-control" data-error="Username." %}Sortie Secours
+                                                {% comment %} <label> <input type="checkbox"> Emergency Exit</label> {% endcomment %}
                                                 </div>
                                             </div>  
                                         </div>
@@ -158,22 +144,14 @@
                                         <div class="row">
                                             <div class="col-xs-6"> 
                                                 <div class="checkbox">
-                                                    <label>  <input type="checkbox" checked> Jog Path </label>
+                                                {% render_field form2.cheminer class="form-control" data-error="Username." %}Cheminer
+                                                {% comment %} <label>  <input type="checkbox" checked> Jog Path </label> {% endcomment %}
                                                 </div>
                                             </div>  
                                             <div class="col-xs-6"> 
                                                 <div class="checkbox">
-                                                    <label>  <input type="checkbox"> 26' Ceilings </label>
-                                                </div>
-                                            </div>  
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-12"> 
-                                                <div class="checkbox">
-                                                    <label>  <input type="checkbox"> Hurricane Shutters </label>
+                                                    {% render_field form2.water_front class="form-control" data-error="Username." %}water Front
+                                                    {% comment %} <label>  <input type="checkbox" checked> Jog Path </label> {% endcomment %}
                                                 </div>
                                             </div>  
                                         </div>
@@ -349,7 +327,7 @@
                                                 <li><a href="?page={{ i }}">{{ i }}</a></li>
                                             {% endif %}  
                                         {% endfor %}
-                                             {{ page_obj.number }} /{{ page_obj.paginator.num_pages }}.
+                                            {{ page_obj.number }} /{{ page_obj.paginator.num_pages }}.
                                     </span>
                             
                                     {% if page_obj.has_next %}

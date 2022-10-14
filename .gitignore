@@ -1,6 +1,6 @@
 ENV/
 **/__pycache__/
-../../garo-estate-master/login.html
+
 ../.DS_Store
 .DS_Store
 garo-estate-master/login.html
